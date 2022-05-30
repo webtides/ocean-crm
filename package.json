@@ -1,0 +1,53 @@
+{
+	"name": "ocean-crm",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "npx luna --dev"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@tailwindcss/typography": "^0.5.1",
+		"@webtides/element-js": "^0.4.2",
+		"@webtides/layouts": "^0.6.1",
+		"@webtides/luna-js": "0.11.0-dev.11",
+		"@webtides/luna-renderer": "0.11.0-dev.11",
+		"autoprefixer": "^10.4.2",
+		"cssnano": "^5.0.17",
+		"diskdb": "^0.1.17",
+		"express-session": "^1.17.3",
+		"postcss": "^8.4.6",
+		"postcss-import": "^14.0.2",
+		"postcss-nested": "^5.0.6",
+		"tailwindcss": "^3.0.19",
+		"validatorjs": "^3.22.1"
+	},
+	"devDependencies": {
+		"@loewen-digital/frontend-scaffold": "^0.2.1",
+		"@webtides/luna-cli": "0.11.0-dev.10"
+	},
+	"prettier": "@loewen-digital/frontend-scaffold/prettier.config.js",
+	"eslintConfig": {
+		"extends": "./node_modules/@loewen-digital/frontend-scaffold/.eslintrc.js"
+	},
+	"stylelint": {
+		"extends": "@loewen-digital/frontend-scaffold/stylelint.config.js",
+		"ignoreFiles": [
+			"**/*.md"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{css,js,json,yaml,yml,md}": [
+			"prettier --write"
+		]
+	}
+}

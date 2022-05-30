@@ -1,0 +1,9 @@
+# generated directories
+.build
+.export
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variable files
+.env
