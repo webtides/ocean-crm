@@ -97,9 +97,19 @@ export default class {
 										)}
 									</tbody>
 								</table>
-								<pagination-component
-									pagination="${JSON.stringify(this.pagination)}"
-								></pagination-component>
+								${this.organizations?.length === 0
+									? html`
+											<div
+												class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+											>
+												No organizations found.
+											</div>
+									  `
+									: html`
+											<pagination-component
+												pagination="${JSON.stringify(this.pagination)}"
+											></pagination-component>
+									  `}
 							</div>
 						</div>
 					</div>

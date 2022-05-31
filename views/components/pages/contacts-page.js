@@ -164,9 +164,19 @@ export default class ContactsPage extends TemplateElement {
 										)}
 									</tbody>
 								</table>
-								<pagination-component
-									pagination="${JSON.stringify(this.pagination)}"
-								></pagination-component>
+								${this.contacts?.length === 0
+									? html`
+											<div
+												class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+											>
+												No contacts found.
+											</div>
+									  `
+									: html`
+											<pagination-component
+												pagination="${JSON.stringify(this.pagination)}"
+											></pagination-component>
+									  `}
 							</div>
 						</div>
 					</div>

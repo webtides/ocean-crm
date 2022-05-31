@@ -1,7 +1,6 @@
 # ocean-crm
 
 ## TODOs
-* Add empty states for filtered lists
 * Notifications
 * Filter Organizations/Contacts by "deleted_at"
 * Dashboard Widgets (with real content?! and maybe with server sent events for updates?!)
