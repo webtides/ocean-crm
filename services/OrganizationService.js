@@ -231,6 +231,11 @@ export default class OrganizationService {
 		return db.organizations;
 	}
 
+	static getAllOrganisations() {
+		const collection = this.getCollection();
+		return collection.find();
+	}
+
 	static getFilteredOrganisations(search, page) {
 		const collection = this.getCollection();
 		const totalOrganizations = collection.count();

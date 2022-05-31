@@ -3,7 +3,7 @@ import { html } from '@webtides/element-js/src/renderer/vanilla';
 export default class {
 	properties() {
 		return {
-			title: 'Contacts',
+			title: 'Edit Contact',
 		};
 	}
 
@@ -12,6 +12,6 @@ export default class {
 	}
 
 	template() {
-		return html`<contacts-page></contacts-page>`;
+		return html`<contacts-edit-page></contacts-edit-page>`;
 	}
 }

@@ -2,7 +2,7 @@ import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla
 import { Component } from '@webtides/luna-js';
 
 @Component({
-	target: Component.TARGET_SERVER,
+	target: Component.TARGET_BOTH,
 })
 export default class PaginationComponent extends TemplateElement {
 	properties() {
@@ -44,16 +44,16 @@ export default class PaginationComponent extends TemplateElement {
 							</a>
 							${this.pagination.totalPages <= 6 ? html`
 								${this.pagination.pages.map(page => html`
-									<a href="?page=${page}" ${page === this.pagination.currentPage ? 'aria-current="page"' : ''} class="${page === this.pagination.currentPage ? pageLinkActiveClasses : pageLinkDefaultClasses} relative inline-flex items-center px-4 py-2 border text-sm font-medium"> ${page} </a>
+									<a href="?page=${page}" data-page="${page}" ${page === this.pagination.currentPage ? 'aria-current="page"' : ''} class="${page === this.pagination.currentPage ? pageLinkActiveClasses : pageLinkDefaultClasses} relative inline-flex items-center px-4 py-2 border text-sm font-medium"> ${page} </a>
 								`)}
 							` : html`
-								<a href="?page=1" aria-current="page" class="${this.page === 0 ? pageLinkActiveClasses : pageLinkDefaultClasses} relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 1 </a>
-								<a href="?page=2" class="${this.page === 1 ? pageLinkActiveClasses : pageLinkDefaultClasses} relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 2 </a>
-								<a href="?page=3" class="${this.page === 2 ? pageLinkActiveClasses : pageLinkDefaultClasses} hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"> 3 </a>
+								<a href="?page=1" data-page="1" aria-current="page" class="${this.page === 0 ? pageLinkActiveClasses : pageLinkDefaultClasses} relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 1 </a>
+								<a href="?page=2" data-page="2" class="${this.page === 1 ? pageLinkActiveClasses : pageLinkDefaultClasses} relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 2 </a>
+								<a href="?page=3" data-page="3" class="${this.page === 2 ? pageLinkActiveClasses : pageLinkDefaultClasses} hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"> 3 </a>
 								<span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"> ... </span>
-								<a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"> 8 </a>
-								<a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 9 </a>
-								<a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 10 </a>
+								<a href="#" data-page="8" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"> 8 </a>
+								<a href="#" data-page="9" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 9 </a>
+								<a href="#" data-page="10" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"> 10 </a>
 							`}
 							<a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
 								<span class="sr-only">Next</span>
