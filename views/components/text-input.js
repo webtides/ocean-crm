@@ -15,16 +15,20 @@ export default class TextInput extends TemplateElement {
 			error: '',
 			label: '',
 			value: '',
-		}
+		};
 	}
 
 	template() {
 		return html`
-			<label class="form-label" for="${this.id}">${ this.label }:</label>
-			<input id="${this.id}" name="${this.name}" class="form-input ${this.error ? 'error' : ''}" type="${this.type}" value="${this.value}" />
-			${this.error ? html`
-				<div class="form-error">${ this.error }</div>
-			` : ''}
+			<label class="form-label" for="${this.id}">${this.label}:</label>
+			<input
+				id="${this.id}"
+				name="${this.name}"
+				class="form-input ${this.error ? 'error' : ''}"
+				type="${this.type}"
+				value="${this.value}"
+			/>
+			${this.error ? html` <div class="form-error">${this.error}</div> ` : ''}
 		`;
 	}
 }

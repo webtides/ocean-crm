@@ -23,23 +23,20 @@
 		"postcss": "^8.4.6",
 		"postcss-import": "^14.0.2",
 		"postcss-nested": "^5.0.6",
-		"qs": "^6.10.3",
 		"tailwindcss": "^3.0.19",
 		"validatorjs": "^3.22.1"
 	},
 	"devDependencies": {
-		"@loewen-digital/frontend-scaffold": "^0.2.1",
-		"@webtides/luna-cli": "0.11.0-dev.12"
-	},
-	"prettier": "@loewen-digital/frontend-scaffold/prettier.config.js",
-	"eslintConfig": {
-		"extends": "./node_modules/@loewen-digital/frontend-scaffold/.eslintrc.js"
-	},
-	"stylelint": {
-		"extends": "@loewen-digital/frontend-scaffold/stylelint.config.js",
-		"ignoreFiles": [
-			"**/*.md"
-		]
+		"@webtides/luna-cli": "0.11.0-dev.12",
+		"eslint": "^8.11.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"husky": "^7.0.4",
+		"lint-staged": "^12.3.7",
+		"prettier": "^2.6.0",
+		"stylelint": "^14.6.0",
+		"stylelint-config-prettier": "^9.0.3",
+		"stylelint-prettier": "^2.0.0"
 	},
 	"husky": {
 		"hooks": {

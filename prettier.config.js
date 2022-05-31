@@ -1,0 +1,26 @@
+// prettier.config.js or .prettierrc.js
+module.exports = {
+	endOfLine: 'lf',
+	printWidth: 120,
+	trailingComma: 'all',
+	tabWidth: 4,
+	semi: true,
+	singleQuote: true,
+	arrowParens: 'always',
+	overrides: [
+		{
+			files: '*.md',
+			options: {
+				useTabs: false,
+				trailingComma: 'none',
+				proseWrap: 'never',
+			},
+		},
+		{
+			files: ['*.css', '*.yaml', '*.yml'],
+			options: {
+				tabWidth: 2,
+			},
+		},
+	],
+};

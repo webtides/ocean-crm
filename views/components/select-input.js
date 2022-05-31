@@ -15,27 +15,26 @@ export default class SelectInput extends TemplateElement {
 			error: '',
 			value: undefined,
 			options: [], // ['string1', 'string2'] or [{value: 'value', label: 'label'}, ...]
-		}
+		};
 	}
 
 	template() {
 		return html`
-			<label class="form-label" for="${this.id}">${ this.label }:</label>
+			<label class="form-label" for="${this.id}">${this.label}:</label>
 			<select id="${this.id}" name="${this.name}" class="form-input ${this.error ? 'error' : ''}">
 				<option value="">Please choose an option</option>
-				${this.options.map(option => html`
-					<option
-						value="${option.value || option || ''}"
-						${((option.value && option.value === this.value) || option === this.value) ? 'selected' : ''}
-					>
-						${option.label ?? option}
-					</option>
-				`
+				${this.options.map(
+					(option) => html`
+						<option
+							value="${option.value || option || ''}"
+							${(option.value && option.value === this.value) || option === this.value ? 'selected' : ''}
+						>
+							${option.label ?? option}
+						</option>
+					`,
 				)}
 			</select>
-			${this.error ? html`
-				<div class="form-error">${ this.error }</div>
-			` : ''}
+			${this.error ? html` <div class="form-error">${this.error}</div> ` : ''}
 		`;
 	}
 }

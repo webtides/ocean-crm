@@ -43,8 +43,8 @@ export default class ContactsPage extends TemplateElement {
 				this.pagination = pagination;
 				this.contacts = contacts;
 				await this.updateUrl();
-			}
-		}
+			},
+		};
 	}
 
 	events() {
@@ -60,7 +60,7 @@ export default class ContactsPage extends TemplateElement {
 					e.preventDefault();
 					this.page = parseInt(e.target.dataset.page);
 				},
-			}
+			},
 		};
 	}
 
@@ -89,7 +89,11 @@ export default class ContactsPage extends TemplateElement {
 						<search-filter class="block w-full max-w-md"></search-filter>
 					</div>
 					<div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-						<a href="/contacts/create" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Add contact</a>
+						<a
+							href="/contacts/create"
+							class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+							>Add contact</a
+						>
 					</div>
 				</div>
 				<div class="mt-8 flex flex-col">
@@ -98,31 +102,71 @@ export default class ContactsPage extends TemplateElement {
 							<div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
 								<table class="min-w-full divide-y divide-gray-300">
 									<thead class="bg-gray-50">
-									<tr>
-										<th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-										<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Organization</th>
-										<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
-										<th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">City</th>
-										<th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-											<span class="sr-only">Edit</span>
-										</th>
-									</tr>
+										<tr>
+											<th
+												scope="col"
+												class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+											>
+												Name
+											</th>
+											<th
+												scope="col"
+												class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+											>
+												Organization
+											</th>
+											<th
+												scope="col"
+												class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+											>
+												Phone
+											</th>
+											<th
+												scope="col"
+												class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+											>
+												City
+											</th>
+											<th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+												<span class="sr-only">Edit</span>
+											</th>
+										</tr>
 									</thead>
 									<tbody class="bg-white">
-									${this.contacts.map(contact => html`
-										<tr class="odd:bg-white even:bg-slate-50">
-											<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">${contact.name}</td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${contact.organization}</td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${contact.phone}</td>
-											<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${contact.city}</td>
-											<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-												<a href="/contacts/${contact.id}/edit" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, ${contact.name}</span></a>
-											</td>
-										</tr>
-									`)}
+										${this.contacts.map(
+											(contact) => html`
+												<tr class="odd:bg-white even:bg-slate-50">
+													<td
+														class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+													>
+														${contact.name}
+													</td>
+													<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+														${contact.organization}
+													</td>
+													<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+														${contact.phone}
+													</td>
+													<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+														${contact.city}
+													</td>
+													<td
+														class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
+													>
+														<a
+															href="/contacts/${contact.id}/edit"
+															class="text-indigo-600 hover:text-indigo-900"
+															>Edit<span class="sr-only">, ${contact.name}</span></a
+														>
+													</td>
+												</tr>
+											`,
+										)}
 									</tbody>
 								</table>
-								<pagination-component pagination='${JSON.stringify(this.pagination)}'></pagination-component>
+								<pagination-component
+									pagination="${JSON.stringify(this.pagination)}"
+								></pagination-component>
 							</div>
 						</div>
 					</div>

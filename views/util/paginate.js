@@ -1,10 +1,5 @@
 // https://jasonwatmore.com/post/2018/08/07/javascript-pure-pagination-logic-in-vanilla-js-typescript
-export default function paginate(
-	totalItems,
-	currentPage = 1,
-	pageSize = 10,
-	maxPages = 10
-) {
+export default function paginate(totalItems, currentPage = 1, pageSize = 10, maxPages = 10) {
 	// calculate total pages
 	let totalPages = Math.ceil(totalItems / pageSize);
 
@@ -44,7 +39,7 @@ export default function paginate(
 	let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
 
 	// create an array of pages to ng-repeat in the pager control
-	let pages = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
+	let pages = Array.from(Array(endPage + 1 - startPage).keys()).map((i) => startPage + i);
 
 	// return object with all pager properties required by the view
 	return {
@@ -56,6 +51,6 @@ export default function paginate(
 		endPage: endPage,
 		startIndex: startIndex,
 		endIndex: endIndex,
-		pages: pages
+		pages: pages,
 	};
 }

@@ -30,11 +30,17 @@ const layout = (page, context = {}) => {
             <img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg" alt="Workflow">
           </div>
           <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-            <a href="/" class="${currentPath === '/' ? navLinkActiveClasses : navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium" aria-current="page">Dashboard</a>
+            <a href="/" class="${
+				currentPath === '/' ? navLinkActiveClasses : navLinkDefaultClasses
+			} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium" aria-current="page">Dashboard</a>
 
-            <a href="/organizations" class="${currentPath.includes('/organizations') ? navLinkActiveClasses : navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Organizations</a>
+            <a href="/organizations" class="${
+				currentPath.includes('/organizations') ? navLinkActiveClasses : navLinkDefaultClasses
+			} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Organizations</a>
 
-            <a href="/contacts" class="${currentPath.includes('/contacts') ? navLinkActiveClasses : navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contacts</a>
+            <a href="/contacts" class="${
+				currentPath.includes('/contacts') ? navLinkActiveClasses : navLinkDefaultClasses
+			} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contacts</a>
           </div>
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
