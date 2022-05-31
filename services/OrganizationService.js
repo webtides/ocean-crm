@@ -1,5 +1,6 @@
 import diskdb from 'diskdb';
 import paginate from '../views/util/paginate';
+import ContactService from "./ContactService";
 
 const page1 = [
 	{
@@ -259,7 +260,9 @@ export default class OrganizationService {
 
 	static find(id) {
 		const collection = this.getCollection();
-		return collection.findOne({ id });
+		const organization = collection.findOne({ id });
+		organization.contacts = ContactService.findWithOrganization(id);
+		return organization;
 	}
 
 	static create(values) {

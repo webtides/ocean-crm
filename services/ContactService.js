@@ -339,6 +339,11 @@ export default class ContactService {
 		};
 	}
 
+	static findWithOrganization(id) {
+		const collection = this.getCollection();
+		return collection.find({ organization: id });
+	}
+
 	static find(id) {
 		const collection = this.getCollection();
 		return collection.findOne({ id });
