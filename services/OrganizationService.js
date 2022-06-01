@@ -1,4 +1,5 @@
 import diskdb from 'diskdb';
+import fetch from 'node-fetch';
 import paginate from '../views/util/paginate';
 import ContactService from './ContactService';
 
@@ -286,13 +287,17 @@ export default class OrganizationService {
 			deleted_at: null,
 		};
 
-		return collection.save(organization);
+		const save = collection.save(organization);
+
+		this.notifyEvents();
+
+		return save;
 	}
 
 	static update(id, values) {
 		const collection = this.getCollection();
 
-		return collection.update(
+		const update = collection.update(
 			{ id },
 			{ ...values },
 			{
@@ -300,12 +305,16 @@ export default class OrganizationService {
 				upsert: false,
 			},
 		);
+
+		this.notifyEvents();
+
+		return update;
 	}
 
 	static delete(id) {
 		const collection = this.getCollection();
 
-		return collection.update(
+		const update = collection.update(
 			{ id },
 			{ deleted_at: Date.now() },
 			{
@@ -313,12 +322,16 @@ export default class OrganizationService {
 				upsert: false,
 			},
 		);
+
+		this.notifyEvents();
+
+		return update;
 	}
 
 	static restore(id) {
 		const collection = this.getCollection();
 
-		return collection.update(
+		const update = collection.update(
 			{ id },
 			{ deleted_at: null },
 			{
@@ -326,5 +339,20 @@ export default class OrganizationService {
 				upsert: false,
 			},
 		);
+
+		this.notifyEvents();
+
+		return update;
+	}
+
+	static notifyEvents() {
+		const collection = this.getCollection();
+
+		// TODO: there must be a better way... Maybe EventEmitter?!
+		fetch('http://localhost:3000/api/events', {
+			method: 'post',
+			body: JSON.stringify({ organizations: collection.count() }),
+			headers: { 'Content-Type': 'application/json' },
+		});
 	}
 }

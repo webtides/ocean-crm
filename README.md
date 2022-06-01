@@ -1,12 +1,11 @@
 # ocean-crm
 
 ## TODOs
-* Dashboard Widgets (with real content?! and maybe with server sent events for updates?!)
 * Manage Users
 * Login/Auth
 * User Profile
 * Login as other user
-* Log/Activity wit all actions from users?
+* Log/Activity wit all actions from users? + Widget
 * Notifications
 * Use Prisma.io as ORM with SQLite database
 * Logo
