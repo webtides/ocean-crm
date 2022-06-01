@@ -317,25 +317,35 @@ export default class ContactService {
 		return db.contacts;
 	}
 
-	static getFilteredContacts(search, page) {
+	static getFilteredContacts(search, page, trashed = '') {
 		const collection = this.getCollection();
 
-		const filteredContacts = collection.find().filter((item) => {
-			if (search) {
-				return JSON.stringify(item).includes(search);
-			}
-			return true;
-		});
+		const filteredItems = collection
+			.find()
+			.filter((item) => {
+				if (search) {
+					return JSON.stringify(item).includes(search);
+				}
+				return true;
+			})
+			.filter((item) => {
+				if (trashed && trashed === 'only') {
+					return item.deleted_at !== null;
+				}
+				if (trashed && trashed === 'with') {
+					return true;
+				}
+				return item.deleted_at === null;
+			});
 
-		const totalItems = filteredContacts.length;
+		const totalItems = filteredItems.length;
 		const pagination = paginate(totalItems, page);
 
-		const contacts = filteredContacts.slice(pagination.startIndex, pagination.endIndex + 1);
+		const items = filteredItems.slice(pagination.startIndex, pagination.endIndex + 1);
 
-		console.log('getFilteredContacts', filteredContacts, contacts, pagination);
 		return {
 			pagination,
-			contacts,
+			contacts: items,
 		};
 	}
 

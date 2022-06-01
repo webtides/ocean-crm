@@ -7,6 +7,7 @@ export default class {
 			title: 'Organisations',
 			search: '',
 			page: 0,
+			trashed: '',
 			pagination: undefined,
 			organizations: [],
 		};
@@ -14,9 +15,10 @@ export default class {
 
 	async loadDynamicProperties({ request, response }) {
 		const search = request.query.search;
+		const trashed = request.query.trashed;
 		const page = parseInt(request.query.page || 1);
-		const { pagination, organizations } = OrganizationService.getFilteredOrganisations(search, page);
-		return { request, response, search, page, pagination, organizations };
+		const { pagination, organizations } = OrganizationService.getFilteredOrganisations(search, page, trashed);
+		return { request, response, search, page, trashed, pagination, organizations };
 	}
 
 	template() {
@@ -25,9 +27,7 @@ export default class {
 				<div class="sm:flex sm:items-center">
 					<div class="sm:flex-auto">
 						<search-filter
-							v-model="form.search"
 							class="block w-full max-w-md"
-							@reset="reset"
 						></search-filter>
 					</div>
 					<div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">

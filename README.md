@@ -1,15 +1,16 @@
 # ocean-crm
 
 ## TODOs
-* Notifications
-* Filter Organizations/Contacts by "deleted_at"
 * Dashboard Widgets (with real content?! and maybe with server sent events for updates?!)
 * Manage Users
 * Login/Auth
 * User Profile
+* Login as other user
+* Log/Activity wit all actions from users?
+* Notifications
+* Use Prisma.io as ORM with SQLite database
 * Logo
 * Favicon
-* Use Prisma.io as ORM with SQLite database
 * Write Readme
 * Push to GitHub
 

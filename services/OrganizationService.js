@@ -1,6 +1,6 @@
 import diskdb from 'diskdb';
 import paginate from '../views/util/paginate';
-import ContactService from "./ContactService";
+import ContactService from './ContactService';
 
 const page1 = [
 	{
@@ -237,24 +237,35 @@ export default class OrganizationService {
 		return collection.find();
 	}
 
-	static getFilteredOrganisations(search, page) {
+	static getFilteredOrganisations(search, page, trashed = '') {
 		const collection = this.getCollection();
-		const totalOrganizations = collection.count();
-		const pagination = paginate(totalOrganizations, page);
 
-		const organizations = collection
+		const filteredItems = collection
 			.find()
-			.slice(pagination.startIndex, pagination.endIndex)
-			.filter((organisation) => {
+			.filter((item) => {
 				if (search) {
-					return JSON.stringify(organisation).includes(search);
+					return JSON.stringify(item).includes(search);
 				}
 				return true;
+			})
+			.filter((item) => {
+				if (trashed && trashed === 'only') {
+					return item.deleted_at !== null;
+				}
+				if (trashed && trashed === 'with') {
+					return true;
+				}
+				return item.deleted_at === null;
 			});
+
+		const totalItems = filteredItems.length;
+		const pagination = paginate(totalItems, page);
+
+		const items = filteredItems.slice(pagination.startIndex, pagination.endIndex + 1);
 
 		return {
 			pagination,
-			organizations,
+			organizations: items,
 		};
 	}
 

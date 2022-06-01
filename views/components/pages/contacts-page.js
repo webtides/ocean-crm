@@ -9,6 +9,7 @@ export default class ContactsPage extends TemplateElement {
 		return {
 			search: '',
 			page: 1,
+			trashed: '',
 			pagination: undefined,
 			contacts: [],
 		};
@@ -16,16 +17,17 @@ export default class ContactsPage extends TemplateElement {
 
 	async loadDynamicProperties({ request, response }) {
 		const search = request.query.search;
+		const trashed = request.query.trashed;
 		const page = parseInt(request.query.page || 1);
 		const ContactService = (await import('../../../services/ContactService.js')).default;
-		const { pagination, contacts } = ContactService.getFilteredContacts(search, page);
-		return { request, response, search, page, pagination, contacts };
+		const { pagination, contacts } = ContactService.getFilteredContacts(search, page, trashed);
+		return { request, response, search, trashed, page, pagination, contacts };
 	}
 
-	@MethodContext({ target: 'server', syncProperties: ['search', 'page'] })
+	@MethodContext({ target: 'server', syncProperties: ['search', 'page', 'trashed'] })
 	async getFilteredContacts() {
 		const ContactService = (await import('../../../services/ContactService.js')).default;
-		const { pagination, contacts } = ContactService.getFilteredContacts(this.search, this.page);
+		const { pagination, contacts } = ContactService.getFilteredContacts(this.search, this.page, this.trashed);
 		return { pagination, contacts };
 	}
 
@@ -44,6 +46,12 @@ export default class ContactsPage extends TemplateElement {
 				this.contacts = contacts;
 				await this.updateUrl();
 			},
+			trashed: async (trashed) => {
+				const { pagination, contacts } = await this.getFilteredContacts();
+				this.pagination = pagination;
+				this.contacts = contacts;
+				await this.updateUrl();
+			},
 		};
 	}
 
@@ -53,6 +61,7 @@ export default class ContactsPage extends TemplateElement {
 				submit: (e) => {
 					e.preventDefault();
 					this.search = e.target.elements.search.value;
+					this.trashed = e.target.elements.trashed.value;
 				},
 			},
 			'pagination-component a': {
@@ -68,12 +77,17 @@ export default class ContactsPage extends TemplateElement {
 		const parameters = {
 			search: this.search || undefined,
 			page: this.page,
+			trashed: this.trashed || undefined,
 		};
 
 		const queryParameters = [`page=${this.page}`];
 
 		if (this.search) {
 			queryParameters.push(`search=${this.search}`);
+		}
+
+		if (this.trashed) {
+			queryParameters.push(`trashed=${this.trashed}`);
 		}
 
 		const query = queryParameters.join('&');

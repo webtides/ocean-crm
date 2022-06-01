@@ -2,17 +2,18 @@ import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla
 import { Component } from '@webtides/luna-js';
 
 @Component({
-	target: Component.TARGET_CLIENT,
+	target: Component.TARGET_BOTH,
 })
 export default class SearchFilter extends TemplateElement {
 	properties() {
 		return {
 			search: '',
+			trashed: '',
 		};
 	}
 
 	async loadDynamicProperties({ request, response }) {
-		return { search: request.query.search };
+		return { search: request.query.search, trashed: request.query.trashed };
 	}
 
 	template() {
@@ -22,7 +23,7 @@ export default class SearchFilter extends TemplateElement {
 					<dropdown-button
 						class="block focus:z-10 px-4 hover:bg-gray-100 border-r focus:border-white rounded-l focus:ring md:px-6"
 					>
-						<div slot="trigger" class="flex items-baseline">
+						<div slot="trigger" class="flex items-baseline py-3 cursor-pointer">
 							<span class="hidden text-gray-700 md:inline">Filter</span>
 							<svg
 								class="w-2 h-2 fill-gray-700 md:ml-2"
@@ -34,11 +35,15 @@ export default class SearchFilter extends TemplateElement {
 								/>
 							</svg>
 						</div>
-						<div slot="content" class="mt-2 px-4 py-6 w-screen bg-white rounded shadow-xl">
+						<div
+							slot="content"
+							class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg px-4 py-6 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+						>
 							<label class="block text-gray-700">Trashed:</label>
-							<select name="form.trashed" class="form-select mt-1 w-full">
-								<option value="with">With Trashed</option>
-								<option value="only">Only Trashed</option>
+							<select name="trashed" class="form-select mt-1 w-full">
+								<option value=""></option>
+								<option value="with" ${this.trashed === 'with' ? 'selected' : ''}>With Trashed</option>
+								<option value="only" ${this.trashed === 'only' ? 'selected' : ''}>Only Trashed</option>
 							</select>
 						</div>
 					</dropdown-button>
