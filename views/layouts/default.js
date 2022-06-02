@@ -41,26 +41,30 @@ const layout = (page, context = {}) => {
 									<div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
 										<a
 											href="/"
-											class="${currentPath === '/'
-												? navLinkActiveClasses
-												: navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+											class="${
+												currentPath === '/' ? navLinkActiveClasses : navLinkDefaultClasses
+											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 											aria-current="page"
 											>Dashboard</a
 										>
 
 										<a
 											href="/organizations"
-											class="${currentPath.includes('/organizations')
-												? navLinkActiveClasses
-												: navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+											class="${
+												currentPath.includes('/organizations')
+													? navLinkActiveClasses
+													: navLinkDefaultClasses
+											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 											>Organizations</a
 										>
 
 										<a
 											href="/contacts"
-											class="${currentPath.includes('/contacts')
-												? navLinkActiveClasses
-												: navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+											class="${
+												currentPath.includes('/contacts')
+													? navLinkActiveClasses
+													: navLinkDefaultClasses
+											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 											>Contacts</a
 										>
 									</div>
@@ -300,6 +304,7 @@ const layout = (page, context = {}) => {
 
 					<main class="py-10">
 						<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+							<flash-message></flash-message>
 							<h1 class="text-3xl font-bold leading-tight text-gray-900">
 								${context.title || 'Dashboard'}
 							</h1>

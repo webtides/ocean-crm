@@ -1,7 +1,6 @@
 # ocean-crm
 
 ## TODOs
-* Manage Users
 * Login/Auth
 * Auth/Roles
 * User Profile
