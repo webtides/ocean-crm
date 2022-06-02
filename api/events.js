@@ -2,7 +2,6 @@ let clients = [];
 let stats = [];
 
 export default async ({ request, response }) => {
-	console.log('Got /events');
 	response.set({
 		'Cache-Control': 'no-cache',
 		'Content-Type': 'text/event-stream',
@@ -23,10 +22,10 @@ export default async ({ request, response }) => {
 
 	clients.push(newClient);
 
-	console.log(`${clientId} Connection opened`);
+	//console.log(`${clientId} Connection opened`);
 
 	request.on('close', () => {
-		console.log(`${clientId} Connection closed`);
+		//console.log(`${clientId} Connection closed`);
 		clients = clients.filter((client) => client.id !== clientId);
 	});
 };

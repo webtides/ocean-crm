@@ -1,9 +1,8 @@
 # ocean-crm
 
 ## TODOs
-* Login as other user (https://stackoverflow.com/questions/28143064/how-can-i-impersonate-another-user-with-passport-js-in-node)
-* Auth/Roles
 * Log/Activity wit all actions from users? + Widget
+* Auth/Roles
 * Notifications
 * Use Prisma.io as ORM with SQLite database
 * Svg partials/helpers instead of inline copies

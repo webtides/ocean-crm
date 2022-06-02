@@ -1,5 +1,7 @@
 // import { html } from '@webtides/element-js/src/renderer/vanilla';
 
+import UserService from '../../services/UserService';
+
 const layout = (page, context = {}) => {
 	const now = Date.now();
 
@@ -12,6 +14,8 @@ const layout = (page, context = {}) => {
 		.split(' ')
 		.map((n) => n[0])
 		.join('');
+
+	const otherUsers = UserService.getAll().filter((otherUser) => otherUser.id !== user?.id);
 
 	return `
 		<!DOCTYPE html>
@@ -143,14 +147,57 @@ const layout = (page, context = {}) => {
 													>Your Profile</a
 												>
 
-												<a
-													href="/users"
-													class="block px-4 py-2 text-sm text-gray-700"
-													role="menuitem"
-													tabindex="-1"
-													id="user-menu-item-1"
-													>Manage Users</a
-												>
+
+												${
+													user?.isAdmin
+														? `
+															<a
+																href="/users"
+																class="block px-4 py-2 text-sm text-gray-700"
+																role="menuitem"
+																tabindex="-1"
+																id="user-menu-item-1"
+																>Manage Users</a
+															>
+												`
+														: ``
+												}
+
+												${
+													user?.isAdmin
+														? `
+													<form action="/api/auth/impersonate" method="post" class="block px-4 py-2 text-sm text-gray-700">
+														<input type="hidden" name="adminId" value="${user.id}">
+														<select name="userId" class="form-select w-full" onchange="this.form.submit()">
+															<option value="">Impersonate User</option>
+															${otherUsers?.map(
+																(user) => `
+																	<option value="${user.id}">${user.name}</option>
+																`,
+															)}
+														</select>
+													</form>
+												`
+														: ``
+												}
+
+												${
+													user?.isImpersonatedBy
+														? `
+													<form action="/api/auth/impersonate" method="post" class="block px-4 py-2 text-sm text-gray-700">
+														<input type="hidden" name="adminId" value="${user.isImpersonatedBy.id}">
+														<button
+															type="submit"
+															class="block text-sm text-gray-700"
+															role="menuitem"
+															tabindex="-1"
+															id="user-menu-item-2"
+														>Undo Impersonation</button
+													>
+													</form>
+												`
+														: ``
+												}
 
 												<form action="/api/auth/logout" method="post">
 													<button
@@ -158,7 +205,7 @@ const layout = (page, context = {}) => {
 														class="block px-4 py-2 text-sm text-gray-700"
 														role="menuitem"
 														tabindex="-1"
-														id="user-menu-item-2"
+														id="user-menu-item-3"
 														>Sign out</button
 													>
 												</form>
