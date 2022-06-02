@@ -16,6 +16,7 @@ export default {
 	pages: {
 		input: [path.join(process.cwd(), 'views/pages')],
 		factory: '@webtides/luna-renderer/lib/element-js/vanilla',
+		fallback: '/fallback'
 	},
 
 	layouts: {
