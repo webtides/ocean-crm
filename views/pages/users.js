@@ -1,5 +1,10 @@
 import { html } from '@webtides/element-js/src/renderer/vanilla';
 import UserService from '../../services/UserService';
+import isAuthenticated from "../util/isAuthenticated";
+
+export const middleware = async () => {
+	return [isAuthenticated];
+};
 
 export default class {
 	properties() {

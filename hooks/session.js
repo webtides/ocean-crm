@@ -1,5 +1,6 @@
 import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
 import session from 'express-session';
+import passport from 'passport';
 
 export const name = HOOKS.MIDDLEWARE_REGISTER;
 
@@ -15,4 +16,6 @@ export default async ({ app }) => {
 			saveUninitialized: true,
 		}),
 	);
+
+	app.use(passport.authenticate('session'));
 };

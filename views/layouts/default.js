@@ -7,6 +7,12 @@ const layout = (page, context = {}) => {
 	const navLinkActiveClasses = 'border-indigo-500 text-gray-900';
 	const navLinkDefaultClasses = 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
 
+	const user = context.request.user;
+	const userNameInitials = user?.name
+		.split(' ')
+		.map((n) => n[0])
+		.join('');
+
 	return `
 		<!DOCTYPE html>
 		<html lang="" class="h-full bg-gray-100">
@@ -105,11 +111,9 @@ const layout = (page, context = {}) => {
 												aria-haspopup="true"
 											>
 												<span class="sr-only">Open user menu</span>
-												<img
-													class="h-8 w-8 rounded-full"
-													src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-													alt=""
-												/>
+												<span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
+												  <span class="text-md font-medium leading-none text-white">${userNameInitials}</span>
+												</span>
 											</button>
 											<!--
 				  Dropdown menu, show/hide based on menu state.
@@ -148,14 +152,16 @@ const layout = (page, context = {}) => {
 													>Manage Users</a
 												>
 
-												<a
-													href="#"
-													class="block px-4 py-2 text-sm text-gray-700"
-													role="menuitem"
-													tabindex="-1"
-													id="user-menu-item-2"
-													>Sign out</a
-												>
+												<form action="/api/auth/logout" method="post">
+													<button
+														type="submit"
+														class="block px-4 py-2 text-sm text-gray-700"
+														role="menuitem"
+														tabindex="-1"
+														id="user-menu-item-2"
+														>Sign out</button
+													>
+												</form>
 											</div>
 										</dropdown-button>
 									</div>
@@ -292,11 +298,13 @@ const layout = (page, context = {}) => {
 										>Settings</a
 									>
 
-									<a
-										href="#"
-										class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
-										>Sign out</a
-									>
+									<form action="/api/auth/logout" method="post">
+										<button
+											type="submit"
+											class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+											>Sign out</button
+										>
+									</form>
 								</div>
 							</div>
 						</div>

@@ -1,7 +1,8 @@
 import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
-import OrganizationService from "../services/OrganizationService";
-import ContactService from "../services/ContactService";
-import UserService from "../services/UserService";
+import OrganizationService from '../services/OrganizationService';
+import ContactService from '../services/ContactService';
+import UserService from '../services/UserService';
+import crypto from 'crypto';
 
 export const name = HOOKS.SERVER_STARTED;
 
@@ -24,4 +25,18 @@ export default async () => {
 	// 		})
 	// 	}
 	// })
+
+	// adding password and salt for all users
+	// password: secret
+
+	// const salt = crypto.randomBytes(16).toString('hex');
+	// const password = crypto.pbkdf2Sync('secret', salt, 1000, 64, `sha512`).toString(`hex`);
+	// const usersCollection = UserService.getCollection();
+	// usersCollection.find().forEach((user) => {
+	// 	UserService.update(user.id, {
+	// 		...user,
+	// 		password,
+	// 		salt,
+	// 	});
+	// });
 };

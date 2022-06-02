@@ -1,5 +1,6 @@
 import paginate from '../views/util/paginate';
 import BaseCollectionService from './BaseCollectionService';
+import crypto from 'crypto';
 
 const seedUsers = [
 	{
@@ -66,7 +67,7 @@ export default class UserService extends BaseCollectionService {
 	}
 
 	static name() {
-		return 'users'
+		return 'users';
 	}
 
 	static getFilteredUsers(search, page, trashed = '', role = '') {
@@ -108,5 +109,15 @@ export default class UserService extends BaseCollectionService {
 			pagination,
 			users: items,
 		};
+	}
+
+	static findByEmail(email) {
+		const collection = this.getCollection();
+		return collection.findOne({ email });
+	}
+
+	static checkPassword(user, password) {
+		const hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64, `sha512`).toString(`hex`);
+		return user.password === hash;
 	}
 }
