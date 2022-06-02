@@ -1,12 +1,14 @@
 import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
 import OrganizationService from "../services/OrganizationService";
 import ContactService from "../services/ContactService";
+import UserService from "../services/UserService";
 
 export const name = HOOKS.SERVER_STARTED;
 
 export default async () => {
 	OrganizationService.init();
 	ContactService.init();
+	UserService.init();
 
 	// const organizationsCollection = OrganizationService.getCollection();
 	// const contactsCollection = ContactService.getCollection();

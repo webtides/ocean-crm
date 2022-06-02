@@ -3,6 +3,7 @@
 ## TODOs
 * Manage Users
 * Login/Auth
+* Auth/Roles
 * User Profile
 * Login as other user
 * Log/Activity wit all actions from users? + Widget
