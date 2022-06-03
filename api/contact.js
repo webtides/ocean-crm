@@ -1,5 +1,11 @@
 import Validator from 'validatorjs';
-import ContactService from "../services/ContactService.js";
+import ContactService from '../services/ContactService.js';
+import LogService from '../services/LogService';
+import isAuthenticated from '../views/util/isAuthenticated';
+
+export const middleware = async () => {
+	return [isAuthenticated];
+};
 
 export const post = async ({ request, response }) => {
 	if (request.body['_method'] && request.body['_method'] === 'delete') {
@@ -7,9 +13,11 @@ export const post = async ({ request, response }) => {
 		const restore = request.body['restore'] === 'true';
 
 		if (restore) {
-			ContactService.restore(organizationId);
+			const contact = ContactService.restore(organizationId);
+			LogService.addLog('restore', 'contact', contact, request.user);
 		} else {
-			ContactService.delete(organizationId);
+			const contact = ContactService.delete(organizationId);
+			LogService.addLog('restore', 'contact', contact, request.user);
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -39,12 +47,14 @@ export const post = async ({ request, response }) => {
 
 		// update
 		const organizationId = request.body['contactId'];
-		ContactService.update(organizationId, {
+		const contact = ContactService.update(organizationId, {
 			name: request.body.name,
 			phone: request.body.phone,
 			city: request.body.city,
 			organization: parseInt(request.body.organization),
 		});
+
+		LogService.addLog('update', 'contact', contact, request.user);
 
 		return response.redirect(request.header('Referer'));
 	}
@@ -53,12 +63,14 @@ export const post = async ({ request, response }) => {
 	request.session.oldValues = undefined;
 
 	// create
-	ContactService.create({
+	const contact = ContactService.create({
 		name: request.body.name,
 		phone: request.body.phone,
 		city: request.body.city,
 		organization: parseInt(request.body.organization),
 	});
+
+	LogService.addLog('create', 'contact', contact, request.user);
 
 	return response.redirect('/contacts'); // TODO: this should NOT be hardcoded...
 };

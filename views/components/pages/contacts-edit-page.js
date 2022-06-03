@@ -10,6 +10,7 @@ export default class ContactsEditPage extends TemplateElement {
 			title: 'Edit Contact',
 			errors: undefined,
 			oldValues: undefined,
+			user: undefined,
 			contact: undefined,
 			organizations: [],
 		};
@@ -19,20 +20,23 @@ export default class ContactsEditPage extends TemplateElement {
 		const ContactService = (await import('../../../services/ContactService.js')).default;
 		const OrganizationService = (await import('../../../services/OrganizationService.js')).default;
 
+		const user = request.user;
+
 		const contactId = parseInt(request.params.id);
-		const contact = ContactService.find(contactId);
+		const contact = ContactService.findById(contactId);
 
 		const errors = request.session?.errors;
 		const oldValues = request.session?.oldValues;
 
 		const organizations = OrganizationService.getAllOrganisations();
 
-		return { request, response, contactId, errors, oldValues, contact, organizations };
+		return { request, response, user, contactId, errors, oldValues, contact, organizations };
 	}
 
-	@MethodContext({ target: 'server', syncProperties: ['contactId'] })
+	@MethodContext({ target: 'server', syncProperties: ['user', 'contactId'] })
 	async deleteContact(restore = false) {
 		const ContactService = (await import('../../../services/ContactService.js')).default;
+		const LogService = (await import('../../../services/LogService.js')).default;
 
 		if (restore) {
 			ContactService.restore(this.contactId);
@@ -40,18 +44,21 @@ export default class ContactsEditPage extends TemplateElement {
 			ContactService.delete(this.contactId);
 		}
 
-		const contact = ContactService.find(this.contactId);
+		const contact = ContactService.findById(this.contactId);
+
+		LogService.addLog(restore ? 'restore' : 'delete', 'contact', contact, this.user);
 
 		return { contact };
 	}
 
-	@MethodContext({ target: 'server', syncProperties: ['contactId'] })
+	@MethodContext({ target: 'server', syncProperties: ['user', 'contactId'] })
 	async updateContact(values) {
 		const ContactService = (await import('../../../services/ContactService.js')).default;
+		const LogService = (await import('../../../services/LogService.js')).default;
 
-		ContactService.update(this.contactId, values);
+		const contact = ContactService.update(this.contactId, values);
 
-		const contact = ContactService.find(this.contactId);
+		LogService.addLog('update', 'contact', contact, this.user);
 
 		return { contact };
 	}

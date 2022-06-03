@@ -77,6 +77,16 @@ const layout = (page, context = {}) => {
 											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 											>Contacts</a
 										>
+
+										<a
+											href="/logs"
+											class="${
+												currentPath.includes('/logs')
+													? navLinkActiveClasses
+													: navLinkDefaultClasses
+											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+											>Logs</a
+										>
 									</div>
 								</div>
 								<div class="hidden sm:ml-6 sm:flex sm:items-center">

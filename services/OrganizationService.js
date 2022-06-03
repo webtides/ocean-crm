@@ -1,6 +1,5 @@
-import diskdb from 'diskdb';
-import fetch from 'node-fetch';
 import paginate from '../views/util/paginate';
+import BaseCollectionService from './BaseCollectionService';
 import ContactService from './ContactService';
 
 const page1 = [
@@ -220,17 +219,13 @@ const page3 = [
 	},
 ];
 
-export default class OrganizationService {
-	static init() {
-		const db = diskdb.connect('./content', ['organizations']);
-		if (db.organizations.count() === 0) {
-			db.organizations.save([...page1, ...page2, ...page3]);
-		}
+export default class OrganizationService extends BaseCollectionService {
+	static seed() {
+		return [...page1, ...page2, ...page3];
 	}
 
-	static getCollection() {
-		const db = diskdb.connect('./content', ['organizations']);
-		return db.organizations;
+	static name() {
+		return 'organizations';
 	}
 
 	static getAllOrganisations() {
@@ -275,84 +270,5 @@ export default class OrganizationService {
 		const organization = collection.findOne({ id });
 		organization.contacts = ContactService.findWithOrganization(id);
 		return organization;
-	}
-
-	static create(values) {
-		const collection = this.getCollection();
-		const id = collection.count() + 100;
-
-		const organization = {
-			id: id,
-			...values,
-			deleted_at: null,
-		};
-
-		const save = collection.save(organization);
-
-		this.notifyEvents();
-
-		return save;
-	}
-
-	static update(id, values) {
-		const collection = this.getCollection();
-
-		const update = collection.update(
-			{ id },
-			{ ...values },
-			{
-				multi: false,
-				upsert: false,
-			},
-		);
-
-		this.notifyEvents();
-
-		return update;
-	}
-
-	static delete(id) {
-		const collection = this.getCollection();
-
-		const update = collection.update(
-			{ id },
-			{ deleted_at: Date.now() },
-			{
-				multi: false,
-				upsert: false,
-			},
-		);
-
-		this.notifyEvents();
-
-		return update;
-	}
-
-	static restore(id) {
-		const collection = this.getCollection();
-
-		const update = collection.update(
-			{ id },
-			{ deleted_at: null },
-			{
-				multi: false,
-				upsert: false,
-			},
-		);
-
-		this.notifyEvents();
-
-		return update;
-	}
-
-	static notifyEvents() {
-		const collection = this.getCollection();
-
-		// TODO: there must be a better way... Maybe EventEmitter?!
-		fetch('http://localhost:3000/api/events', {
-			method: 'post',
-			body: JSON.stringify({ organizations: collection.count() }),
-			headers: { 'Content-Type': 'application/json' },
-		});
 	}
 }

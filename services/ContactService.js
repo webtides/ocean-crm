@@ -1,5 +1,5 @@
-import diskdb from 'diskdb';
 import paginate from '../views/util/paginate';
+import BaseCollectionService from './BaseCollectionService';
 
 const seedContacts = [
 	{
@@ -304,17 +304,13 @@ const seedContacts = [
 	},
 ];
 
-export default class ContactService {
-	static init() {
-		const collection = this.getCollection();
-		if (collection.count() === 0) {
-			collection.save([...seedContacts]);
-		}
+export default class ContactService extends BaseCollectionService {
+	static seed() {
+		return seedContacts;
 	}
 
-	static getCollection() {
-		const db = diskdb.connect('./content', ['contacts']);
-		return db.contacts;
+	static name() {
+		return 'contacts';
 	}
 
 	static getFilteredContacts(search, page, trashed = '') {
@@ -352,62 +348,5 @@ export default class ContactService {
 	static findWithOrganization(id) {
 		const collection = this.getCollection();
 		return collection.find({ organization: id });
-	}
-
-	static find(id) {
-		const collection = this.getCollection();
-		return collection.findOne({ id });
-	}
-
-	static create(values) {
-		const collection = this.getCollection();
-		const id = collection.count() + 100;
-
-		const organization = {
-			id: id,
-			...values,
-			deleted_at: null,
-		};
-
-		return collection.save(organization);
-	}
-
-	static update(id, values) {
-		const collection = this.getCollection();
-
-		return collection.update(
-			{ id },
-			{ ...values },
-			{
-				multi: false,
-				upsert: false,
-			},
-		);
-	}
-
-	static delete(id) {
-		const collection = this.getCollection();
-
-		return collection.update(
-			{ id },
-			{ deleted_at: Date.now() },
-			{
-				multi: false,
-				upsert: false,
-			},
-		);
-	}
-
-	static restore(id) {
-		const collection = this.getCollection();
-
-		return collection.update(
-			{ id },
-			{ deleted_at: null },
-			{
-				multi: false,
-				upsert: false,
-			},
-		);
 	}
 }

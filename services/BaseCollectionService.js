@@ -42,7 +42,7 @@ export default class BaseCollectionService {
 
 	static findById(id) {
 		const collection = this.getCollection();
-		return collection.findOne({ id });
+		return collection.findOne({ id: parseInt(id) });
 	}
 
 	static create(values) {
@@ -66,7 +66,7 @@ export default class BaseCollectionService {
 		const collection = this.getCollection();
 
 		collection.update(
-			{ id },
+			{ id: parseInt(id) },
 			{ ...values },
 			{
 				multi: false,

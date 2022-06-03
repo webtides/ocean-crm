@@ -1,8 +1,10 @@
 import Validator from 'validatorjs';
 import OrganizationService from "../services/OrganizationService";
+import LogService from "../services/LogService";
+import isAuthenticated from '../views/util/isAuthenticated';
 
-export default async ({ request, response }) => {
-	return response.json({ result: 'success' });
+export const middleware = async () => {
+	return [isAuthenticated];
 };
 
 export const post = async ({ request, response }) => {
@@ -11,9 +13,11 @@ export const post = async ({ request, response }) => {
 		const restore = request.body['restore'] === 'true';
 
 		if (restore) {
-			OrganizationService.restore(organizationId);
+			const organization = OrganizationService.restore(organizationId);
+			LogService.addLog('restore', 'organization', organization, request.user);
 		} else {
-			OrganizationService.delete(organizationId);
+			const organization = OrganizationService.delete(organizationId);
+			LogService.addLog('delete', 'organization', organization, request.user);
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -51,11 +55,13 @@ export const post = async ({ request, response }) => {
 
 		// update
 		const organizationId = request.body['organizationId'];
-		OrganizationService.update(organizationId, {
+		const organization = OrganizationService.update(organizationId, {
 			name: request.body.name,
 			phone: request.body.phone,
 			city: request.body.city,
 		});
+
+		LogService.addLog('update', 'organization', organization, request.user);
 
 		return response.redirect(request.header('Referer'));
 	}
@@ -64,11 +70,13 @@ export const post = async ({ request, response }) => {
 	request.session.oldValues = undefined;
 
 	// create
-	OrganizationService.create({
+	const organization = OrganizationService.create({
 		name: request.body.name,
 		phone: request.body.phone,
 		city: request.body.city,
 	});
+
+	LogService.addLog('create', 'organization', organization, request.user);
 
 	return response.redirect('/organizations'); // TODO: this should NOT be hardcoded...
 };
