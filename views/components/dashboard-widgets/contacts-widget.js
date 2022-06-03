@@ -24,7 +24,7 @@ export default class ContactsWidget extends TemplateElement {
 			const data = JSON.parse(event.data);
 
 			if (data && data.contacts) {
-				this.totalCount = data.contacts;
+				this.totalCount = data.contacts.total;
 			}
 		});
 	}

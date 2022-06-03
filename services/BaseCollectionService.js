@@ -120,7 +120,7 @@ export default class BaseCollectionService {
 			body: JSON.stringify({
 				[this.name()]: {
 					total: this.getAll().length,
-					deleted: this.getDeleted().length,
+					// deleted: this.getDeleted().length,
 				},
 			}),
 			headers: { 'Content-Type': 'application/json' },

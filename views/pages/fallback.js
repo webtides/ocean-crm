@@ -2,7 +2,6 @@ import { html } from '@webtides/element-js/src/renderer/vanilla';
 
 export default class {
 	async loadDynamicProperties({ request, response }) {
-		console.log('request', request);
 		return { request, response };
 	}
 

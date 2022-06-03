@@ -2,7 +2,7 @@ import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla
 import { Component } from '@webtides/luna-js';
 
 @Component({
-	target: Component.TARGET_SERVER,
+	target: Component.TARGET_BOTH,
 })
 export default class LogFeed extends TemplateElement {
 	properties() {

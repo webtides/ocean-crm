@@ -24,7 +24,7 @@ export default class OrganizationsWidget extends TemplateElement {
 			const data = JSON.parse(event.data);
 
 			if (data && data.organizations) {
-				this.totalCount = data.organizations;
+				this.totalCount = data.organizations.total;
 			}
 		});
 	}

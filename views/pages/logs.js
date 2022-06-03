@@ -20,8 +20,7 @@ export default class {
 	async loadDynamicProperties({ request, response }) {
 		const search = request.query.search;
 		const page = parseInt(request.query.page || 1);
-		const userId = request.user?.id;
-		const { pagination, logs } = LogService.getFilteredLogs(userId, page, search);
+		const { pagination, logs } = LogService.getFilteredLogs(page, search);
 		return { request, response, search, page, pagination, logs };
 	}
 

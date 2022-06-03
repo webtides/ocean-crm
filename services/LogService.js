@@ -40,7 +40,7 @@ export default class LogService extends BaseCollectionService {
 		return 'logs';
 	}
 
-	static getFilteredLogs(userId, page, search = '') {
+	static getFilteredLogs(page, search = '') {
 		const collection = this.getCollection();
 
 		const filteredItems = collection
@@ -70,7 +70,6 @@ export default class LogService extends BaseCollectionService {
 	}
 
 	static addLog(activityType, resourceType, resource, user) {
-		console.log({ activityType, resourceType, resource, user });
 		const values = {
 			type: activityType, // create, update, delete, restore
 			resource: resourceType, // contact, organization, user
