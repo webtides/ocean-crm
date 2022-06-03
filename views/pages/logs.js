@@ -27,7 +27,7 @@ export default class {
 
 	template() {
 		return html`
-			<log-feed logs='${JSON.stringify(this.logs)}'"></log-feed>
+			<log-feed logs='${JSON.stringify(this.logs)}' class="mt-8"></log-feed>
 		`;
 	}
 }

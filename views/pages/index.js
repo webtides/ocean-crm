@@ -74,6 +74,8 @@ export default class {
 							</div>
 						</dd>
 					</div>
+
+					<logs-widget class="col-span-1 sm:col-span-2 lg:col-span-3"></logs-widget>
 				</dl>
 			</div>
 		`;

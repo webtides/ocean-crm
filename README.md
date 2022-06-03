@@ -1,7 +1,6 @@
 # ocean-crm
 
 ## TODOs
-* Log/Activity wit all actions from users? + Widget
 * Auth/Roles
 * Notifications
 * Use Prisma.io as ORM with SQLite database
