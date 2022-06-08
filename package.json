@@ -3,14 +3,19 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "npx luna --dev"
+		"dev": "npx luna --dev",
+		"migrate:reset": "npx prisma db push --force-reset --accept-data-loss && npx prisma db seed",
+		"prisma:format": "npx prisma format",
+		"prisma:generate": "npx prisma generate"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@prisma/client": "^3.14.0",
 		"@tailwindcss/forms": "^0.5.2",
 		"@tailwindcss/typography": "^0.5.1",
 		"@webtides/element-js": "^0.4.2",
@@ -30,6 +35,7 @@
 		"validatorjs": "^3.22.1"
 	},
 	"devDependencies": {
+		"@faker-js/faker": "^7.2.0",
 		"@webtides/luna-cli": "0.11.0-dev.12",
 		"eslint": "^8.11.0",
 		"eslint-config-prettier": "^8.5.0",
@@ -37,9 +43,13 @@
 		"husky": "^7.0.4",
 		"lint-staged": "^12.3.7",
 		"prettier": "^2.6.0",
+		"prisma": "^3.14.0",
 		"stylelint": "^14.6.0",
 		"stylelint-config-prettier": "^9.0.3",
 		"stylelint-prettier": "^2.0.0"
+	},
+	"prisma": {
+		"seed": "node database/seeders/database-seeder.js"
 	},
 	"husky": {
 		"hooks": {
