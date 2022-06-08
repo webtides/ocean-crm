@@ -49,6 +49,7 @@
 		"stylelint-prettier": "^2.0.0"
 	},
 	"prisma": {
+		"schema": "database/schema.prisma",
 		"seed": "node database/seeders/database-seeder.js"
 	},
 	"husky": {
