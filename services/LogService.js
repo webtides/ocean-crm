@@ -12,10 +12,20 @@ export default class LogService extends BasePrismaService {
 		};
 	}
 
-	static async getFilteredLogs(page, search = '') {
+	static async getFilteredLogs(user, page, search = '') {
 		const model = this.getModel();
 
-		const allItems = await model.findMany({ include: this.include() });
+		const query = {
+			include: this.include(),
+		};
+
+		if (user.id !== 1) {
+			query.where = {
+				userId: user.id,
+			};
+		}
+
+		const allItems = await model.findMany(query);
 		const filteredItems = allItems
 			.filter((item) => {
 				if (search) {
@@ -23,7 +33,7 @@ export default class LogService extends BasePrismaService {
 				}
 				return true;
 			})
-			.sort((a, b) => b.timestamp - a.timestamp);
+			.sort((a, b) => b.createdAt - a.createdAt);
 
 		const totalItems = filteredItems.length;
 		const pagination = paginate(totalItems, page);

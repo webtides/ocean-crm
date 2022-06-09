@@ -1,6 +1,7 @@
 import { html } from '@webtides/element-js/src/renderer/vanilla';
 import OrganizationService from '../../../../services/OrganizationService';
-import isAuthenticated from "../../../util/isAuthenticated";
+import isAuthenticated from '../../../util/isAuthenticated';
+import AuthorizationService from '../../../../services/AuthorizationService';
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -13,6 +14,7 @@ export default class {
 			errors: undefined,
 			oldValues: undefined,
 			organization: undefined,
+			can: undefined,
 		};
 	}
 
@@ -23,47 +25,63 @@ export default class {
 		const errors = request.session?.errors;
 		const oldValues = request.session?.oldValues;
 
-		return { request, response, organizationId, errors, oldValues, organization };
+		const can = {
+			deleteOrganization: await AuthorizationService.can(request.user, 'delete', 'organization', organizationId),
+		};
+
+		return { request, response, organizationId, errors, oldValues, organization, can };
 	}
 
 	template() {
 		return html`
 			<div>
-				${this.organization?.deleted_at
+				${this.can?.deleteOrganization
 					? html`
-							<form
-								method="post"
-								action="/api/organisation"
-								class="p-4 bg-yellow-300 rounded flex items-center justify-between max-w-3xl mb-6"
-							>
-								<input type="hidden" name="_method" value="delete" />
-								<input type="hidden" name="organizationId" value="${this.organizationId}" />
-								<input type="hidden" name="restore" value="true" />
-								<div class="flex items-center">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 20 20"
-										class="flex-shrink-0 w-4 h-4 fill-yellow-800 mr-2"
-									>
-										<path
-											d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"
-										></path>
-									</svg>
-									<div class="text-sm font-medium text-yellow-800">
-										This organization has been deleted.
-									</div>
-								</div>
-								<button type="submit" class="text-sm text-yellow-800 hover:underline">Restore</button>
-							</form>
+							${this.organization?.deletedAt
+								? html`
+										<form
+											method="post"
+											action="/api/organisation"
+											class="p-4 bg-yellow-300 rounded flex items-center justify-between max-w-3xl mb-6"
+										>
+											<input type="hidden" name="_method" value="delete" />
+											<input type="hidden" name="organizationId" value="${this.organizationId}" />
+											<input type="hidden" name="restore" value="true" />
+											<div class="flex items-center">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													viewBox="0 0 20 20"
+													class="flex-shrink-0 w-4 h-4 fill-yellow-800 mr-2"
+												>
+													<path
+														d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"
+													></path>
+												</svg>
+												<div class="text-sm font-medium text-yellow-800">
+													This organization has been deleted.
+												</div>
+											</div>
+											<button type="submit" class="text-sm text-yellow-800 hover:underline">
+												Restore
+											</button>
+										</form>
+								  `
+								: html`
+										<form
+											method="post"
+											action="/api/organisation"
+											class="py-4 flex justify-end max-w-3xl"
+										>
+											<input type="hidden" name="_method" value="delete" />
+											<input type="hidden" name="organizationId" value="${this.organizationId}" />
+											<input type="hidden" name="restore" value="false" />
+											<button type="submit" class="text-red-600 hover:underline">
+												Delete Organization
+											</button>
+										</form>
+								  `}
 					  `
-					: html`
-							<form method="post" action="/api/organisation" class="py-4 flex justify-end max-w-3xl">
-								<input type="hidden" name="_method" value="delete" />
-								<input type="hidden" name="organizationId" value="${this.organizationId}" />
-								<input type="hidden" name="restore" value="false" />
-								<button type="submit" class="text-red-600 hover:underline">Delete Organization</button>
-							</form>
-					  `}
+					: ''}
 				<div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
 					<form method="post" action="/api/organisation">
 						<input type="hidden" name="_method" value="put" />

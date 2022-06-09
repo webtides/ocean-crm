@@ -48,8 +48,6 @@ export default class BasePrismaService {
 	}
 
 	static async findById(id) {
-		console.log('findById', id);
-		console.trace();
 		const model = this.getModel();
 
 		const include = this.include();

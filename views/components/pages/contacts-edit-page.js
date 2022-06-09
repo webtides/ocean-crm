@@ -19,6 +19,7 @@ export default class ContactsEditPage extends TemplateElement {
 	async loadDynamicProperties({ request, response }) {
 		const ContactService = (await import('../../../services/ContactService.js')).default;
 		const OrganizationService = (await import('../../../services/OrganizationService.js')).default;
+		const AuthorizationService = (await import('../../../services/AuthorizationService.js')).default;
 
 		const user = request.user;
 
@@ -30,7 +31,11 @@ export default class ContactsEditPage extends TemplateElement {
 
 		const organizations = await OrganizationService.getAll();
 
-		return { request, response, user, contactId, errors, oldValues, contact, organizations };
+		const can = {
+			deleteContact: await AuthorizationService.can(request.user, 'delete', 'contact', contactId),
+		};
+
+		return { request, response, user, contactId, errors, oldValues, contact, organizations, can };
 	}
 
 	@MethodContext({ target: 'server', syncProperties: ['user', 'contactId'] })
@@ -105,41 +110,53 @@ export default class ContactsEditPage extends TemplateElement {
 		}));
 		return html`
 			<div>
-				${this.contact?.deletedAt
+				${this.can?.deleteContact
 					? html`
-							<form
-								method="post"
-								action="/api/contact"
-								class="p-4 bg-yellow-300 rounded flex items-center justify-between max-w-3xl mb-6"
-							>
-								<input type="hidden" name="_method" value="delete" />
-								<input type="hidden" name="contactId" value="${this.contactId}" />
-								<input type="hidden" name="restore" value="true" />
-								<div class="flex items-center">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 20 20"
-										class="flex-shrink-0 w-4 h-4 fill-yellow-800 mr-2"
-									>
-										<path
-											d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"
-										></path>
-									</svg>
-									<div class="text-sm font-medium text-yellow-800">
-										This contact has been deleted.
-									</div>
-								</div>
-								<button type="submit" class="text-sm text-yellow-800 hover:underline">Restore</button>
-							</form>
+							${this.contact?.deletedAt
+								? html`
+										<form
+											method="post"
+											action="/api/contact"
+											class="p-4 bg-yellow-300 rounded flex items-center justify-between max-w-3xl mb-6"
+										>
+											<input type="hidden" name="_method" value="delete" />
+											<input type="hidden" name="contactId" value="${this.contactId}" />
+											<input type="hidden" name="restore" value="true" />
+											<div class="flex items-center">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													viewBox="0 0 20 20"
+													class="flex-shrink-0 w-4 h-4 fill-yellow-800 mr-2"
+												>
+													<path
+														d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"
+													></path>
+												</svg>
+												<div class="text-sm font-medium text-yellow-800">
+													This contact has been deleted.
+												</div>
+											</div>
+											<button type="submit" class="text-sm text-yellow-800 hover:underline">
+												Restore
+											</button>
+										</form>
+								  `
+								: html`
+										<form
+											method="post"
+											action="/api/contact"
+											class="py-4 flex justify-end max-w-3xl"
+										>
+											<input type="hidden" name="_method" value="delete" />
+											<input type="hidden" name="contactId" value="${this.contactId}" />
+											<input type="hidden" name="restore" value="false" />
+											<button type="submit" class="text-red-600 hover:underline">
+												Delete Contact
+											</button>
+										</form>
+								  `}
 					  `
-					: html`
-							<form method="post" action="/api/contact" class="py-4 flex justify-end max-w-3xl">
-								<input type="hidden" name="_method" value="delete" />
-								<input type="hidden" name="contactId" value="${this.contactId}" />
-								<input type="hidden" name="restore" value="false" />
-								<button type="submit" class="text-red-600 hover:underline">Delete Contact</button>
-							</form>
-					  `}
+					: ''}
 				<div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
 					<form method="post" action="/api/contact">
 						<input type="hidden" name="_method" value="put" />

@@ -1,8 +1,7 @@
 # ocean-crm
 
 ## TODOs
-* Use Prisma.io as ORM with SQLite database
-* Auth/Roles (All Logs only for Admins, Delete/Restore only for Admins)
+* Auth/Roles
 * Notifications (for Contacts Pages?) like Flash Messages
 * Use Model classes
 * Don't pass all fields from db to frontend
@@ -21,3 +20,5 @@
 * Cannot import anything for the client when using TARGET_BOTH...
 * I think fallback routes are not the right tool for 404 and 500 error pages... First of all I cannot know the difference and second I cannot have the correct http headers... I think luna needs another concept for these kind of routes.
 * When the app gets bigger, creating new pages/components is a lot of typing... I think it would be nice to have some generators via the cli to create pages, components, apis, services etc.
+* Cannot invoke put/delete api handlers via standard form post requests...
+* I would like to add middleware functions just for the eg. delete methods

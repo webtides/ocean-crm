@@ -1,7 +1,8 @@
 import Validator from 'validatorjs';
-import OrganizationService from "../services/OrganizationService";
-import LogService from "../services/LogService";
+import OrganizationService from '../services/OrganizationService';
+import LogService from '../services/LogService';
 import isAuthenticated from '../views/util/isAuthenticated';
+import AuthorizationService from '../services/AuthorizationService.js';
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -11,6 +12,13 @@ export const post = async ({ request, response }) => {
 	if (request.body['_method'] && request.body['_method'] === 'delete') {
 		const organizationId = request.body['organizationId'];
 		const restore = request.body['restore'] === 'true';
+
+		// check if authorized
+		if (!(await AuthorizationService.can(request.user, 'delete', 'organization', organizationId))) {
+			// TODO: 403 redirect is not working... what is the correct thing to do here?!
+			// maybe like this? https://laravel.com/docs/7.x/errors#custom-http-error-pages
+			return response.status(403).redirect(request.header('Referer'));
+		}
 
 		if (restore) {
 			const organization = OrganizationService.restore(organizationId);
