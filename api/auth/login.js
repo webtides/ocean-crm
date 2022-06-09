@@ -14,8 +14,8 @@ import UserService from '../../services/UserService';
  * user is authenticated; otherwise, not.
  */
 passport.use(
-	new LocalStrategy(function verify(username, password, done) {
-		const user = UserService.findByEmail(username);
+	new LocalStrategy(async function verify(username, password, done) {
+		const user = await UserService.findByEmail(username);
 
 		if (!user) {
 			return done(null, false, { message: 'Incorrect username or password.' });

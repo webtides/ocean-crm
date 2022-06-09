@@ -5,7 +5,7 @@ export const post = async ({ request, response }) => {
 	const adminId = request.body['adminId'];
 
 	if (userId) {
-		const user = UserService.findById(parseInt(userId));
+		const user = await UserService.findById(parseInt(userId));
 		request.session.impersonate = {
 			id: user.id,
 			email: user.email,

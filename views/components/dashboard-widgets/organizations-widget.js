@@ -13,7 +13,8 @@ export default class OrganizationsWidget extends TemplateElement {
 
 	async loadDynamicProperties({ request, response }) {
 		const OrganizationService = (await import('../../../services/OrganizationService.js')).default;
-		const totalCount = OrganizationService.getAllOrganisations().length;
+		const allOrganizations = await OrganizationService.getAll();
+		const totalCount = allOrganizations.length;
 		return { totalCount };
 	}
 

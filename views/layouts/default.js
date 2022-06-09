@@ -1,8 +1,8 @@
 // import { html } from '@webtides/element-js/src/renderer/vanilla';
 
-import UserService from '../../services/UserService';
+import UserService from '../../services/UserService.js';
 
-const layout = (page, context = {}) => {
+const layout = async (page, context = {}) => {
 	const now = Date.now();
 
 	const currentPath = context.request?.url || '/';
@@ -15,7 +15,8 @@ const layout = (page, context = {}) => {
 		.map((n) => n[0])
 		.join('');
 
-	const otherUsers = UserService.getAll().filter((otherUser) => otherUser.id !== user?.id);
+	const allUsers = await UserService.getAll();
+	const otherUsers = allUsers.filter((otherUser) => otherUser.id !== user?.id);
 
 	return `
 		<!DOCTYPE html>

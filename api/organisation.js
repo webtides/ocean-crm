@@ -14,10 +14,10 @@ export const post = async ({ request, response }) => {
 
 		if (restore) {
 			const organization = OrganizationService.restore(organizationId);
-			LogService.addLog('restore', 'organization', organization, request.user);
+			await LogService.addLog('restore', 'organization', organization, request.user);
 		} else {
 			const organization = OrganizationService.delete(organizationId);
-			LogService.addLog('delete', 'organization', organization, request.user);
+			await LogService.addLog('delete', 'organization', organization, request.user);
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -55,13 +55,13 @@ export const post = async ({ request, response }) => {
 
 		// update
 		const organizationId = request.body['organizationId'];
-		const organization = OrganizationService.update(organizationId, {
+		const organization = await OrganizationService.update(organizationId, {
 			name: request.body.name,
 			phone: request.body.phone,
 			city: request.body.city,
 		});
 
-		LogService.addLog('update', 'organization', organization, request.user);
+		await LogService.addLog('update', 'organization', organization, request.user);
 
 		return response.redirect(request.header('Referer'));
 	}
@@ -70,13 +70,13 @@ export const post = async ({ request, response }) => {
 	request.session.oldValues = undefined;
 
 	// create
-	const organization = OrganizationService.create({
+	const organization = await OrganizationService.create({
 		name: request.body.name,
 		phone: request.body.phone,
 		city: request.body.city,
 	});
 
-	LogService.addLog('create', 'organization', organization, request.user);
+	await LogService.addLog('create', 'organization', organization, request.user);
 
 	return response.redirect('/organizations'); // TODO: this should NOT be hardcoded...
 };

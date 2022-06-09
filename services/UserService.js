@@ -1,104 +1,43 @@
-import paginate from '../views/util/paginate';
-import BaseCollectionService from './BaseCollectionService';
+import paginate from '../views/util/paginate.js';
+import BasePrismaService from './BasePrismaService.js';
 import crypto from 'crypto';
 
-const seedUsers = [
-	{
-		id: 4,
-		name: 'Marian Cronin',
-		email: 'qbecker@example.net',
-		role: 'User',
-		deleted_at: null,
-	},
-	{
-		id: 1,
-		name: 'John Doe',
-		email: 'johndoe@example.com',
-		role: 'Admin',
-		deleted_at: null,
-	},
-	{
-		id: 7,
-		name: 'Enstein Exd',
-		email: 'enstein@example.com',
-		role: 'User',
-		deleted_at: null,
-	},
-	{
-		id: 6,
-		name: 'Augusta Little',
-		email: 'runolfsson.rollin@example.org',
-		role: 'User',
-		deleted_at: null,
-	},
-	{
-		id: 2,
-		name: 'Graciela Spencer',
-		email: 'senger.maynard@example.com',
-		role: 'User',
-		deleted_at: null,
-	},
-	{
-		id: 3,
-		name: 'Elian Toy',
-		email: 'marcos.rowe@example.org',
-		role: 'User',
-		deleted_at: null,
-	},
-	{
-		id: 8,
-		name: 'Haha Wow',
-		email: 'wow@example.net',
-		role: 'User',
-		deleted_at: null,
-	},
-	{
-		id: 5,
-		name: 'Aric Yundt',
-		email: 'zola.cummings@example.org',
-		role: 'User',
-		deleted_at: null,
-	},
-];
-
-export default class UserService extends BaseCollectionService {
-	static seed() {
-		return seedUsers;
-	}
-
+export default class UserService extends BasePrismaService {
 	static name() {
-		return 'users';
+		return 'user';
 	}
 
-	static getFilteredUsers(search, page, trashed = '', role = '') {
-		const collection = this.getCollection();
+	static async getFilteredUsers(search, page, trashed = '', role = '') {
+		const model = this.getModel();
 
-		const filteredItems = collection
-			.find()
-			.filter((item) => {
-				if (search) {
-					return JSON.stringify(item).includes(search);
-				}
-				return true;
-			})
-			.filter((item) => {
-				if (trashed && trashed === 'only') {
-					return item.deleted_at !== null;
-				}
-				if (trashed && trashed === 'with') {
-					return true;
-				}
-				return item.deleted_at === null;
-			})
-			.filter((item) => {
-				if (role && role === 'User') {
-					return item.role === 'User';
-				}
-				if (role && role === 'Admin') {
-					return item.role === 'Admin';
-				}
-				return true;
-			});
+		// TODO: full-text search is not available for SQLite...
+		// https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search
+		const where = {};
+
+		if (trashed) {
+			if (trashed === 'only') {
+				where.deletedAt = { not: null };
+			}
+			if (trashed === 'with') {
+				// don't filter
+			}
+		} else {
+			where.deletedAt = null;
+		}
+
+		if (role) {
+			where.role = role;
+		}
+
+		const allItems = await model.findMany({ where });
+		const filteredItems = allItems.filter((item) => {
+			if (search) {
+				return JSON.stringify(item).includes(search);
+			}
+			return true;
+		});
+
+		// TODO: use pagination from prisma...
 
 		const totalItems = filteredItems.length;
 		const pagination = paginate(totalItems, page);
@@ -111,9 +50,13 @@ export default class UserService extends BaseCollectionService {
 		};
 	}
 
-	static findByEmail(email) {
-		const collection = this.getCollection();
-		return collection.findOne({ email });
+	static async findByEmail(email) {
+		const model = this.getModel();
+		return await model.findUnique({
+			where: {
+				email: email,
+			},
+		});
 	}
 
 	static checkPassword(user, password) {

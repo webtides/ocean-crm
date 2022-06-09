@@ -21,10 +21,10 @@ export const post = async ({ request, response }) => {
 
 		if (restore) {
 			const user = UserService.restore(userId);
-			LogService.addLog('restore', 'user', user, request.user);
+			await LogService.addLog('restore', 'user', user, request.user);
 		} else {
 			const user = UserService.delete(userId);
-			LogService.addLog('delete', 'user', user, request.user);
+			await LogService.addLog('delete', 'user', user, request.user);
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -62,14 +62,14 @@ export const post = async ({ request, response }) => {
 		}
 
 		// update
-		const user = UserService.update(userId, {
+		const user = await UserService.update(userId, {
 			name: request.body.name,
 			email: request.body.email,
 			// password: request.body.password,
 			role: request.body.role,
 		});
 
-		LogService.addLog('update', 'user', user, request.user);
+		await LogService.addLog('update', 'user', user, request.user);
 
 		return response.redirect(request.header('Referer'));
 	}
@@ -78,7 +78,7 @@ export const post = async ({ request, response }) => {
 	request.session.oldValues = undefined;
 
 	// create
-	const user = UserService.create({
+	const user = await UserService.create({
 		name: request.body.name,
 		email: request.body.email,
 		// password: request.body.password,
@@ -87,7 +87,7 @@ export const post = async ({ request, response }) => {
 
 	// TODO: I think it would be better to just emit an event here and have a global listener somewhere
 	// the Event should take the request as a property...
-	LogService.addLog('create', 'user', user, request.user);
+	await LogService.addLog('create', 'user', user, request.user);
 
 	return response.redirect('/users'); // TODO: this should NOT be hardcoded...
 };

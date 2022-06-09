@@ -18,7 +18,7 @@ export default class {
 
 	async loadDynamicProperties({ request, response }) {
 		const organizationId = parseInt(request.params.id);
-		const organization = OrganizationService.find(organizationId);
+		const organization = await OrganizationService.findById(organizationId);
 
 		const errors = request.session?.errors;
 		const oldValues = request.session?.oldValues;

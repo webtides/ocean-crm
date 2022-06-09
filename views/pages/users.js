@@ -24,7 +24,7 @@ export default class {
 		const trashed = request.query.trashed;
 		const role = request.query.role;
 		const page = parseInt(request.query.page || 1);
-		const { pagination, users } = UserService.getFilteredUsers(search, page, trashed, role);
+		const { pagination, users } = await UserService.getFilteredUsers(search, page, trashed, role);
 		return { request, response, search, page, trashed, role, pagination, users };
 	}
 

@@ -22,7 +22,7 @@ export default class {
 		const search = request.query.search;
 		const trashed = request.query.trashed;
 		const page = parseInt(request.query.page || 1);
-		const { pagination, organizations } = OrganizationService.getFilteredOrganisations(search, page, trashed);
+		const { pagination, organizations } = await OrganizationService.getFilteredOrganisations(search, page, trashed);
 		return { request, response, search, page, trashed, pagination, organizations };
 	}
 

@@ -19,7 +19,7 @@ export default class {
 		const errors = request.session?.errors;
 		const oldValues = request.session?.oldValues;
 
-		const organizations = OrganizationService.getAllOrganisations();
+		const organizations = await OrganizationService.getAll();
 
 		return { request, response, errors, oldValues, organizations };
 	}

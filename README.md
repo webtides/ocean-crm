@@ -5,10 +5,12 @@
 * Auth/Roles (All Logs only for Admins, Delete/Restore only for Admins)
 * Notifications (for Contacts Pages?) like Flash Messages
 * Use Model classes
+* Don't pass all fields from db to frontend
 * Preview Modal for resources from overview
 * Svg partials/helpers instead of inline copies
 * Logo
 * Favicon
+* Layout improvements and fixes
 * Write Readme
 * Push to GitHub
 

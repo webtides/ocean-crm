@@ -9,15 +9,15 @@ export const middleware = async () => {
 
 export const post = async ({ request, response }) => {
 	if (request.body['_method'] && request.body['_method'] === 'delete') {
-		const organizationId = request.body['contactId'];
+		const contactId = request.body['contactId'];
 		const restore = request.body['restore'] === 'true';
 
 		if (restore) {
-			const contact = ContactService.restore(organizationId);
-			LogService.addLog('restore', 'contact', contact, request.user);
+			const contact = ContactService.restore(contactId);
+			await LogService.addLog('restore', 'contact', contact, request.user);
 		} else {
-			const contact = ContactService.delete(organizationId);
-			LogService.addLog('restore', 'contact', contact, request.user);
+			const contact = ContactService.delete(contactId);
+			await LogService.addLog('restore', 'contact', contact, request.user);
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -47,14 +47,14 @@ export const post = async ({ request, response }) => {
 
 		// update
 		const organizationId = request.body['contactId'];
-		const contact = ContactService.update(organizationId, {
+		const contact = await ContactService.update(organizationId, {
 			name: request.body.name,
 			phone: request.body.phone,
 			city: request.body.city,
-			organization: parseInt(request.body.organization),
+			organizationId: parseInt(request.body.organization),
 		});
 
-		LogService.addLog('update', 'contact', contact, request.user);
+		await LogService.addLog('update', 'contact', contact, request.user);
 
 		return response.redirect(request.header('Referer'));
 	}
@@ -63,14 +63,14 @@ export const post = async ({ request, response }) => {
 	request.session.oldValues = undefined;
 
 	// create
-	const contact = ContactService.create({
+	const contact = await ContactService.create({
 		name: request.body.name,
 		phone: request.body.phone,
 		city: request.body.city,
-		organization: parseInt(request.body.organization),
+		organizationId: parseInt(request.body.organization),
 	});
 
-	LogService.addLog('create', 'contact', contact, request.user);
+	await LogService.addLog('create', 'contact', contact, request.user);
 
 	return response.redirect('/contacts'); // TODO: this should NOT be hardcoded...
 };

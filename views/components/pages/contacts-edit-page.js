@@ -23,12 +23,12 @@ export default class ContactsEditPage extends TemplateElement {
 		const user = request.user;
 
 		const contactId = parseInt(request.params.id);
-		const contact = ContactService.findById(contactId);
+		const contact = await ContactService.findById(contactId);
 
 		const errors = request.session?.errors;
 		const oldValues = request.session?.oldValues;
 
-		const organizations = OrganizationService.getAllOrganisations();
+		const organizations = await OrganizationService.getAll();
 
 		return { request, response, user, contactId, errors, oldValues, contact, organizations };
 	}
@@ -39,14 +39,14 @@ export default class ContactsEditPage extends TemplateElement {
 		const LogService = (await import('../../../services/LogService.js')).default;
 
 		if (restore) {
-			ContactService.restore(this.contactId);
+			await ContactService.restore(this.contactId);
 		} else {
-			ContactService.delete(this.contactId);
+			await ContactService.delete(this.contactId);
 		}
 
-		const contact = ContactService.findById(this.contactId);
+		const contact = await ContactService.findById(this.contactId);
 
-		LogService.addLog(restore ? 'restore' : 'delete', 'contact', contact, this.user);
+		await LogService.addLog(restore ? 'restore' : 'delete', 'contact', contact, this.user);
 
 		return { contact };
 	}
@@ -56,9 +56,9 @@ export default class ContactsEditPage extends TemplateElement {
 		const ContactService = (await import('../../../services/ContactService.js')).default;
 		const LogService = (await import('../../../services/LogService.js')).default;
 
-		const contact = ContactService.update(this.contactId, values);
+		const contact = await ContactService.update(this.contactId, values);
 
-		LogService.addLog('update', 'contact', contact, this.user);
+		await LogService.addLog('update', 'contact', contact, this.user);
 
 		return { contact };
 	}
@@ -85,7 +85,7 @@ export default class ContactsEditPage extends TemplateElement {
 						const formData = new FormData(e.target);
 						const values = {
 							name: formData.get('name'),
-							organization: formData.get('organization'),
+							organizationId: formData.get('organization'),
 							email: formData.get('email'),
 							phone: formData.get('phone'),
 						};
@@ -105,7 +105,7 @@ export default class ContactsEditPage extends TemplateElement {
 		}));
 		return html`
 			<div>
-				${this.contact?.deleted_at
+				${this.contact?.deletedAt
 					? html`
 							<form
 								method="post"

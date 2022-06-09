@@ -1,50 +1,22 @@
-import paginate from '../views/util/paginate';
-import BaseCollectionService from './BaseCollectionService';
+import paginate from '../views/util/paginate.js';
+import BasePrismaService from './BasePrismaService.js';
 
-const seedLogs = [
-	{
-		id: 1,
-		type: 'create', // create, update, delete, restore
-		resource: 'user', // contact, organization, user
-		resourceName: 'Jane Doe',
-		resourceId: 48,
-		timestamp: 1654241957773,
-		userName: 'John Doe',
-	},
-	{
-		id: 1,
-		type: 'update', // create, update, delete, restore
-		resource: 'organization', // contact, organization, user
-		resourceName: 'Acme Corp.',
-		resourceId: 48,
-		timestamp: 1654241954773,
-		userName: 'John Doe',
-	},
-	{
-		id: 1,
-		type: 'delete', // create, update, delete, restore
-		resource: 'contact', // contact, organization, user
-		resourceName: 'Jim Smith',
-		resourceId: 48,
-		timestamp: 1654241957763,
-		userName: 'John Doe',
-	},
-];
-
-export default class LogService extends BaseCollectionService {
-	static seed() {
-		return seedLogs;
-	}
-
+export default class LogService extends BasePrismaService {
 	static name() {
-		return 'logs';
+		return 'log';
 	}
 
-	static getFilteredLogs(page, search = '') {
-		const collection = this.getCollection();
+	static include() {
+		return {
+			user: true,
+		};
+	}
 
-		const filteredItems = collection
-			.find()
+	static async getFilteredLogs(page, search = '') {
+		const model = this.getModel();
+
+		const allItems = await model.findMany({ include: this.include() });
+		const filteredItems = allItems
 			.filter((item) => {
 				if (search) {
 					return JSON.stringify(item).includes(search);
@@ -64,21 +36,17 @@ export default class LogService extends BaseCollectionService {
 		};
 	}
 
-	static findByUser(id) {
-		const collection = this.getCollection();
-		return collection.find({ userId: id });
+	static async findByUser(id) {
+		const model = this.getModel();
+		return await model.find({ where: { userId: parseInt(id) } });
 	}
 
-	static addLog(activityType, resourceType, resource, user) {
-		const values = {
-			type: activityType, // create, update, delete, restore
-			resource: resourceType, // contact, organization, user
-			resourceName: resource.name,
+	static async addLog(logType, resourceType, resource, user) {
+		return await this.create({
+			logType: logType, // create, update, delete, restore
+			resourceType: resourceType, // contact, organization, user
 			resourceId: resource.id,
-			timestamp: Date.now(),
-			userName: user.name,
-		};
-
-		this.create(values);
+			userId: user.id,
+		});
 	}
 }

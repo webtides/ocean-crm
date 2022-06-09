@@ -17,7 +17,7 @@ export default class UsersEditPage extends TemplateElement {
 		const UserService = (await import('../../../services/UserService')).default;
 
 		const userId = parseInt(request.params.id);
-		const user = userId ? UserService.findById(userId) : undefined;
+		const user = userId ? await UserService.findById(userId) : undefined;
 
 		const errors = request.session?.errors;
 		const oldValues = request.session?.oldValues;
@@ -40,7 +40,7 @@ export default class UsersEditPage extends TemplateElement {
 			<div>
 				${this.user
 					? html`
-							${this.user?.deleted_at
+							${this.user?.deletedAt
 								? html`
 										<form
 											method="post"

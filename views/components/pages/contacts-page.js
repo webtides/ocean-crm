@@ -20,14 +20,14 @@ export default class ContactsPage extends TemplateElement {
 		const trashed = request.query.trashed;
 		const page = parseInt(request.query.page || 1);
 		const ContactService = (await import('../../../services/ContactService.js')).default;
-		const { pagination, contacts } = ContactService.getFilteredContacts(search, page, trashed);
+		const { pagination, contacts } = await ContactService.getFilteredContacts(search, page, trashed);
 		return { request, response, search, trashed, page, pagination, contacts };
 	}
 
 	@MethodContext({ target: 'server', syncProperties: ['search', 'page', 'trashed'] })
 	async getFilteredContacts() {
 		const ContactService = (await import('../../../services/ContactService.js')).default;
-		const { pagination, contacts } = ContactService.getFilteredContacts(this.search, this.page, this.trashed);
+		const { pagination, contacts } = await ContactService.getFilteredContacts(this.search, this.page, this.trashed);
 		return { pagination, contacts };
 	}
 

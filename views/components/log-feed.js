@@ -51,20 +51,20 @@ export default class LogFeed extends TemplateElement {
 										(log) => html`
 											<tr>
 												<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-													${this.activityTemplate(log.resource, log.type, log.userName)}
+													${this.activityTemplate(log.resourceType, log.logType, log.user.name)}
 												</td>
 												<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
 													${this.resourceTemplate(
-														log.resource,
+														log.resourceType,
 														log.resourceName,
 														log.resourceId,
 													)}
 												</td>
 												<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-													${this.typeTemplate(log.type)}
+													${this.typeTemplate(log.logType)}
 												</td>
 												<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-													${this.formattedDateTemplate(log.timestamp)}
+													${this.formattedDateTemplate(log.createdAt)}
 												</td>
 											</tr>
 										`,
@@ -155,7 +155,7 @@ export default class LogFeed extends TemplateElement {
 		</div>`;
 	}
 
-	resourceTemplate(type, name, id) {
+	resourceTemplate(type, name = 'name', id) {
 		if (type === 'contact') {
 			return html`
 				<a href="/contacts/${id}/edit" class="font-medium text-indigo-600 hover:text-indigo-500">${name}</a>

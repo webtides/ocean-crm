@@ -13,14 +13,14 @@ export default class LogsWidget extends TemplateElement {
 
 	async loadDynamicProperties({ request, response }) {
 		const LogService = (await import('../../../services/LogService.js')).default;
-		const { logs } = LogService.getFilteredLogs(1, '');
+		const { logs } = await LogService.getFilteredLogs(1, '');
 		return { logs };
 	}
 
 	@MethodContext({ target: 'server' })
 	async getLatestLogs() {
 		const LogService = (await import('../../../services/LogService.js')).default;
-		const { logs } = LogService.getFilteredLogs(1, '');
+		const { logs } = await LogService.getFilteredLogs(1, '');
 		return { logs };
 	}
 
