@@ -1,7 +1,6 @@
 # ocean-crm
 
 ## TODOs
-* Auth/Roles
 * Notifications (for Contacts Pages?) like Flash Messages
 * Use Model classes
 * Don't pass all fields from db to frontend

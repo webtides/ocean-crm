@@ -29,6 +29,7 @@ passport.use(
 			id: user.id,
 			name: user.name,
 			email: user.email,
+			isAdmin: user.role === 'Admin',
 		});
 	}),
 );
@@ -50,7 +51,7 @@ passport.use(
  */
 passport.serializeUser(function (user, cb) {
 	process.nextTick(function () {
-		cb(null, { id: user.id, email: user.email, name: user.name });
+		cb(null, { id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin });
 	});
 });
 
