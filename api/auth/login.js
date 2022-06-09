@@ -15,7 +15,11 @@ import UserService from '../../services/UserService';
  */
 passport.use(
 	new LocalStrategy(async function verify(username, password, done) {
-		const user = await UserService.findByEmail(username);
+		const user = await UserService.find({ email: username }, {
+			...UserService.select(),
+			password: true,
+			salt: true,
+		});
 
 		if (!user) {
 			return done(null, false, { message: 'Incorrect username or password.' });

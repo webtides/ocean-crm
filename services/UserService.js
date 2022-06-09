@@ -7,6 +7,18 @@ export default class UserService extends BasePrismaService {
 		return 'user';
 	}
 
+	static select() {
+		return {
+			id: true,
+			deletedAt: true,
+			name: true,
+			email: true,
+			password: false,
+			salt: false,
+			role: true,
+		};
+	}
+
 	static async getFilteredUsers(search, page, trashed = '', role = '') {
 		const model = this.getModel();
 
@@ -48,15 +60,6 @@ export default class UserService extends BasePrismaService {
 			pagination,
 			users: items,
 		};
-	}
-
-	static async findByEmail(email) {
-		const model = this.getModel();
-		return await model.findUnique({
-			where: {
-				email: email,
-			},
-		});
 	}
 
 	static checkPassword(user, password) {

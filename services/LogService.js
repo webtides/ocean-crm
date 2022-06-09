@@ -48,7 +48,7 @@ export default class LogService extends BasePrismaService {
 
 	static async findByUser(id) {
 		const model = this.getModel();
-		return await model.find({ where: { userId: parseInt(id) } });
+		return await this.find({ userId: parseInt(id) });
 	}
 
 	static async addLog(logType, resourceType, resource, user) {

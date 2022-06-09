@@ -43,60 +43,7 @@ export default class UsersEditPage extends TemplateElement {
 		];
 		return html`
 			<div>
-				${this.can?.deleteUser
-					? html`
-							${this.user
-								? html`
-										${this.user?.deletedAt
-											? html`
-													<form
-														method="post"
-														action="/api/user"
-														class="p-4 bg-yellow-300 rounded flex items-center justify-between max-w-3xl mb-6"
-													>
-														<input type="hidden" name="_method" value="delete" />
-														<input type="hidden" name="userId" value="${this.userId}" />
-														<input type="hidden" name="restore" value="true" />
-														<div class="flex items-center">
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																viewBox="0 0 20 20"
-																class="flex-shrink-0 w-4 h-4 fill-yellow-800 mr-2"
-															>
-																<path
-																	d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"
-																></path>
-															</svg>
-															<div class="text-sm font-medium text-yellow-800">
-																This user has been deleted.
-															</div>
-														</div>
-														<button
-															type="submit"
-															class="text-sm text-yellow-800 hover:underline"
-														>
-															Restore
-														</button>
-													</form>
-											  `
-											: html`
-													<form
-														method="post"
-														action="/api/user"
-														class="py-4 flex justify-end max-w-3xl"
-													>
-														<input type="hidden" name="_method" value="delete" />
-														<input type="hidden" name="userId" value="${this.userId}" />
-														<input type="hidden" name="restore" value="false" />
-														<button type="submit" class="text-red-600 hover:underline">
-															Delete User
-														</button>
-													</form>
-											  `}
-								  `
-								: ''}
-					  `
-					: ''}
+				${this.deleteUserTemplate()}
 				<div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
 					<form method="post" action="/api/user">
 						<input type="hidden" name="_method" value="put" />
@@ -138,6 +85,52 @@ export default class UsersEditPage extends TemplateElement {
 					</form>
 				</div>
 			</div>
+		`;
+	}
+
+	deleteUserTemplate() {
+		return html`
+			${this.user && this.can?.deleteUser
+				? html`
+						${this.user?.deletedAt
+							? html`
+									<form
+										method="post"
+										action="/api/user"
+										class="p-4 bg-yellow-300 rounded flex items-center justify-between max-w-3xl mb-6"
+									>
+										<input type="hidden" name="_method" value="delete" />
+										<input type="hidden" name="userId" value="${this.userId}" />
+										<input type="hidden" name="restore" value="true" />
+										<div class="flex items-center">
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 20 20"
+												class="flex-shrink-0 w-4 h-4 fill-yellow-800 mr-2"
+											>
+												<path
+													d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"
+												></path>
+											</svg>
+											<div class="text-sm font-medium text-yellow-800">
+												This user has been deleted.
+											</div>
+										</div>
+										<button type="submit" class="text-sm text-yellow-800 hover:underline">
+											Restore
+										</button>
+									</form>
+							  `
+							: html`
+									<form method="post" action="/api/user" class="py-4 flex justify-end max-w-3xl">
+										<input type="hidden" name="_method" value="delete" />
+										<input type="hidden" name="userId" value="${this.userId}" />
+										<input type="hidden" name="restore" value="false" />
+										<button type="submit" class="text-red-600 hover:underline">Delete User</button>
+									</form>
+							  `}
+				  `
+				: ''}
 		`;
 	}
 }

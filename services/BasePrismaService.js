@@ -7,8 +7,12 @@ export default class BasePrismaService {
 		return undefined;
 	}
 
+	static select() {
+		return null;
+	}
+
 	static include() {
-		return undefined;
+		return null;
 	}
 
 	static getModel() {
@@ -42,27 +46,26 @@ export default class BasePrismaService {
 		});
 	}
 
-	static async find(query) {
+	static async find(where, select = this.select(), include = this.include()) {
 		const model = this.getModel();
-		return await model.findUnique(query);
-	}
-
-	static async findById(id) {
-		const model = this.getModel();
-
-		const include = this.include();
 
 		const query = {
-			where: {
-				id: parseInt(id),
-			},
+			where: where,
 		};
+
+		if (select) {
+			query.select = select;
+		}
 
 		if (include) {
 			query.include = include;
 		}
 
 		return await model.findUnique(query);
+	}
+
+	static async findById(id) {
+		return await this.find({ id: parseInt(id) });
 	}
 
 	static async create(properties) {

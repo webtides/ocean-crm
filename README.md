@@ -1,10 +1,8 @@
 # ocean-crm
 
 ## TODOs
-* Notifications (for Contacts Pages?) like Flash Messages
-* Use Model classes
-* Don't pass all fields from db to frontend
 * Preview Modal for resources from overview
+* Notifications (for Contacts Pages?) like Flash Messages
 * Svg partials/helpers instead of inline copies
 * Logo
 * Favicon
