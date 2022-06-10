@@ -6,8 +6,18 @@ export default class ContactService extends BasePrismaService {
 		return 'contact';
 	}
 
+	static include() {
+		return {
+			organization: true,
+		};
+	}
+
 	static async getFilteredContacts(search, page, trashed = '') {
 		const model = this.getModel();
+
+		const query = {
+			include: this.include(),
+		};
 
 		// TODO: full-text search is not available for SQLite...
 		// https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search
@@ -24,7 +34,9 @@ export default class ContactService extends BasePrismaService {
 			where.deletedAt = null;
 		}
 
-		const allItems = await model.findMany({ where });
+		query.where = where;
+
+		const allItems = await model.findMany(query);
 		const filteredItems = allItems.filter((item) => {
 			if (search) {
 				return JSON.stringify(item).includes(search);

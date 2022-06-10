@@ -99,6 +99,11 @@ export default class ResourceOverviewTable extends TemplateElement {
 						  `}
 				</div>
 			</div>
+			<resource-preview-dialog
+				resource="organization"
+				title="Preview Contact"
+				fields='${JSON.stringify(this.fields)}'
+			></resource-preview-dialog>
 		`;
 	}
 }

@@ -57,11 +57,6 @@ export default class {
 						></resource-overview-table>
 					</div>
 				</div>
-				<resource-preview-dialog
-					resource="organization"
-					title="Preview Organization"
-					fields='${JSON.stringify(fields)}'
-				></resource-preview-dialog>
 			</div>
 		`;
 	}

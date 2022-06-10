@@ -96,6 +96,19 @@ export default class ContactsPage extends TemplateElement {
 	}
 
 	template() {
+		const fields = {
+			name: 'Name',
+			organization: 'Organization',
+			city: 'City',
+		};
+
+		const contacts = this.contacts.map((contact) => {
+			return {
+				...contact,
+				organization: contact.organization.name,
+			};
+		});
+
 		return html`
 			<div class="">
 				<div class="sm:flex sm:items-center">
@@ -112,87 +125,12 @@ export default class ContactsPage extends TemplateElement {
 				</div>
 				<div class="mt-8 flex flex-col">
 					<div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-						<div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-							<div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-								<table class="min-w-full divide-y divide-gray-300">
-									<thead class="bg-gray-50">
-										<tr>
-											<th
-												scope="col"
-												class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-											>
-												Name
-											</th>
-											<th
-												scope="col"
-												class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-											>
-												Organization
-											</th>
-											<th
-												scope="col"
-												class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-											>
-												Phone
-											</th>
-											<th
-												scope="col"
-												class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-											>
-												City
-											</th>
-											<th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-												<span class="sr-only">Edit</span>
-											</th>
-										</tr>
-									</thead>
-									<tbody class="bg-white">
-										${this.contacts.map(
-											(contact) => html`
-												<tr class="odd:bg-white even:bg-slate-50">
-													<td
-														class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
-													>
-														${contact.name}
-													</td>
-													<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-														${contact.organization}
-													</td>
-													<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-														${contact.phone}
-													</td>
-													<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-														${contact.city}
-													</td>
-													<td
-														class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
-													>
-														<a
-															href="/contacts/${contact.id}/edit"
-															class="text-indigo-600 hover:text-indigo-900"
-															>Edit<span class="sr-only">, ${contact.name}</span></a
-														>
-													</td>
-												</tr>
-											`,
-										)}
-									</tbody>
-								</table>
-								${this.contacts?.length === 0
-									? html`
-											<div
-												class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-											>
-												No contacts found.
-											</div>
-									  `
-									: html`
-											<pagination-component
-												pagination="${JSON.stringify(this.pagination)}"
-											></pagination-component>
-									  `}
-							</div>
-						</div>
+						<resource-overview-table
+							resource="contact"
+							pagination="${JSON.stringify(this.pagination)}"
+							items="${JSON.stringify(contacts)}"
+							fields="${JSON.stringify(fields)}"
+						></resource-overview-table>
 					</div>
 				</div>
 			</div>
