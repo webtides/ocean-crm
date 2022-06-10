@@ -25,6 +25,7 @@ model Contact {
   id             Int           @id @default(autoincrement())
   deletedAt      DateTime?
   name           String
+  email     String    @unique
   phone          String
   city           String
   organization   Organization? @relation(fields: [organizationId], references: [id])
@@ -35,8 +36,13 @@ model Organization {
   id        Int       @id @default(autoincrement())
   deletedAt DateTime?
   name      String
+  email     String    @unique
   phone     String
+  address     String
   city      String
+  region      String
+  country      String
+  postalCode      String
   contacts  Contact[]
 }
 

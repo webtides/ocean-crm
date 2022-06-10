@@ -11,8 +11,13 @@ export default class OrganizationFactory extends PrismaFactory {
 		return {
 			// deletedAt: null,
 			name: this.faker.company.companyName(),
+			email: this.faker.internet.email(),
 			phone: this.faker.phone.phoneNumber(),
+			address: this.faker.address.street(),
 			city: this.faker.address.city(),
+			region: this.faker.address.state(),
+			country: this.faker.address.countryCode(),
+			postalCode: this.faker.address.zipCode(),
 			...properties,
 		};
 	}

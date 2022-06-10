@@ -55,7 +55,8 @@ export default class {
 							resource="user"
 							pagination="${JSON.stringify(this.pagination)}"
 							items="${JSON.stringify(this.users)}"
-							fields="${JSON.stringify(fields)}"
+							overviewfields="${JSON.stringify(fields)}"
+							previewfields="${JSON.stringify(fields)}"
 						></resource-overview-table>
 					</div>
 				</div>

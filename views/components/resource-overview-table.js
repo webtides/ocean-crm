@@ -10,7 +10,8 @@ export default class ResourceOverviewTable extends TemplateElement {
 			resource: '',
 			pagination: undefined,
 			items: [],
-			fields: {},
+			overviewfields: {},
+			previewfields: {},
 		};
 	}
 
@@ -28,13 +29,13 @@ export default class ResourceOverviewTable extends TemplateElement {
 					<table class="min-w-full divide-y divide-gray-300">
 						<thead class="bg-gray-50">
 							<tr>
-								${Object.keys(this.fields).map(
+								${Object.values(this.overviewfields).map(
 									(field) => html`
 										<th
 											scope="col"
 											class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
 										>
-											${this.fields[field]}
+											${field}
 										</th>
 									`,
 								)}
@@ -50,7 +51,7 @@ export default class ResourceOverviewTable extends TemplateElement {
 							${this.items?.map(
 								(item) => html`
 									<tr class="odd:bg-white even:bg-slate-50">
-										${Object.keys(this.fields).map(
+										${Object.keys(this.overviewfields).map(
 											(field) => html`
 												<td
 													class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
@@ -102,7 +103,7 @@ export default class ResourceOverviewTable extends TemplateElement {
 			<resource-preview-dialog
 				resource="organization"
 				title="Preview Contact"
-				fields='${JSON.stringify(this.fields)}'
+				fields='${JSON.stringify(this.previewfields)}'
 			></resource-preview-dialog>
 		`;
 	}

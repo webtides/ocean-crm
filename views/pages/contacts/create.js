@@ -1,6 +1,6 @@
 import { html } from '@webtides/element-js/src/renderer/vanilla';
 import OrganizationService from '../../../services/OrganizationService';
-import isAuthenticated from "../../util/isAuthenticated";
+import isAuthenticated from '../../util/isAuthenticated';
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -40,6 +40,13 @@ export default class {
 								value="${this.oldValues?.name}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Name"
+							></text-input>
+							<text-input
+								name="email"
+								error="${this.errors?.email?.join(',')}"
+								value="${this.oldValues?.email}"
+								class="pb-8 pr-6 w-full lg:w-1/2"
+								label="Email"
 							></text-input>
 							<text-input
 								name="phone"

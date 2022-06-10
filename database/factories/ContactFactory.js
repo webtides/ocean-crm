@@ -8,9 +8,13 @@ export default class ContactFactory extends PrismaFactory {
 	}
 
 	properties(properties) {
+		const firstName = this.faker.name.firstName();
+		const lastName = this.faker.name.lastName();
+
 		return {
 			// deletedAt: null,
-			name: `${this.faker.name.firstName()} ${this.faker.name.lastName()}`,
+			name: `${firstName} ${lastName}`,
+			email: this.faker.internet.email(firstName, lastName),
 			phone: this.faker.phone.phoneNumber(),
 			city: this.faker.address.city(),
 			...properties,

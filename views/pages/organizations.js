@@ -27,10 +27,21 @@ export default class {
 	}
 
 	template() {
-		const fields = {
+		const overviewFields = {
 			name: 'Name',
 			phone: 'Phone',
 			city: 'City',
+		};
+
+		const previewFields = {
+			name: 'Name',
+			email: 'Email',
+			phone: 'Phone',
+			address: 'Address',
+			postalCode: 'Postal Code',
+			city: 'City',
+			region: 'Region',
+			country: 'Country',
 		};
 
 		return html`
@@ -53,7 +64,8 @@ export default class {
 							resource="organization"
 							pagination="${JSON.stringify(this.pagination)}"
 							items="${JSON.stringify(this.organizations)}"
-							fields='${JSON.stringify(fields)}'
+							overviewfields='${JSON.stringify(overviewFields)}'
+							previewfields='${JSON.stringify(previewFields)}'
 						></resource-overview-table>
 					</div>
 				</div>

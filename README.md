@@ -1,8 +1,6 @@
 # ocean-crm
 
 ## TODOs
-* Preview Modal for resources from overview
-  * Models should have more fields than shown in overview (like forms already have)
 * Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
 * Svg partials/helpers instead of inline copies
 * Logo
@@ -19,7 +17,10 @@
 * Add sorting per column for datatables
 * Flash messages and Toasts?! Should there be two?! Or just a single pattern?
 
-## Gotchas
+## luna-js Bugs
+* when rendering serverside, dashToCamel is not working for attribute to property mappings 
+
+## luna-js Gotchas
 * We always need the request inside the layout. Therefor we always have to use "loadDynamicProperties" although we don't need it for the page itself...
 * Pages can't be reactive on the client, which gets limiting quite fast
 * Cannot import anything that uses native node libs... Need to dynamically import... It would be nice if luna-js could figure that out for me!

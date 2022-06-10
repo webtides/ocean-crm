@@ -102,6 +102,20 @@ export default class ContactsPage extends TemplateElement {
 			city: 'City',
 		};
 
+		const overviewFields = {
+			name: 'Name',
+			organization: 'Organization',
+			city: 'City',
+		};
+
+		const previewFields = {
+			name: 'Name',
+			email: 'Email',
+			phone: 'Phone',
+			city: 'City',
+			organization: 'Organization',
+		};
+
 		const contacts = this.contacts.map((contact) => {
 			return {
 				...contact,
@@ -129,7 +143,8 @@ export default class ContactsPage extends TemplateElement {
 							resource="contact"
 							pagination="${JSON.stringify(this.pagination)}"
 							items="${JSON.stringify(contacts)}"
-							fields="${JSON.stringify(fields)}"
+							overviewfields='${JSON.stringify(overviewFields)}'
+							previewfields='${JSON.stringify(previewFields)}'
 						></resource-overview-table>
 					</div>
 				</div>
