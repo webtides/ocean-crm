@@ -1,7 +1,6 @@
 # ocean-crm
 
 ## TODOs
-* Svg partials/helpers instead of inline copies
 * Logo
 * Favicon
 * Layout improvements and fixes
@@ -11,7 +10,6 @@
   * Updating Contacts is broken...
   * Flash messages seem broken
   * Session seems to be broken or not consistent
-* Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
 * Write Readme
 * Push to GitHub
 
@@ -21,6 +19,7 @@
 * Add Model classes for typehints in templates?!
 * Add global sorting to overview lists
 * Add sorting per column for datatables
+* Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
 * Flash messages and Toasts?! Should there be two?! Or just a single pattern?
 
 ## luna-js Bugs

@@ -58,7 +58,12 @@ export default {
 		},
 
 		static: {
-			sources: [],
+			sources: [
+				{
+					input: 'node_modules/heroicons/**/*.svg',
+					output: 'assets/heroicons',
+				},
+			],
 		},
 	},
 

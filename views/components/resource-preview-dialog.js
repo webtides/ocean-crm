@@ -1,5 +1,6 @@
 import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
 import { Component } from '@webtides/luna-js';
+import icon from "../partials/icon";
 
 @Component({
 	target: Component.TARGET_BOTH,
@@ -61,22 +62,7 @@ export default class ResourcePreviewDialog extends TemplateElement {
 										<div
 											class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
 										>
-											<!-- Heroicon name: outline/check -->
-											<svg
-												class="h-6 w-6 text-green-600"
-												xmlns="http://www.w3.org/2000/svg"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke-width="2"
-												stroke="currentColor"
-												aria-hidden="true"
-											>
-												<path
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													d="M5 13l4 4L19 7"
-												/>
-											</svg>
+											${icon.outline('check', 'h-6 w-6 text-green-600')}
 										</div>
 										<div>
 											<h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -110,20 +96,7 @@ export default class ResourcePreviewDialog extends TemplateElement {
 															class="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
 														>
 															<div class="w-0 flex-1 flex items-center">
-																<!-- Heroicon name: solid/paper-clip -->
-																<svg
-																	class="flex-shrink-0 h-5 w-5 text-gray-400"
-																	xmlns="http://www.w3.org/2000/svg"
-																	viewBox="0 0 20 20"
-																	fill="currentColor"
-																	aria-hidden="true"
-																>
-																	<path
-																		fill-rule="evenodd"
-																		d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-																		clip-rule="evenodd"
-																	/>
-																</svg>
+																${icon.solid('paper-clip', 'flex-shrink-0 h-5 w-5 text-gray-400')}
 																<span class="ml-2 flex-1 w-0 truncate">
 																	resume_back_end_developer.pdf
 																</span>
@@ -141,20 +114,7 @@ export default class ResourcePreviewDialog extends TemplateElement {
 															class="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
 														>
 															<div class="w-0 flex-1 flex items-center">
-																<!-- Heroicon name: solid/paper-clip -->
-																<svg
-																	class="flex-shrink-0 h-5 w-5 text-gray-400"
-																	xmlns="http://www.w3.org/2000/svg"
-																	viewBox="0 0 20 20"
-																	fill="currentColor"
-																	aria-hidden="true"
-																>
-																	<path
-																		fill-rule="evenodd"
-																		d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-																		clip-rule="evenodd"
-																	/>
-																</svg>
+																${icon.solid('paper-clip', 'flex-shrink-0 h-5 w-5 text-gray-400')}
 																<span class="ml-2 flex-1 w-0 truncate">
 																	coverletter_back_end_developer.pdf
 																</span>
