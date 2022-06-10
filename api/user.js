@@ -20,10 +20,10 @@ export const post = async ({ request, response }) => {
 		}
 
 		if (restore) {
-			const user = UserService.restore(userId);
+			const user = await UserService.restore(userId);
 			await LogService.addLog('restore', 'user', user, request.user);
 		} else {
-			const user = UserService.delete(userId);
+			const user = await UserService.delete(userId);
 			await LogService.addLog('delete', 'user', user, request.user);
 		}
 

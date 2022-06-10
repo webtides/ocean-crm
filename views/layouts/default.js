@@ -394,6 +394,7 @@ const layout = async (page, context = {}) => {
 						</div>
 					</main>
 				</div>
+				<notification-stack></notification-stack>
 			</body>
 		</html>
 	`;

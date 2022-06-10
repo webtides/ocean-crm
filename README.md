@@ -1,11 +1,17 @@
 # ocean-crm
 
 ## TODOs
-* Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
 * Svg partials/helpers instead of inline copies
 * Logo
 * Favicon
 * Layout improvements and fixes
+  * Pagination component for more than 6 pages
+  * Logs sorting seems out of order
+  * Impersonation seems broken
+  * Updating Contacts is broken...
+  * Flash messages seem broken
+  * Session seems to be broken or not consistent
+* Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
 * Write Readme
 * Push to GitHub
 
@@ -20,7 +26,7 @@
 ## luna-js Bugs
 * when rendering serverside, dashToCamel is not working for attribute to property mappings 
 
-## luna-js Gotchas
+## luna-js Gotchas and possible Improvements
 * We always need the request inside the layout. Therefor we always have to use "loadDynamicProperties" although we don't need it for the page itself...
 * Pages can't be reactive on the client, which gets limiting quite fast
 * Cannot import anything that uses native node libs... Need to dynamically import... It would be nice if luna-js could figure that out for me!

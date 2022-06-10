@@ -13,10 +13,10 @@ export const post = async ({ request, response }) => {
 		const restore = request.body['restore'] === 'true';
 
 		if (restore) {
-			const contact = ContactService.restore(contactId);
+			const contact = await ContactService.restore(contactId);
 			await LogService.addLog('restore', 'contact', contact, request.user);
 		} else {
-			const contact = ContactService.delete(contactId);
+			const contact = await ContactService.delete(contactId);
 			await LogService.addLog('restore', 'contact', contact, request.user);
 		}
 

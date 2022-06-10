@@ -71,6 +71,10 @@ export const post = async ({ request, response }) => {
 
 		await LogService.addLog('update', 'organization', organization, request.user);
 
+		request.session.flash = {
+			success: 'Successfully updated!',
+		};
+
 		return response.redirect(request.header('Referer'));
 	}
 

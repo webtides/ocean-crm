@@ -94,8 +94,6 @@ export default class BasePrismaService {
 
 		this.notifyEvents();
 
-		console.log('update', item);
-
 		return item;
 	}
 
