@@ -87,7 +87,7 @@ export default class PaginationComponent extends TemplateElement {
 											href="?page=1"
 											data-page="1"
 											aria-current="page"
-											class="${this.page === 0
+											class="${this.pagination.currentPage === 1
 												? pageLinkActiveClasses
 												: pageLinkDefaultClasses} relative inline-flex items-center px-4 py-2 border text-sm font-medium"
 										>
@@ -96,7 +96,7 @@ export default class PaginationComponent extends TemplateElement {
 										<a
 											href="?page=2"
 											data-page="2"
-											class="${this.page === 1
+											class="${this.pagination.currentPage === 2
 												? pageLinkActiveClasses
 												: pageLinkDefaultClasses} relative inline-flex items-center px-4 py-2 border text-sm font-medium"
 										>
@@ -105,7 +105,7 @@ export default class PaginationComponent extends TemplateElement {
 										<a
 											href="?page=3"
 											data-page="3"
-											class="${this.page === 2
+											class="${this.pagination.currentPage === 3
 												? pageLinkActiveClasses
 												: pageLinkDefaultClasses} hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
 										>
