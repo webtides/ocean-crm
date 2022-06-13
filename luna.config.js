@@ -63,6 +63,10 @@ export default {
 					input: 'node_modules/heroicons/**/*.svg',
 					output: 'assets/heroicons',
 				},
+				{
+					input: 'assets/images/**/*',
+					output: 'assets/images',
+				},
 			],
 		},
 	},

@@ -37,17 +37,17 @@ const layout = async (page, context = {}) => {
 					<nav class="bg-white shadow-sm">
 						<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 							<div class="flex justify-between h-16">
-								<div class="flex">
-									<div class="flex-shrink-0 flex items-center">
+								<div class="flex gap-4">
+									<div class="flex-shrink-0 flex gap-4 items-center">
 										<img
-											class="block lg:hidden h-8 w-auto"
-											src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-											alt="Workflow"
+											class="block h-8 w-auto"
+											src="/assets/images/logo/vector/default-monochrome.svg"
+											alt="Ocean CRM"
 										/>
 										<img
-											class="hidden lg:block h-8 w-auto"
-											src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-											alt="Workflow"
+											class="hidden lg:block h-4 w-auto"
+											src="/assets/images/logo/vector/isolated-monochrome-black.svg"
+											alt="Ocean CRM"
 										/>
 									</div>
 									<div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
