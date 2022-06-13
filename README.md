@@ -11,6 +11,18 @@ A real world example application to demonstrate how luna-js and element-js work.
 -   prisma
 -   tailwindcss
 
+## Features
+
+- Full-stack application with real-world features
+- Server side rendering + client side rendering
+- RESTful API with backend validation
+- Real time updates with Server Sent Events
+- Session Management
+- User impersonation
+- Local Authentication + Role based Authorization
+- Database Migrations and Seeding
+- (TODO) Unit + Feature/Integration Testing
+
 ## Installation
 
 Clone the repo locally:

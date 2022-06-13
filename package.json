@@ -1,7 +1,7 @@
 {
 	"name": "ocean-crm",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A real world example application to demonstrate how luna-js and element-js work.",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
