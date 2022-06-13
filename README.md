@@ -1,7 +1,6 @@
 # ocean-crm
 
 ## TODOs
-* Favicon
 * Uses theme colors from logo
 * Layout improvements and fixes
   * Pagination component for more than 6 pages

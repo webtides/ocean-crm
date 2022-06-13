@@ -28,6 +28,7 @@ const layout = async (page, context = {}) => {
 				<meta charset="UTF-8" />
 				<link href="/assets/css/main.css?${now}" type="text/css" rel="stylesheet" />
 				<link href="/assets/css/base.css?${now}" type="text/css" rel="stylesheet" />
+				<link rel="icon" href="/assets/images/logo/vector/default-monochrome.svg" type="image/svg+xml">
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 				${context.head ?? ''}
