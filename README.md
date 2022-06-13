@@ -87,7 +87,6 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
 
 ## TODOs
 
--   Push to GitHub
 -   Layout improvements and fixes
     -   Pagination component for more than 6 pages
     -   Logs sorting seems out of order
