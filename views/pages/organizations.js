@@ -64,7 +64,8 @@ export default class {
 							resource="organization"
 							pagination="${JSON.stringify(this.pagination)}"
 							items="${JSON.stringify(this.organizations)}"
-							y
+							overviewfields='${JSON.stringify(overviewFields)}'
+							previewfields='${JSON.stringify(previewFields)}'
 						></resource-overview-table>
 					</div>
 				</div>
