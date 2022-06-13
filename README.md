@@ -13,15 +13,16 @@ A real world example application to demonstrate how luna-js and element-js work.
 
 ## Features
 
-- Full-stack application with real-world features
-- Server side rendering + client side rendering
-- RESTful API with backend validation
-- Real time updates with Server Sent Events
-- Session Management
-- User impersonation
-- Local Authentication + Role based Authorization
-- Database Migrations and Seeding
-- (TODO) Unit + Feature/Integration Testing
+-   Full-stack application with real-world features
+-   Server side rendering + client side rendering
+-   RESTful API with backend validation
+-   Real time updates with Server Sent Events
+-   Session Management
+-   User impersonation
+-   Local Authentication + Role based Authorization
+-   Database Migrations and Seeding
+-   (TODO) Static exports
+-   (TODO) Unit + Feature/Integration Testing
 
 ## Installation
 
@@ -94,6 +95,7 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
     -   Updating Contacts is broken...
     -   Flash messages seem broken
     -   Session seems to be broken or not consistent
+-   Static exports - maybe some xml or csv logs?!
 
 ## Possible Enhancements
 
