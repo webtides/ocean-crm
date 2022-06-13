@@ -80,7 +80,7 @@ export default class UsersEditPage extends TemplateElement {
 							></select-input>
 						</div>
 						<div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
-							<button class="btn-indigo" type="submit">${this.user ? 'Update' : 'Create'} User</button>
+							<button class="btn-primary" type="submit">${this.user ? 'Update' : 'Create'} User</button>
 						</div>
 					</form>
 				</div>

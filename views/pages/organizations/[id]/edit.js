@@ -146,7 +146,7 @@ export default class {
 							></text-input>
 						</div>
 						<div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
-							<button class="btn-indigo" type="submit">Update Organization</button>
+							<button class="btn-primary" type="submit">Update Organization</button>
 						</div>
 					</form>
 				</div>
@@ -201,7 +201,7 @@ export default class {
 													>
 														<a
 															href="/contacts/${contact.id}/edit"
-															class="text-indigo-600 hover:text-indigo-900"
+															class="text-primary-600 hover:text-primary-900"
 															>Edit<span class="sr-only">, ${contact.name}</span></a
 														>
 													</td>

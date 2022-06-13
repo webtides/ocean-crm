@@ -158,19 +158,19 @@ export default class LogFeed extends TemplateElement {
 	resourceTemplate(type, name = 'name', id) {
 		if (type === 'contact') {
 			return html`
-				<a href="/contacts/${id}/edit" class="font-medium text-indigo-600 hover:text-indigo-500">${name}</a>
+				<a href="/contacts/${id}/edit" class="font-medium text-primary-600 hover:text-primary-500">${name}</a>
 			`;
 		}
 		if (type === 'organization') {
 			return html`
-				<a href="/organizations/${id}/edit" class="font-medium text-indigo-600 hover:text-indigo-500"
+				<a href="/organizations/${id}/edit" class="font-medium text-primary-600 hover:text-primary-500"
 					>${name}</a
 				>
 			`;
 		}
 		if (type === 'user') {
 			return html`
-				<a href="/users/${id}/edit" class="font-medium text-indigo-600 hover:text-indigo-500">${name}</a>
+				<a href="/users/${id}/edit" class="font-medium text-primary-600 hover:text-primary-500">${name}</a>
 			`;
 		}
 	}

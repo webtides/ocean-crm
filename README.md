@@ -1,7 +1,6 @@
 # ocean-crm
 
 ## TODOs
-* Uses theme colors from logo
 * Layout improvements and fixes
   * Pagination component for more than 6 pages
   * Logs sorting seems out of order

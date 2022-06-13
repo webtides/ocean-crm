@@ -18,14 +18,14 @@ export default class {
 							<span class="sr-only">Workflow</span>
 							<img
 								class="h-12 w-auto"
-								src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
+								src="https://tailwindui.com/img/logos/workflow-mark.svg?color=primary&shade=600"
 								alt=""
 							/>
 						</a>
 					</div>
 					<div class="py-16">
 						<div class="text-center">
-							<p class="text-sm font-semibold text-indigo-600 uppercase tracking-wide">404 error</p>
+							<p class="text-sm font-semibold text-primary-600 uppercase tracking-wide">404 error</p>
 							<h1 class="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
 								Page not found.
 							</h1>
@@ -33,7 +33,7 @@ export default class {
 								Sorry, we couldn’t find the page you’re looking for.
 							</p>
 							<div class="mt-6">
-								<a href="/" class="text-base font-medium text-indigo-600 hover:text-indigo-500"
+								<a href="/" class="text-base font-medium text-primary-600 hover:text-primary-500"
 									>Go back home<span aria-hidden="true"> &rarr;</span></a
 								>
 							</div>

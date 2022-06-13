@@ -66,7 +66,7 @@ export default class ResourceOverviewTable extends TemplateElement {
 											<resource-preview-link api-link="/api/json/${this.resource}s?id=${item.id}">
 												<a
 													href="/${this.resource}s/${item.id}/edit"
-													class="text-indigo-600 hover:text-indigo-900"
+													class="text-primary-600 hover:text-primary-900"
 													>Preview<span class="sr-only">, ${item.name}</span></a
 												>
 											</resource-preview-link>
@@ -76,7 +76,7 @@ export default class ResourceOverviewTable extends TemplateElement {
 										>
 											<a
 												href="/${this.resource}s/${item.id}/edit"
-												class="text-indigo-600 hover:text-indigo-900"
+												class="text-primary-600 hover:text-primary-900"
 												>Edit<span class="sr-only">, ${item.name}</span></a
 											>
 										</td>

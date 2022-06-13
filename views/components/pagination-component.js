@@ -13,7 +13,7 @@ export default class PaginationComponent extends TemplateElement {
 	}
 
 	template() {
-		const pageLinkActiveClasses = 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600';
+		const pageLinkActiveClasses = 'z-10 bg-primary-50 border-primary-500 text-primary-600';
 		const pageLinkDefaultClasses = 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50';
 
 		return html`

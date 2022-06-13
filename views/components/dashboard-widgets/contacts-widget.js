@@ -35,7 +35,7 @@ export default class ContactsWidget extends TemplateElement {
 		return html`
 			<div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
 				<dt>
-					<div class="absolute bg-indigo-500 rounded-md p-3">
+					<div class="absolute bg-primary-500 rounded-md p-3">
 						${icon.outline('mail-open', 'h-6 w-6 text-white')}
 					</div>
 					<p class="ml-16 text-sm font-medium text-gray-500 truncate">Contacts</p>
@@ -49,7 +49,7 @@ export default class ContactsWidget extends TemplateElement {
 					</p>
 					<div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
 						<div class="text-sm">
-							<a href="/contacts" class="font-medium text-indigo-600 hover:text-indigo-500">
+							<a href="/contacts" class="font-medium text-primary-600 hover:text-primary-500">
 								View all<span class="sr-only"> Contacts</span></a
 							>
 						</div>

@@ -104,7 +104,7 @@ export default class ResourcePreviewDialog extends TemplateElement {
 															<div class="ml-4 flex-shrink-0">
 																<a
 																	href="#"
-																	class="font-medium text-indigo-600 hover:text-indigo-500"
+																	class="font-medium text-primary-600 hover:text-primary-500"
 																>
 																	Download
 																</a>
@@ -122,7 +122,7 @@ export default class ResourcePreviewDialog extends TemplateElement {
 															<div class="ml-4 flex-shrink-0">
 																<a
 																	href="#"
-																	class="font-medium text-indigo-600 hover:text-indigo-500"
+																	class="font-medium text-primary-600 hover:text-primary-500"
 																>
 																	Download
 																</a>
@@ -140,13 +140,13 @@ export default class ResourcePreviewDialog extends TemplateElement {
 								>
 									<button
 										value="cancel"
-										class="mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:col-start-1 sm:text-sm"
+										class="mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:col-start-1 sm:text-sm"
 									>
 										Cancel
 									</button>
 									<a
 										href="/${this.resource}s/${this.item.id}/edit"
-										class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
+										class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-primary-600 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:col-start-2 sm:text-sm"
 									>
 										Edit
 									</a>

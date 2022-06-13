@@ -7,7 +7,7 @@ const layout = async (page, context = {}) => {
 	const now = Date.now();
 
 	const currentPath = context.request?.url || '/';
-	const navLinkActiveClasses = 'border-indigo-500 text-gray-900';
+	const navLinkActiveClasses = 'border-primary-500 text-gray-900';
 	const navLinkDefaultClasses = 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
 
 	const user = context.request.user;
@@ -95,7 +95,7 @@ const layout = async (page, context = {}) => {
 								<div class="hidden sm:ml-6 sm:flex sm:items-center">
 									<button
 										type="button"
-										class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+										class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
 									>
 										<span class="sr-only">View notifications</span>
 										${icon.outline('bell', 'h-6 w-6')}
@@ -107,7 +107,7 @@ const layout = async (page, context = {}) => {
 											<button
 												slot="trigger"
 												type="button"
-												class="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+												class="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
 												id="user-menu-button"
 												aria-expanded="false"
 												aria-haspopup="true"
@@ -231,7 +231,7 @@ const layout = async (page, context = {}) => {
 									<!-- Mobile menu button -->
 									<button
 										type="button"
-										class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+										class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
 										aria-controls="mobile-menu"
 										aria-expanded="false"
 									>
@@ -246,10 +246,10 @@ const layout = async (page, context = {}) => {
 						<!-- Mobile menu, show/hide based on menu state. -->
 						<div class="sm:hidden" id="mobile-menu">
 							<div class="pt-2 pb-3 space-y-1">
-								<!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" -->
+								<!-- Current: "bg-primary-50 border-primary-500 text-primary-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" -->
 								<a
 									href="#"
-									class="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+									class="bg-primary-50 border-primary-500 text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
 									aria-current="page"
 									>Dashboard</a
 								>
@@ -287,7 +287,7 @@ const layout = async (page, context = {}) => {
 									</div>
 									<button
 										type="button"
-										class="ml-auto bg-white flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+										class="ml-auto bg-white flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
 									>
 										<span class="sr-only">View notifications</span>
 										${icon.outline('bell', 'h-6 w-6')}
