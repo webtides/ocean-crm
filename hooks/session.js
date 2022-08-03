@@ -1,5 +1,6 @@
 import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
 import session from 'express-session';
+import cookieParser from 'cookie-parser';
 import passport from 'passport';
 
 export const name = HOOKS.MIDDLEWARE_REGISTER;
@@ -18,4 +19,6 @@ export default async ({ app }) => {
 	);
 
 	app.use(passport.authenticate('session'));
+
+	app.use(cookieParser());
 };

@@ -1,6 +1,7 @@
 import { html } from '@webtides/element-js/src/renderer/vanilla';
 import isAuthenticated from "../util/isAuthenticated";
 import icon from "../partials/icon";
+import { i18n } from "../util/i18n";
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -29,7 +30,9 @@ export default class {
 							<div class="absolute bg-primary-500 rounded-md p-3">
 								${icon.outline('cursor-click', 'h-6 w-6 text-white')}
 							</div>
-							<p class="ml-16 text-sm font-medium text-gray-500 truncate">Avg. Click Rate</p>
+							<p class="ml-16 text-sm font-medium text-gray-500 truncate">
+								${i18n('views.pages.index.avgClickRate')}
+							</p>
 						</dt>
 						<dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
 							<p class="text-2xl font-semibold text-gray-900">24.57%</p>

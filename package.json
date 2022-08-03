@@ -22,6 +22,7 @@
 		"@webtides/luna-js": "0.11.0-dev.12",
 		"@webtides/luna-renderer": "0.11.0-dev.12",
 		"autoprefixer": "^10.4.2",
+		"cookie-parser": "^1.4.6",
 		"cssnano": "^5.0.17",
 		"diskdb": "^0.1.17",
 		"express-session": "^1.17.3",

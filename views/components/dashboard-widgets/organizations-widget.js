@@ -1,6 +1,7 @@
 import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
 import { Component } from '@webtides/luna-js';
-import icon from "../../partials/icon";
+import icon from '../../partials/icon';
+import { i18n } from '../../util/i18n';
 
 @Component({
 	target: Component.TARGET_BOTH,
@@ -38,7 +39,9 @@ export default class OrganizationsWidget extends TemplateElement {
 					<div class="absolute bg-primary-500 rounded-md p-3">
 						${icon.outline('users', 'h-6 w-6 text-white')}
 					</div>
-					<p class="ml-16 text-sm font-medium text-gray-500 truncate">Organizations</p>
+					<p class="ml-16 text-sm font-medium text-gray-500 truncate">
+						${i18n('views.components.dashboard-widgets.organization-widget.organizations')}
+					</p>
 				</dt>
 				<dd class="ml-16 pb-6 flex items-baseline sm:pb-7">
 					<p class="text-2xl font-semibold text-gray-900">${this.totalCount}</p>

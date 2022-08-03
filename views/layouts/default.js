@@ -1,7 +1,8 @@
 // import { html } from '@webtides/element-js/src/renderer/vanilla';
 
 import UserService from '../../services/UserService.js';
-import icon from "../partials/icon.js";
+import icon from '../partials/icon.js';
+import { I18nService } from '../../services/I18nService';
 
 const layout = async (page, context = {}) => {
 	const now = Date.now();
@@ -19,6 +20,11 @@ const layout = async (page, context = {}) => {
 	const allUsers = await UserService.getAll();
 	const otherUsers = allUsers.filter((otherUser) => otherUser.id !== user?.id);
 
+	const i18nService = new I18nService(['en', 'de'], 'en');
+	const locales = i18nService.getLocales();
+	const currentLocale = context.request.cookies['ocean-crm-locale'] || 'en';
+	const translations = i18nService.getTranslations(currentLocale);
+
 	return `
 		<!DOCTYPE html>
 		<html lang="" class="h-full bg-gray-100">
@@ -32,6 +38,14 @@ const layout = async (page, context = {}) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 				${context.head ?? ''}
+
+				<script>
+					globalThis.elementjs = {
+						i18n: function () {
+							return ${JSON.stringify(translations)};
+						},
+					};
+				</script>
 			</head>
 			<body class="h-full">
 				<div class="min-h-full">
@@ -135,6 +149,16 @@ const layout = async (page, context = {}) => {
 												aria-labelledby="user-menu-button"
 												tabindex="-1"
 											>
+												<form action="/api/locale" method="post" class="block px-4 py-2 text-sm text-gray-700">
+													<select name="locale" class="form-select w-full" onchange="this.form.submit()">
+														${locales?.map(
+															(locale) => `
+																<option value="${locale}" ${locale === currentLocale ? 'selected' : ''}>${locale}</option>
+															`,
+														)}
+													</select>
+												</form>
+
 												<!-- Active: "bg-gray-100", Not Active: "" -->
 												<a
 													href="/users/${user?.id || 1}/edit"
