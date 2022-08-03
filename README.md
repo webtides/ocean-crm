@@ -21,6 +21,7 @@ A real world example application to demonstrate how luna-js and element-js work.
 - Session Management
 - User impersonation
 - Local Authentication + Role based Authorization
+- i18n
 - Database Migrations and Seeding
 - (TODO) Static exports
 - (TODO) Unit + Feature/Integration Testing
