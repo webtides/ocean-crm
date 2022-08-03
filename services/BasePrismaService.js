@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { PrismaClient } from '@prisma/client';
+import PrismaModelChanged from '../events/prisma-model-changed';
 const prisma = new PrismaClient();
 
 export default class BasePrismaService {
@@ -77,8 +78,6 @@ export default class BasePrismaService {
 			},
 		});
 
-		this.notifyEvents();
-
 		return item;
 	}
 
@@ -92,7 +91,6 @@ export default class BasePrismaService {
 			},
 		});
 
-		this.notifyEvents();
 
 		return item;
 	}
@@ -107,7 +105,6 @@ export default class BasePrismaService {
 			},
 		});
 
-		this.notifyEvents();
 
 		return item;
 	}
@@ -122,22 +119,7 @@ export default class BasePrismaService {
 			},
 		});
 
-		this.notifyEvents();
 
 		return item;
-	}
-
-	static notifyEvents() {
-		// TODO: there must be a better way... Maybe EventEmitter?!
-		fetch('http://localhost:3000/api/events', {
-			method: 'post',
-			body: JSON.stringify({
-				[this.name()]: {
-					total: this.getAll().length,
-					// deleted: this.getDeleted().length,
-				},
-			}),
-			headers: { 'Content-Type': 'application/json' },
-		});
 	}
 }

@@ -1,8 +1,8 @@
 import Validator from 'validatorjs';
 import OrganizationService from '../services/OrganizationService';
-import LogService from '../services/LogService';
 import isAuthenticated from '../views/util/isAuthenticated';
 import AuthorizationService from '../services/AuthorizationService.js';
+import PrismaModelChanged from "../events/prisma-model-changed";
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -22,10 +22,12 @@ export const post = async ({ request, response }) => {
 
 		if (restore) {
 			const organization = OrganizationService.restore(organizationId);
-			await LogService.addLog('restore', 'organization', organization, request.user);
+			const event = new PrismaModelChanged('restore', 'organization', organization, OrganizationService, request);
+			event.emit();
 		} else {
 			const organization = OrganizationService.delete(organizationId);
-			await LogService.addLog('delete', 'organization', organization, request.user);
+			const event = new PrismaModelChanged('delete', 'organization', organization, OrganizationService, request);
+			event.emit();
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -69,7 +71,8 @@ export const post = async ({ request, response }) => {
 			city: request.body.city,
 		});
 
-		await LogService.addLog('update', 'organization', organization, request.user);
+		const event = new PrismaModelChanged('update', 'organization', organization, OrganizationService, request);
+		event.emit();
 
 		request.session.flash = {
 			success: 'Successfully updated!',
@@ -88,7 +91,8 @@ export const post = async ({ request, response }) => {
 		city: request.body.city,
 	});
 
-	await LogService.addLog('create', 'organization', organization, request.user);
+	const event = new PrismaModelChanged('create', 'organization', organization, OrganizationService, request);
+	event.emit();
 
 	return response.redirect('/organizations'); // TODO: this should NOT be hardcoded...
 };

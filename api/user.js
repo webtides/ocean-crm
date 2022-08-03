@@ -1,7 +1,7 @@
 import Validator from 'validatorjs';
 import UserService from '../services/UserService';
-import LogService from '../services/LogService';
 import isAuthenticated from '../views/util/isAuthenticated';
+import PrismaModelChanged from "../events/prisma-model-changed";
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -21,10 +21,13 @@ export const post = async ({ request, response }) => {
 
 		if (restore) {
 			const user = await UserService.restore(userId);
-			await LogService.addLog('restore', 'user', user, request.user);
+
+			const event = new PrismaModelChanged('restore', 'user', user, UserService, request);
+			event.emit();
 		} else {
 			const user = await UserService.delete(userId);
-			await LogService.addLog('delete', 'user', user, request.user);
+			const event = new PrismaModelChanged('delete', 'user', user, UserService, request);
+			event.emit();
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -69,7 +72,8 @@ export const post = async ({ request, response }) => {
 			role: request.body.role,
 		});
 
-		await LogService.addLog('update', 'user', user, request.user);
+		const event = new PrismaModelChanged('update', 'user', user, UserService, request);
+		event.emit();
 
 		return response.redirect(request.header('Referer'));
 	}
@@ -85,9 +89,8 @@ export const post = async ({ request, response }) => {
 		role: request.body.role,
 	});
 
-	// TODO: I think it would be better to just emit an event here and have a global listener somewhere
-	// the Event should take the request as a property...
-	await LogService.addLog('create', 'user', user, request.user);
+	const event = new PrismaModelChanged('create', 'user', user, UserService, request);
+	event.emit();
 
 	return response.redirect('/users'); // TODO: this should NOT be hardcoded...
 };

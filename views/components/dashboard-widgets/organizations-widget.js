@@ -26,8 +26,10 @@ export default class OrganizationsWidget extends TemplateElement {
 		source.addEventListener('message', (event) => {
 			const data = JSON.parse(event.data);
 
-			if (data && data.organizations) {
-				this.totalCount = data.organizations.total;
+			console.log('message', data);
+
+			if (data && data.organization) {
+				this.totalCount = data.organization.total;
 			}
 		});
 	}
