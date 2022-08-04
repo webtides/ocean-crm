@@ -11,4 +11,6 @@ export default class Event {
 	emit() {
 		this.eventEmitter.emit(this.constructor.eventName, this);
 	}
+
+	// TODO: make Facade like sending Mails
 }

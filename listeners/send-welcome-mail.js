@@ -6,6 +6,6 @@ export default class SendWelcomeMail {
 	 * @param { UserCreated } event
 	 */
 	async handle(event) {
-		await Mail.send(new UserCreated(), event.user.email);
+		await Mail.send(new UserCreated(event.user), event.user.email);
 	}
 }

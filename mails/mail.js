@@ -49,27 +49,29 @@ export default class Mail {
 	 * HTML body
 	 * @returns {string}
 	 */
-	html() {
+	async html() {
 		return '<b>Hello world?</b>';
 	}
 
 	/**
 	 * Message object
+	 * For full message see example: https://github.com/nodemailer/nodemailer/blob/master/examples/full.js
 	 * @returns {{subject: string, from: string, html: string, to: string, text: string}}
 	 */
-	message() {
+	async message() {
 		return {
 			from: this.from(),
 			to: 'bar@example.com, baz@example.com', // list of receivers
 			subject: this.subject(),
 			text: this.text(),
-			html: this.html(),
+			html: await this.html(),
 		};
 	}
 
 	static async send(mail, to) {
+		const message = await mail.message();
 		let info = await mail.transporter.sendMail({
-			...mail.message(),
+			...message,
 			to,
 		});
 	}
