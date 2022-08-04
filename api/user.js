@@ -1,8 +1,9 @@
 import Validator from 'validatorjs';
 import UserService from '../services/UserService';
 import isAuthenticated from '../views/util/isAuthenticated';
+import Event from "../events/event";
 import PrismaModelChanged from "../events/prisma-model-changed";
-import UserCreated from "../events/UserCreated";
+import UserCreated from "../events/user-created";
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -23,12 +24,10 @@ export const post = async ({ request, response }) => {
 		if (restore) {
 			const user = await UserService.restore(userId);
 
-			const event = new PrismaModelChanged('restore', 'user', user, UserService, request);
-			event.emit();
+			Event.emit(new PrismaModelChanged('restore', 'user', user, UserService, request));
 		} else {
 			const user = await UserService.delete(userId);
-			const event = new PrismaModelChanged('delete', 'user', user, UserService, request);
-			event.emit();
+			Event.emit(new PrismaModelChanged('delete', 'user', user, UserService, request));
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -73,10 +72,9 @@ export const post = async ({ request, response }) => {
 			role: request.body.role,
 		});
 
-		const event = new PrismaModelChanged('update', 'user', user, UserService, request);
-		event.emit();
-
-		UserCreated.dispatch(user, request);
+		Event.emit(new PrismaModelChanged('update', 'user', user, UserService, request));
+		// TODO: it is easier to test this by just editing a user instead of creating a new one
+		Event.emit(new UserCreated(user, request));
 
 		return response.redirect(request.header('Referer'));
 	}
@@ -92,8 +90,7 @@ export const post = async ({ request, response }) => {
 		role: request.body.role,
 	});
 
-	const event = new PrismaModelChanged('create', 'user', user, UserService, request);
-	event.emit();
+	Event.emit(new PrismaModelChanged('create', 'user', user, UserService, request));
 
 	return response.redirect('/users'); // TODO: this should NOT be hardcoded...
 };

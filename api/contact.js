@@ -2,6 +2,7 @@ import Validator from 'validatorjs';
 import ContactService from '../services/ContactService.js';
 import isAuthenticated from '../views/util/isAuthenticated';
 import PrismaModelChanged from "../events/prisma-model-changed";
+import Event from "../events/event";
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -14,12 +15,10 @@ export const post = async ({ request, response }) => {
 
 		if (restore) {
 			const contact = await ContactService.restore(contactId);
-			const event = new PrismaModelChanged('restore', 'contact', contact, ContactService, request);
-			event.emit();
+			Event.emit(new PrismaModelChanged('restore', 'contact', contact, ContactService, request));
 		} else {
 			const contact = await ContactService.delete(contactId);
-			const event = new PrismaModelChanged('delete', 'contact', contact, ContactService, request);
-			event.emit();
+			Event.emit(new PrismaModelChanged('delete', 'contact', contact, ContactService, request));
 		}
 
 		return response.redirect(request.header('Referer'));
@@ -56,8 +55,7 @@ export const post = async ({ request, response }) => {
 			organizationId: parseInt(request.body.organization),
 		});
 
-		const event = new PrismaModelChanged('update', 'contact', contact, ContactService, request);
-		event.emit();
+		Event.emit(new PrismaModelChanged('update', 'contact', contact, ContactService, request));
 
 		return response.redirect(request.header('Referer'));
 	}
@@ -73,8 +71,7 @@ export const post = async ({ request, response }) => {
 		organizationId: parseInt(request.body.organization),
 	});
 
-	const event = new PrismaModelChanged('create', 'contact', contact, ContactService, request);
-	event.emit();
+	Event.emit(new PrismaModelChanged('create', 'contact', contact, ContactService, request));
 
 	return response.redirect('/contacts'); // TODO: this should NOT be hardcoded...
 };

@@ -3,7 +3,7 @@ import EventEmitter from '../singletons/event-emitter';
 import LogPrismaModelChange from '../listeners/log-prisma-model-change';
 import PrismaModelChanged from '../events/prisma-model-changed';
 import NotifyClientEvents from '../listeners/notify-client-events';
-import UserCreated from '../events/UserCreated';
+import UserCreated from '../events/user-created';
 import SendWelcomeMail from '../listeners/send-welcome-mail';
 // import OrganizationService from '../services/OrganizationService';
 // import ContactService from '../services/ContactService';

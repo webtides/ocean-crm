@@ -10,9 +10,4 @@ export default class UserCreated extends Event {
 		this.user = user;
 		this.request = request;
 	}
-
-	static dispatch(user, request) {
-		const event = new UserCreated(user, request);
-		event.emit();
-	}
 }
