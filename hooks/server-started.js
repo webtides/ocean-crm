@@ -2,7 +2,9 @@ import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
 import EventEmitter from '../singletons/event-emitter';
 import LogPrismaModelChange from '../listeners/log-prisma-model-change';
 import PrismaModelChanged from '../events/prisma-model-changed';
-import NotifyClientEvents from "../listeners/notify-client-events";
+import NotifyClientEvents from '../listeners/notify-client-events';
+import UserCreated from '../events/UserCreated';
+import SendWelcomeMail from '../listeners/send-welcome-mail';
 // import OrganizationService from '../services/OrganizationService';
 // import ContactService from '../services/ContactService';
 // import UserService from '../services/UserService';
@@ -12,10 +14,9 @@ import NotifyClientEvents from "../listeners/notify-client-events";
 export const name = HOOKS.SERVER_STARTED;
 
 export default async () => {
-	EventEmitter.on(PrismaModelChanged, [
-		LogPrismaModelChange,
-		NotifyClientEvents,
-	]);
+	EventEmitter.on(PrismaModelChanged, [LogPrismaModelChange, NotifyClientEvents]);
+
+	EventEmitter.on(UserCreated, [SendWelcomeMail]);
 
 	// OrganizationService.init();
 	// ContactService.init();

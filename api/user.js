@@ -2,6 +2,7 @@ import Validator from 'validatorjs';
 import UserService from '../services/UserService';
 import isAuthenticated from '../views/util/isAuthenticated';
 import PrismaModelChanged from "../events/prisma-model-changed";
+import UserCreated from "../events/UserCreated";
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -74,6 +75,8 @@ export const post = async ({ request, response }) => {
 
 		const event = new PrismaModelChanged('update', 'user', user, UserService, request);
 		event.emit();
+
+		UserCreated.dispatch(user, request);
 
 		return response.redirect(request.header('Referer'));
 	}
