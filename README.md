@@ -22,10 +22,10 @@ A real world example application to demonstrate how luna-js and element-js work.
 - User impersonation
 - Local Authentication + Role based Authorization
 - i18n for backend and frontend
-- Publisher/Subscriber Pattern with Events and Listeners
+- Publisher/Subscriber pattern with Events and Listeners
 - Sending Mails
 - Database Migrations and Seeding
-- (TODO) Static exports
+- Jobs and Task scheduling
 - (TODO) Unit + Feature/Integration Testing
 
 ## Installation
@@ -99,7 +99,6 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
     -   Updating Contacts is broken...
     -   Flash messages seem broken
     -   Session seems to be broken or not consistent
--   Static exports - maybe some xml or csv logs?!
 
 ## Possible Enhancements
 
