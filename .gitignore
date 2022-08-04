@@ -2,6 +2,9 @@
 .build
 .export
 
+# reports
+.reports/*
+
 # Dependency directories
 node_modules/
 
