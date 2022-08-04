@@ -21,7 +21,9 @@ A real world example application to demonstrate how luna-js and element-js work.
 - Session Management
 - User impersonation
 - Local Authentication + Role based Authorization
-- i18n
+- i18n for backend and frontend
+- Publisher/Subscriber Pattern with Events and Listeners
+- Sending Mails
 - Database Migrations and Seeding
 - (TODO) Static exports
 - (TODO) Unit + Feature/Integration Testing
@@ -101,13 +103,14 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
 
 ## Possible Enhancements
 
--   Show Logs for User on user detail page
--   Show Log history for resource on detail page
--   Add Model classes for typehints in templates?!
--   Add global sorting to overview lists
--   Add sorting per column for datatables
--   Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
--   Flash messages and Toasts?! Should there be two?! Or just a single pattern?
+- Show Logs for User on user detail page
+- Show Log history for resource on detail page
+- Add Model classes for typehints in templates?!
+- Add global sorting to overview lists
+- Add sorting per column for datatables
+- Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
+- Flash messages and Toasts?! Should there be two?! Or just a single pattern?
+- Use custom tailwind config for mail templates (see for example: https://github.com/maizzle/starter-netlify-identity/blob/master/src/layouts/main.html)
 
 ## luna-js Bugs
 
@@ -127,3 +130,4 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
     - See https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller for example
 - Would it be possible to get views or pages or even components (rendered) programmatically?
   - In this case I would like to get the email templates as string without having to fetch them from the server
+- Cannot use inline styles in layouts... Have to use fs.readFileSync from .build directory...

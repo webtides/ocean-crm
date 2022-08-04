@@ -54,6 +54,12 @@ export default {
 					output: 'assets/css/main.css',
 					plugins: () => [],
 				},
+				{
+					input: [path.join(process.cwd(), 'assets/css/mail.css')],
+
+					output: 'assets/css/mail.css',
+					plugins: () => [],
+				},
 			],
 		},
 

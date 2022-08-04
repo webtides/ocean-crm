@@ -1,0 +1,19 @@
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'buttons.css';
+
+:root {
+	color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+	}
+}
+
+[data-theme='dark'] {
+}
+
+html {
+	overflow-y: scroll;
+}

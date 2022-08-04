@@ -1,5 +1,7 @@
+import fs from "fs";
+
 const layout = (page, context = {}) => {
-	const now = Date.now();
+	const style = fs.readFileSync(`.build/public/assets/css/mail.css`, 'utf-8');
 
 	return `
 		<!DOCTYPE html>
@@ -28,9 +30,7 @@ const layout = (page, context = {}) => {
 				</style>
 				<![endif]-->
 
-				<!-- TODO: inline css... -->
-				<link href="/assets/css/main.css?${now}" type="text/css" rel="stylesheet" />
-				<link href="/assets/css/base.css?${now}" type="text/css" rel="stylesheet" />
+				<style>${style}</style>
 
 				${context.head ?? ''}
 			</head>
