@@ -16,7 +16,7 @@ export default class OrganizationFactory extends PrismaFactory {
 			address: this.faker.address.street(),
 			city: this.faker.address.city(),
 			region: this.faker.address.state(),
-			country: this.faker.address.countryCode(),
+			country: 'CA', //this.faker.address.countryCode(),
 			postalCode: this.faker.address.zipCode(),
 			...properties,
 		};

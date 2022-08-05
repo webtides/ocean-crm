@@ -76,13 +76,13 @@ const layout = async (page, context = {}) => {
 										>
 
 										<a
-											href="/organizations"
+											href="/organisations"
 											class="${
-												currentPath.includes('/organizations')
+												currentPath.includes('/organisations')
 													? navLinkActiveClasses
 													: navLinkDefaultClasses
 											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-											>Organizations</a
+											>Organisations</a
 										>
 
 										<a

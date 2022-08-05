@@ -3,9 +3,12 @@
 	"version": "1.0.0",
 	"description": "A real world example application to demonstrate how luna-js and element-js work.",
 	"main": "index.js",
+	"type": "commonjs",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "cross-env DATABASE_URL=file:cypress.sqlite cypress open",
+		"test:migrate": "cross-env DATABASE_URL=file:cypress.sqlite npx prisma db push --force-reset --accept-data-loss",
 		"dev": "npx luna --dev",
+		"dev:test": "cross-env DATABASE_URL=file:cypress.sqlite npx luna --dev",
 		"migrate:reset": "npx prisma db push --force-reset --accept-data-loss && npx prisma db seed",
 		"prisma:format": "npx prisma format",
 		"prisma:generate": "npx prisma generate"
@@ -41,6 +44,8 @@
 	"devDependencies": {
 		"@faker-js/faker": "^7.2.0",
 		"@webtides/luna-cli": "0.11.0-dev.12",
+		"cross-env": "^7.0.3",
+		"cypress": "^10.4.0",
 		"eslint": "^8.11.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.0.0",

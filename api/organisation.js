@@ -34,13 +34,13 @@ export const post = async ({ request, response }) => {
 
 	let validation = new Validator(request.body, {
 		name: 'required',
-		// email: 'required|email',
+		email: 'required|email',
 		phone: 'required',
-		// address: 'required',
+		address: 'required',
 		city: 'required',
-		// region: 'required',
-		// country: 'required',
-		// postalCode: 'required',
+		region: 'required',
+		country: 'required',
+		postalCode: 'required',
 	});
 
 	if (validation.fails()) {
@@ -66,11 +66,16 @@ export const post = async ({ request, response }) => {
 		const organizationId = request.body['organizationId'];
 		const organization = await OrganizationService.update(organizationId, {
 			name: request.body.name,
+			email: request.body.email,
 			phone: request.body.phone,
+			address: request.body.address,
 			city: request.body.city,
+			region: request.body.region,
+			country: request.body.country,
+			postalCode: request.body.postalCode,
 		});
 
-		Event.emit(new PrismaModelChanged('update', 'organization', organization, OrganizationService, request));
+		// Event.emit(new PrismaModelChanged('update', 'organization', organization, OrganizationService, request));
 
 		request.session.flash = {
 			success: 'Successfully updated!',
@@ -85,11 +90,16 @@ export const post = async ({ request, response }) => {
 	// create
 	const organization = await OrganizationService.create({
 		name: request.body.name,
+		email: request.body.email,
 		phone: request.body.phone,
+		address: request.body.address,
 		city: request.body.city,
+		region: request.body.region,
+		country: request.body.country,
+		postalCode: request.body.postalCode,
 	});
 
-	Event.emit(new PrismaModelChanged('create', 'organization', organization, OrganizationService, request));
+	//Event.emit(new PrismaModelChanged('create', 'organization', organization, OrganizationService, request));
 
-	return response.redirect('/organizations'); // TODO: this should NOT be hardcoded...
+	return response.redirect('/organisations'); // TODO: this should NOT be hardcoded...
 };

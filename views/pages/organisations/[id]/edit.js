@@ -139,7 +139,7 @@ export default class {
 							></select-input>
 							<text-input
 								name="postalCode"
-								value="${this.oldValues?.postalCode || this.organization?.postcalCode}"
+								value="${this.oldValues?.postalCode || this.organization?.postalCode}"
 								error="${this.errors?.postalCode}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Postal code"
