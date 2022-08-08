@@ -101,7 +101,7 @@ export default class BasePrismaService {
 		const item = await model.update({
 			where: { id: parseInt(id) },
 			data: {
-				deletedAt: Date.now(),
+				deletedAt: new Date(),
 			},
 		});
 
