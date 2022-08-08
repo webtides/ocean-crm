@@ -78,6 +78,33 @@ describe('organisations overview', () => {
 		cy.get('body').should('contain', 'City');
 	});
 
+	it('validates the request when creating a new organisation', () => {
+		// clear database
+		cy.exec('npm run test:migrate');
+
+		cy.visit('http://localhost:3000/organisations/create');
+
+		cy.get('button').contains('Create Organization').click();
+
+		cy.url().should('equal', 'http://localhost:3000/organisations/create');
+
+		cy.get('body').should('contain', 'The name field is required');
+		cy.get('body').should('contain', 'The email field is required');
+		cy.get('body').should('contain', 'The phone field is required');
+		cy.get('body').should('contain', 'The address field is required');
+		cy.get('body').should('contain', 'The city field is required');
+		cy.get('body').should('contain', 'The region field is required');
+		cy.get('body').should('contain', 'The country field is required');
+		cy.get('body').should('contain', 'The postalCode field is required');
+
+		cy.get('input[name="email"]').type('john');
+		cy.get('button').contains('Create Organization').click();
+
+		cy.url().should('equal', 'http://localhost:3000/organisations/create');
+
+		cy.get('body').should('contain', 'The email format is invalid');
+	});
+
 	it('can edit an organisation', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
@@ -120,5 +147,47 @@ describe('organisations overview', () => {
 		cy.get('body').should('contain', 'Jane Doe');
 		cy.get('body').should('contain', '888nose');
 		cy.get('body').should('contain', 'Village');
+	});
+
+	it('validates the request when editing an organisation', () => {
+		// clear database
+		cy.exec('npm run test:migrate');
+
+		// create a new organisation via factory
+		cy.task('create', {
+			model: 'organisation',
+			properties: { name: 'John Doe', phone: '555nose', city: 'Atlantis' },
+		});
+
+		const organisationId = 1; // TODO: do not hardcode the id...
+		cy.visit(`http://localhost:3000/organisations/${organisationId}/edit`);
+
+		cy.get('input[name="name"]').clear();
+		cy.get('input[name="email"]').clear();
+		cy.get('input[name="phone"]').clear();
+		cy.get('input[name="address"]').clear();
+		cy.get('input[name="city"]').clear();
+		cy.get('input[name="region"]').clear();
+		cy.get('select[name="country"]').select('');
+		cy.get('input[name="postalCode"]').clear();
+		cy.get('button').contains('Update Organization').click();
+
+		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+
+		cy.get('body').should('contain', 'The name field is required');
+		cy.get('body').should('contain', 'The email field is required');
+		cy.get('body').should('contain', 'The phone field is required');
+		cy.get('body').should('contain', 'The address field is required');
+		cy.get('body').should('contain', 'The city field is required');
+		cy.get('body').should('contain', 'The region field is required');
+		cy.get('body').should('contain', 'The country field is required');
+		cy.get('body').should('contain', 'The postalCode field is required');
+
+		cy.get('input[name="email"]').type('john');
+		cy.get('button').contains('Update Organization').click();
+
+		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+
+		cy.get('body').should('contain', 'The email format is invalid');
 	});
 });

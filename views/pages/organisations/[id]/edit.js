@@ -19,11 +19,11 @@ export default class {
 	}
 
 	async loadDynamicProperties({ request, response }) {
-		const organizationId = parseInt(request.params.id);
-		const organization = await OrganizationService.findById(organizationId);
-
 		const errors = request.session?.errors;
 		const oldValues = request.session?.oldValues;
+
+		const organizationId = parseInt(request.params.id);
+		const organization = await OrganizationService.findById(organizationId);
 
 		const can = {
 			deleteOrganization: await AuthorizationService.can(request.user, 'delete', 'organization', organizationId),
@@ -89,49 +89,49 @@ export default class {
 						<div class="flex flex-wrap -mb-8 -mr-6 p-8">
 							<text-input
 								name="name"
-								value="${this.oldValues?.name || this.organization?.name}"
+								value="${this.oldValues ? this.oldValues?.name : this.organization?.name}"
 								error="${this.errors?.name}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Name"
 							></text-input>
 							<text-input
 								name="email"
-								value="${this.oldValues?.email || this.organization?.email}"
+								value="${this.oldValues ? this.oldValues?.email : this.organization?.email}"
 								error="${this.errors?.email}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Email"
 							></text-input>
 							<text-input
 								name="phone"
-								value="${this.oldValues?.phone || this.organization?.phone}"
+								value="${this.oldValues ? this.oldValues?.phone : this.organization?.phone}"
 								error="${this.errors?.phone}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Phone"
 							></text-input>
 							<text-input
 								name="address"
-								value="${this.oldValues?.address || this.organization?.address}"
+								value="${this.oldValues ? this.oldValues?.address : this.organization?.address}"
 								error="${this.errors?.address}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Address"
 							></text-input>
 							<text-input
 								name="city"
-								value="${this.oldValues?.city || this.organization?.city}"
+								value="${this.oldValues ? this.oldValues?.city : this.organization?.city}"
 								error="${this.errors?.city}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="City"
 							></text-input>
 							<text-input
 								name="region"
-								value="${this.oldValues?.region || this.organization?.region}"
+								value="${this.oldValues ? this.oldValues?.region : this.organization?.region}"
 								error="${this.errors?.region}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Province/State"
 							></text-input>
 							<select-input
 								name="country"
-								value="${this.oldValues?.country || this.organization?.country}"
+								value="${this.oldValues ? this.oldValues?.country : this.organization?.country}"
 								error="${this.errors?.country}"
 								options='[{"value": "CA", "label": "Canada"}, {"value": "US", "label": "United States"}]'
 								class="pb-8 pr-6 w-full lg:w-1/2"
@@ -139,7 +139,7 @@ export default class {
 							></select-input>
 							<text-input
 								name="postalCode"
-								value="${this.oldValues?.postalCode || this.organization?.postalCode}"
+								value="${this.oldValues ? this.oldValues?.postalCode : this.organization?.postalCode}"
 								error="${this.errors?.postalCode}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Postal code"
@@ -182,7 +182,7 @@ export default class {
 										</tr>
 									</thead>
 									<tbody class="bg-white">
-										${this.organization.contacts?.map(
+										${this.organization?.contacts?.map(
 											(contact) => html`
 												<tr class="odd:bg-white even:bg-slate-50">
 													<td
