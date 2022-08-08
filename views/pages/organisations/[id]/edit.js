@@ -19,6 +19,10 @@ export default class {
 	}
 
 	async loadDynamicProperties({ request, response }) {
+		// TODO: getting things out of the session must be done before any async things?!
+		// because otherwise they will be undefined...
+		// this seems to be "only" the case for manually added properties by me (errors + oldValues)
+		// passport related user things are still there...
 		const errors = request.session?.errors;
 		const oldValues = request.session?.oldValues;
 
@@ -41,11 +45,10 @@ export default class {
 								? html`
 										<form
 											method="post"
-											action="/api/organisation"
+											action="/api/organisation/${this.organizationId}"
 											class="p-4 bg-yellow-300 rounded flex items-center justify-between max-w-3xl mb-6"
 										>
 											<input type="hidden" name="_method" value="delete" />
-											<input type="hidden" name="organizationId" value="${this.organizationId}" />
 											<input type="hidden" name="restore" value="true" />
 											<div class="flex items-center">
 												<svg
@@ -69,11 +72,10 @@ export default class {
 								: html`
 										<form
 											method="post"
-											action="/api/organisation"
+											action="/api/organisation/${this.organizationId}"
 											class="py-4 flex justify-end max-w-3xl"
 										>
 											<input type="hidden" name="_method" value="delete" />
-											<input type="hidden" name="organizationId" value="${this.organizationId}" />
 											<input type="hidden" name="restore" value="false" />
 											<button type="submit" class="text-red-600 hover:underline">
 												Delete Organization
@@ -83,9 +85,8 @@ export default class {
 					  `
 					: ''}
 				<div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
-					<form method="post" action="/api/organisation">
+					<form method="post" action="/api/organisation/${this.organizationId}">
 						<input type="hidden" name="_method" value="put" />
-						<input type="hidden" name="organizationId" value="${this.organizationId}" />
 						<div class="flex flex-wrap -mb-8 -mr-6 p-8">
 							<text-input
 								name="name"
