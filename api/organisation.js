@@ -1,8 +1,8 @@
 import Validator from 'validatorjs';
 import OrganizationService from '../services/OrganizationService';
 import isAuthenticated from '../views/util/isAuthenticated';
-import Event from "../events/event";
-import PrismaModelChanged from "../events/prisma-model-changed";
+import Event from '../events/event';
+import PrismaModelChanged from '../events/prisma-model-changed';
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -51,6 +51,10 @@ export const post = async ({ request, response }) => {
 	});
 
 	//Event.emit(new PrismaModelChanged('create', 'organization', organization, OrganizationService, request));
+
+	if (request.accepts('application/json')) {
+		return response.json(organization);
+	}
 
 	return response.redirect('/organisations'); // TODO: this should NOT be hardcoded...
 };
