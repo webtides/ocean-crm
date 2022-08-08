@@ -27,7 +27,7 @@ A real world example application to demonstrate how luna-js and element-js work.
 - Sending Mails
 - Database Migrations and Seeding
 - Jobs and Task scheduling
-- (TODO) Unit + Feature/Integration Testing
+- Unit + Feature/Integration Testing
 
 ## Installation
 
