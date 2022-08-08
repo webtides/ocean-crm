@@ -190,4 +190,50 @@ describe('organisations overview', () => {
 
 		cy.get('body').should('contain', 'The email format is invalid');
 	});
+
+	it('can (soft) delete an organisation', () => {
+		// clear database
+		cy.exec('npm run test:migrate');
+
+		// create a new organisation via factory
+		cy.task('create', {
+			model: 'organisation',
+			properties: { name: 'John Doe', phone: '555nose', city: 'Atlantis' },
+		});
+
+		const organisationId = 1; // TODO: do not hardcode the id...
+		cy.visit(`http://localhost:3000/organisations/${organisationId}/edit`);
+
+		cy.get('body').should('not.contain', 'This organization has been deleted');
+
+		cy.get('button').contains('Delete Organization').click();
+
+		// assert redirect
+		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+
+		cy.get('body').should('contain', 'This organization has been deleted');
+	});
+
+	it('can restore a (soft) deleted organisation', () => {
+		// clear database
+		cy.exec('npm run test:migrate');
+
+		// create a new organisation via factory
+		cy.task('create', {
+			model: 'organisation',
+			properties: { name: 'John Doe', phone: '555nose', city: 'Atlantis', deletedAt: new Date() },
+		});
+
+		const organisationId = 1; // TODO: do not hardcode the id...
+		cy.visit(`http://localhost:3000/organisations/${organisationId}/edit`);
+
+		cy.get('body').should('contain', 'This organization has been deleted');
+
+		cy.get('button').contains('Restore').click();
+
+		// assert redirect
+		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+
+		cy.get('body').should('not.contain', 'This organization has been deleted');
+	});
 });
