@@ -16,7 +16,7 @@ A real world example application to demonstrate how luna-js and element-js work.
 - Full-stack application with real-world features
 - Server side rendering + client side rendering
 - RESTful API with backend validation
-- (TODO) OpenAPI + Swagger
+- OpenAPI + Swagger
 - CRUD operations/views for models (+ relations)
 - Real time updates with Server Sent Events
 - Session Management

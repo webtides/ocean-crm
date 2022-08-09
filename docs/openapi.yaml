@@ -1,0 +1,143 @@
+openapi: 3.0.0
+host: 'localhost:3000'
+basePath: '/'
+info:
+  description: A sample API
+  version: 1.0.0
+  title: Ocean CRM
+tags:
+  - name: web
+  - name: organisations
+paths:
+  /organisations:
+    get:
+      summary: Organizations overview page
+      tags:
+        - web
+      responses:
+        '200':
+          description: Organizations overview page
+          content:
+            plain/html:
+              schema:
+                type: string
+
+  /api/organisation:
+    get:
+      summary: All organizations
+      tags:
+        - organisations
+      responses:
+        '200':
+          $ref: '#/components/requestBodies/OrganizationList'
+    post:
+      summary: Create an organisation
+      tags:
+        - organisations
+      requestBody:
+        $ref: '#/components/requestBodies/Organization_Post'
+      responses:
+        '200':
+          $ref: '#/components/requestBodies/Organization'
+
+  /api/organisation/{id}:
+    put:
+      summary: Update an organisation
+      tags:
+        - organisations
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        $ref: '#/components/requestBodies/Organization_Post'
+      responses:
+        '200':
+          $ref: '#/components/requestBodies/Organization'
+    delete:
+      summary: (soft) Delete an organisation
+      tags:
+        - organisations
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        $ref: '#/components/requestBodies/Organization_Delete'
+      responses:
+        '200':
+          $ref: '#/components/requestBodies/Organization'
+
+components:
+  requestBodies:
+    Organization:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Organization'
+
+    Organization_Post:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              email:
+                type: string
+              phone:
+                type: string
+              address:
+                type: string
+              city:
+                type: string
+              region:
+                type: string
+              country:
+                type: string
+              postCode:
+                type: string
+            required:
+              - name
+
+    Organization_Delete:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              restore:
+                type: string
+            required:
+              - restore
+
+  schemas:
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - name
+
+    OrganizationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Organization'
+
+  parameters:
+    id:
+      name: id
+      description: Numeric ID
+      in: path
+      schema:
+        type: integer
+      required: true

@@ -59,6 +59,10 @@ export const put = async ({ request, response }) => {
 		success: 'Successfully updated!',
 	};
 
+	if (request.accepts('application/json')) {
+		return response.json(organization);
+	}
+
 	return response.redirect(request.header('Referer'));
 }
 
@@ -74,12 +78,17 @@ export const remove = async ({ request, response }) => {
 		return response.status(403).redirect(request.header('Referer'));
 	}
 
+	let organization;
 	if (restore) {
-		const organization = OrganizationService.restore(organizationId);
-		//Event.emit(new PrismaModelChanged('restore', 'organization', organization, OrganizationService, request));
+		organization = await OrganizationService.restore(organizationId);
 	} else {
-		const organization = OrganizationService.delete(organizationId);
-		//Event.emit(new PrismaModelChanged('delete', 'organization', organization, OrganizationService, request));
+		organization = await OrganizationService.delete(organizationId);
+	}
+
+	//Event.emit(new PrismaModelChanged(restore ? 'restore' : 'delete', 'organization', organization, OrganizationService, request));
+
+	if (request.accepts('application/json')) {
+		return response.json(organization);
 	}
 
 	return response.redirect(request.header('Referer'));

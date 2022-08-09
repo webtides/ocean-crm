@@ -8,6 +8,14 @@ export const middleware = async () => {
 	return [isAuthenticated];
 };
 
+export const get = async ({ request, response }) => {
+	const organisations = await OrganizationService.getAll();
+
+	if (request.accepts('application/json')) {
+		return response.json(organisations);
+	}
+};
+
 export const post = async ({ request, response }) => {
 	let validation = new Validator(request.body, {
 		name: 'required',

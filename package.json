@@ -39,8 +39,10 @@
 		"postcss": "^8.4.6",
 		"postcss-import": "^14.0.2",
 		"postcss-nested": "^5.0.6",
+		"swagger-ui-express": "^4.5.0",
 		"tailwindcss": "^3.0.19",
-		"validatorjs": "^3.22.1"
+		"validatorjs": "^3.22.1",
+		"yamljs": "^0.3.0"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^7.2.0",
