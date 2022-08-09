@@ -1,5 +1,5 @@
 import { html } from '@webtides/element-js/src/renderer/vanilla';
-import LogService from '../../services/LogService';
+import LogService from '../../app/services/LogService';
 import isAuthenticated from '../util/isAuthenticated';
 
 export const middleware = async () => {

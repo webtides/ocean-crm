@@ -13,7 +13,7 @@ export default class ContactsWidget extends TemplateElement {
 	}
 
 	async loadDynamicProperties({ request, response }) {
-		const ContactService = (await import('../../../services/ContactService.js')).default;
+		const ContactService = (await import('../../../app/services/ContactService.js')).default;
 		const allContacts = await ContactService.getAll();
 		const totalCount = allContacts.length;
 		return { totalCount };

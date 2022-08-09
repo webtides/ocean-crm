@@ -14,8 +14,8 @@ export default class UsersEditPage extends TemplateElement {
 	}
 
 	async loadDynamicProperties({ request, response }) {
-		const UserService = (await import('../../../services/UserService')).default;
-		const AuthorizationService = (await import('../../../services/AuthorizationService.js')).default;
+		const UserService = (await import('../../../app/services/UserService')).default;
+		const AuthorizationService = (await import('../../../app/services/AuthorizationService.js')).default;
 
 		const userId = parseInt(request.params.id);
 		const user = userId ? await UserService.findById(userId) : undefined;

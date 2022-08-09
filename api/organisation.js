@@ -1,8 +1,8 @@
 import Validator from 'validatorjs';
-import OrganizationService from '../services/OrganizationService';
+import OrganizationService from '../app/services/OrganizationService';
 import isAuthenticated from '../views/util/isAuthenticated';
-import Event from '../events/event';
-import PrismaModelChanged from '../events/prisma-model-changed';
+import Event from '../app/events/event';
+import PrismaModelChanged from '../app/events/prisma-model-changed';
 
 export const middleware = async () => {
 	return [isAuthenticated];

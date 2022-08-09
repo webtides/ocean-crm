@@ -1,19 +1,23 @@
-import paginate from '../views/util/paginate.js';
-import BasePrismaService from './BasePrismaService.js';
+import paginate from '../../views/util/paginate.js';
+import BasePrismaService from "./BasePrismaService.js";
 
-export default class OrganizationService extends BasePrismaService {
+export default class ContactService extends BasePrismaService {
 	static name() {
-		return 'organization';
+		return 'contact';
 	}
 
 	static include() {
 		return {
-			contacts: true,
+			organization: true,
 		};
 	}
 
-	static async getFilteredOrganisations(search, page, trashed = '') {
+	static async getFilteredContacts(search, page, trashed = '') {
 		const model = this.getModel();
+
+		const query = {
+			include: this.include(),
+		};
 
 		// TODO: full-text search is not available for SQLite...
 		// https://www.prisma.io/docs/concepts/components/prisma-client/full-text-search
@@ -30,7 +34,9 @@ export default class OrganizationService extends BasePrismaService {
 			where.deletedAt = null;
 		}
 
-		const allItems = await model.findMany({ where });
+		query.where = where;
+
+		const allItems = await model.findMany(query);
 		const filteredItems = allItems.filter((item) => {
 			if (search) {
 				return JSON.stringify(item).includes(search);
@@ -45,7 +51,16 @@ export default class OrganizationService extends BasePrismaService {
 
 		return {
 			pagination,
-			organizations: items,
+			contacts: items,
 		};
+	}
+
+	static async findWithOrganization(id) {
+		const model = this.getModel();
+		return await model.findMany({
+			where: {
+				organizationId: parseInt(id),
+			},
+		});
 	}
 }

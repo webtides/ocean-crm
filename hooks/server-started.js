@@ -1,12 +1,12 @@
 import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
-import EventEmitter from '../singletons/event-emitter';
-import LogPrismaModelChange from '../listeners/log-prisma-model-change';
-import PrismaModelChanged from '../events/prisma-model-changed';
-import NotifyClientEvents from '../listeners/notify-client-events';
-import UserCreated from '../events/user-created';
-import SendWelcomeMail from '../listeners/send-welcome-mail';
-import Job from '../jobs/job';
-import GenerateCsvReports from '../jobs/generate-csv-reports.js';
+import EventEmitter from '../app/singletons/event-emitter';
+import LogPrismaModelChange from '../app/listeners/log-prisma-model-change';
+import PrismaModelChanged from '../app/events/prisma-model-changed';
+import NotifyClientEvents from '../app/listeners/notify-client-events';
+import UserCreated from '../app/events/user-created';
+import SendWelcomeMail from '../app/listeners/send-welcome-mail';
+import Job from '../app/jobs/job';
+import GenerateCsvReports from '../app/jobs/generate-csv-reports.js';
 
 export const name = HOOKS.SERVER_STARTED;
 

@@ -13,7 +13,7 @@ export default class LogsWidget extends TemplateElement {
 	}
 
 	async loadDynamicProperties({ request, response }) {
-		const LogService = (await import('../../../services/LogService.js')).default;
+		const LogService = (await import('../../../app/services/LogService.js')).default;
 		const user = request.user;
 		const { logs } = await LogService.getFilteredLogs(user, 1, '');
 		return { user, logs };
@@ -21,7 +21,7 @@ export default class LogsWidget extends TemplateElement {
 
 	@MethodContext({ target: 'server', syncProperties: ['user'] })
 	async getLatestLogs() {
-		const LogService = (await import('../../../services/LogService.js')).default;
+		const LogService = (await import('../../../app/services/LogService.js')).default;
 		const { logs } = await LogService.getFilteredLogs(this.user, 1, '');
 		return { logs };
 	}

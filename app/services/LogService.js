@@ -1,4 +1,4 @@
-import paginate from '../views/util/paginate.js';
+import paginate from '../../views/util/paginate.js';
 import BasePrismaService from './BasePrismaService.js';
 
 export default class LogService extends BasePrismaService {

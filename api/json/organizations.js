@@ -1,4 +1,4 @@
-import OrganizationService from '../../services/OrganizationService.js';
+import OrganizationService from '../../app/services/OrganizationService.js';
 
 export const get = async ({ request, response }) => {
 	const organizationId = request.query.id;

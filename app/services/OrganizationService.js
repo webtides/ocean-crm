@@ -1,25 +1,18 @@
-import paginate from '../views/util/paginate.js';
+import paginate from '../../views/util/paginate.js';
 import BasePrismaService from './BasePrismaService.js';
-import crypto from 'crypto';
 
-export default class UserService extends BasePrismaService {
+export default class OrganizationService extends BasePrismaService {
 	static name() {
-		return 'user';
+		return 'organization';
 	}
 
-	static select() {
+	static include() {
 		return {
-			id: true,
-			deletedAt: true,
-			name: true,
-			email: true,
-			password: false,
-			salt: false,
-			role: true,
+			contacts: true,
 		};
 	}
 
-	static async getFilteredUsers(search, page, trashed = '', role = '') {
+	static async getFilteredOrganisations(search, page, trashed = '') {
 		const model = this.getModel();
 
 		// TODO: full-text search is not available for SQLite...
@@ -37,10 +30,6 @@ export default class UserService extends BasePrismaService {
 			where.deletedAt = null;
 		}
 
-		if (role) {
-			where.role = role;
-		}
-
 		const allItems = await model.findMany({ where });
 		const filteredItems = allItems.filter((item) => {
 			if (search) {
@@ -49,8 +38,6 @@ export default class UserService extends BasePrismaService {
 			return true;
 		});
 
-		// TODO: use pagination from prisma...
-
 		const totalItems = filteredItems.length;
 		const pagination = paginate(totalItems, page);
 
@@ -58,12 +45,7 @@ export default class UserService extends BasePrismaService {
 
 		return {
 			pagination,
-			users: items,
+			organizations: items,
 		};
-	}
-
-	static checkPassword(user, password) {
-		const hash = crypto.pbkdf2Sync(password, user.salt, 1000, 64, `sha512`).toString(`hex`);
-		return user.password === hash;
 	}
 }

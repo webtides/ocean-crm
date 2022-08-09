@@ -1,6 +1,6 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
-import UserService from '../../services/UserService';
+import UserService from '../../app/services/UserService';
 
 /* Configure password authentication strategy.
  *

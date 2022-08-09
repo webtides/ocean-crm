@@ -1,8 +1,8 @@
 // import { html } from '@webtides/element-js/src/renderer/vanilla';
 
-import UserService from '../../services/UserService.js';
+import UserService from '../../app/services/UserService.js';
 import icon from '../partials/icon.js';
-import { I18nService } from '../../services/I18nService';
+import { I18nService } from '../../app/services/I18nService';
 
 const layout = async (page, context = {}) => {
 	const now = Date.now();

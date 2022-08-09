@@ -1,5 +1,5 @@
-import en from '../i18n/en.js';
-import de from '../i18n/de.js';
+import en from '../../i18n/en.js';
+import de from '../../i18n/de.js';
 
 export class I18nService {
 	_translations = {

@@ -1,4 +1,4 @@
-import UserService from '../../services/UserService.js';
+import UserService from '../../app/services/UserService.js';
 
 export const get = async ({ request, response }) => {
 	const userId = request.query.id;

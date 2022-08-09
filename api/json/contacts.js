@@ -1,4 +1,4 @@
-import ContactService from '../../services/ContactService.js';
+import ContactService from '../../app/services/ContactService.js';
 
 export const get = async ({ request, response }) => {
 	const contactId = request.query.id;

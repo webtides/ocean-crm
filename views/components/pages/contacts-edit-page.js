@@ -17,9 +17,9 @@ export default class ContactsEditPage extends TemplateElement {
 	}
 
 	async loadDynamicProperties({ request, response }) {
-		const ContactService = (await import('../../../services/ContactService.js')).default;
-		const OrganizationService = (await import('../../../services/OrganizationService.js')).default;
-		const AuthorizationService = (await import('../../../services/AuthorizationService.js')).default;
+		const ContactService = (await import('../../../app/services/ContactService.js')).default;
+		const OrganizationService = (await import('../../../app/services/OrganizationService.js')).default;
+		const AuthorizationService = (await import('../../../app/services/AuthorizationService.js')).default;
 
 		const user = request.user;
 
@@ -40,8 +40,8 @@ export default class ContactsEditPage extends TemplateElement {
 
 	@MethodContext({ target: 'server', syncProperties: ['user', 'contactId'] })
 	async deleteContact(restore = false) {
-		const ContactService = (await import('../../../services/ContactService.js')).default;
-		const LogService = (await import('../../../services/LogService.js')).default;
+		const ContactService = (await import('../../../app/services/ContactService.js')).default;
+		const LogService = (await import('../../../app/services/LogService.js')).default;
 
 		if (restore) {
 			await ContactService.restore(this.contactId);
@@ -58,8 +58,8 @@ export default class ContactsEditPage extends TemplateElement {
 
 	@MethodContext({ target: 'server', syncProperties: ['user', 'contactId'] })
 	async updateContact(values) {
-		const ContactService = (await import('../../../services/ContactService.js')).default;
-		const LogService = (await import('../../../services/LogService.js')).default;
+		const ContactService = (await import('../../../app/services/ContactService.js')).default;
+		const LogService = (await import('../../../app/services/LogService.js')).default;
 
 		const contact = await ContactService.update(this.contactId, values);
 

@@ -1,5 +1,5 @@
 import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
-import { I18nService } from '../services/I18nService';
+import { I18nService } from '../app/services/I18nService';
 
 export const name = HOOKS.REQUEST_RECEIVED;
 
