@@ -60,7 +60,7 @@ export const post = async ({ request, response }) => {
 
 	//Event.emit(new PrismaModelChanged('create', 'organization', organization, OrganizationService, request));
 
-	if (request.accepts('application/json')) {
+	if (request.is('application/json') && request.accepts('application/json')) {
 		return response.json(organization);
 	}
 

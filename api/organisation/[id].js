@@ -59,7 +59,7 @@ export const put = async ({ request, response }) => {
 		success: 'Successfully updated!',
 	};
 
-	if (request.accepts('application/json')) {
+	if (request.is('application/json') && request.accepts('application/json')) {
 		return response.json(organization);
 	}
 
@@ -87,7 +87,7 @@ export const remove = async ({ request, response }) => {
 
 	//Event.emit(new PrismaModelChanged(restore ? 'restore' : 'delete', 'organization', organization, OrganizationService, request));
 
-	if (request.accepts('application/json')) {
+	if (request.is('application/json') && request.accepts('application/json')) {
 		return response.json(organization);
 	}
 

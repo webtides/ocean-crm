@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "A real world example application to demonstrate how luna-js and element-js work.",
 	"main": "index.js",
-	"type": "module",
+	"type": "commonjs",
 	"scripts": {
 		"test:e2e": "cross-env DATABASE_URL=file:cypress.sqlite cypress open",
 		"test:unit": "web-test-runner tests/web-test-runner/**/*.test.js --node-resolve",
