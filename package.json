@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "A real world example application to demonstrate how luna-js and element-js work.",
 	"main": "index.js",
-	"type": "commonjs",
+	"type": "module",
 	"scripts": {
 		"test": "cross-env DATABASE_URL=file:cypress.sqlite cypress open",
 		"test:migrate": "cross-env DATABASE_URL=file:cypress.sqlite npx prisma db push --force-reset --accept-data-loss",
