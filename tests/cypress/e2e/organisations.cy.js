@@ -1,36 +1,36 @@
-describe('organisations overview', () => {
+describe('organizations overview', () => {
 	beforeEach(() => {});
 
-	it('the h1 contains the correct text & has a link to create a new organisation', () => {
-		cy.visit('http://localhost:3000/organisations');
-		cy.get('h1').contains('Organisations');
-		cy.get('a').contains('Add organisation').invoke('attr', 'href').should('contain', '/organisations/create');
+	it('the h1 contains the correct text & has a link to create a new organization', () => {
+		cy.visit('http://localhost:3000/organizations');
+		cy.get('h1').contains('Organizations');
+		cy.get('a').contains('Add organization').invoke('attr', 'href').should('contain', '/organizations/create');
 	});
 
-	it('shows name, phone and city for organisations in table', () => {
+	it('shows name, phone and city for organizations in table', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
 
 		// create entries via factory
 		cy.task('create', {
-			model: 'organisation',
+			model: 'organization',
 			properties: { name: 'Name 1', phone: '555nose', city: 'Gotham City' },
 		});
 
-		cy.visit('http://localhost:3000/organisations');
+		cy.visit('http://localhost:3000/organizations');
 
 		cy.get('body').should('contain', 'Name 1');
 		cy.get('body').should('contain', '555nose');
 		cy.get('body').should('contain', 'Gotham City');
 	});
 
-	it('shows a paginated list of all organisations', () => {
+	it('shows a paginated list of all organizations', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
 
 		// create entries via factory
 		cy.task('createMany', {
-			model: 'organisation',
+			model: 'organization',
 			count: 11,
 			properties: [
 				{ name: 'Name 1' },
@@ -47,18 +47,18 @@ describe('organisations overview', () => {
 			],
 		});
 
-		cy.visit('http://localhost:3000/organisations');
+		cy.visit('http://localhost:3000/organizations');
 
 		cy.get('body').should('contain', 'Name 1');
 		cy.get('body').should('contain', 'Name 10');
 		cy.get('body').should('not.contain', 'Name 11');
 	});
 
-	it('can create a new organisation', () => {
+	it('can create a new organization', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
 
-		cy.visit('http://localhost:3000/organisations/create');
+		cy.visit('http://localhost:3000/organizations/create');
 
 		cy.get('input[name="name"]').type('John Doe');
 		cy.get('input[name="email"]').type('john@example.com');
@@ -71,22 +71,22 @@ describe('organisations overview', () => {
 		cy.get('button').contains('Create Organization').click();
 
 		// assert redirect
-		cy.url().should('equal', 'http://localhost:3000/organisations');
+		cy.url().should('equal', 'http://localhost:3000/organizations');
 
 		cy.get('body').should('contain', 'John Doe');
 		cy.get('body').should('contain', '555nose');
 		cy.get('body').should('contain', 'City');
 	});
 
-	it('validates the request when creating a new organisation', () => {
+	it('validates the request when creating a new organization', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
 
-		cy.visit('http://localhost:3000/organisations/create');
+		cy.visit('http://localhost:3000/organizations/create');
 
 		cy.get('button').contains('Create Organization').click();
 
-		cy.url().should('equal', 'http://localhost:3000/organisations/create');
+		cy.url().should('equal', 'http://localhost:3000/organizations/create');
 
 		cy.get('body').should('contain', 'The name field is required');
 		cy.get('body').should('contain', 'The email field is required');
@@ -100,22 +100,22 @@ describe('organisations overview', () => {
 		cy.get('input[name="email"]').type('john');
 		cy.get('button').contains('Create Organization').click();
 
-		cy.url().should('equal', 'http://localhost:3000/organisations/create');
+		cy.url().should('equal', 'http://localhost:3000/organizations/create');
 
 		cy.get('body').should('contain', 'The email format is invalid');
 	});
 
-	it('can edit an organisation', () => {
+	it('can edit an organization', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
 
-		// create a new organisation via factory
+		// create a new organization via factory
 		cy.task('create', {
-			model: 'organisation',
+			model: 'organization',
 			properties: { name: 'John Doe', phone: '555nose', city: 'Atlantis' },
 		});
 
-		cy.visit('http://localhost:3000/organisations');
+		cy.visit('http://localhost:3000/organizations');
 
 		cy.get('body').should('contain', 'John Doe');
 		cy.get('body').should('contain', '555nose');
@@ -123,8 +123,8 @@ describe('organisations overview', () => {
 
 		cy.get('a').contains('Edit').click();
 
-		const organisationId = 1; // TODO: do not hardcode the id...
-		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+		const organizationId = 1; // TODO: do not hardcode the id...
+		cy.url().should('equal', `http://localhost:3000/organizations/${organizationId}/edit`);
 
 		cy.get('input[name="name"]').clear().type('Jane Doe');
 		cy.get('input[name="phone"]').clear().type('888nose');
@@ -136,9 +136,9 @@ describe('organisations overview', () => {
 		cy.get('button').contains('Update Organization').click();
 
 		// assert redirect
-		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+		cy.url().should('equal', `http://localhost:3000/organizations/${organizationId}/edit`);
 
-		cy.visit('http://localhost:3000/organisations');
+		cy.visit('http://localhost:3000/organizations');
 
 		cy.get('body').should('not.contain', 'John Doe');
 		cy.get('body').should('not.contain', '555nose');
@@ -149,18 +149,18 @@ describe('organisations overview', () => {
 		cy.get('body').should('contain', 'Village');
 	});
 
-	it('validates the request when editing an organisation', () => {
+	it('validates the request when editing an organization', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
 
-		// create a new organisation via factory
+		// create a new organization via factory
 		cy.task('create', {
-			model: 'organisation',
+			model: 'organization',
 			properties: { name: 'John Doe', phone: '555nose', city: 'Atlantis' },
 		});
 
-		const organisationId = 1; // TODO: do not hardcode the id...
-		cy.visit(`http://localhost:3000/organisations/${organisationId}/edit`);
+		const organizationId = 1; // TODO: do not hardcode the id...
+		cy.visit(`http://localhost:3000/organizations/${organizationId}/edit`);
 
 		cy.get('input[name="name"]').clear();
 		cy.get('input[name="email"]').clear();
@@ -172,7 +172,7 @@ describe('organisations overview', () => {
 		cy.get('input[name="postalCode"]').clear();
 		cy.get('button').contains('Update Organization').click();
 
-		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+		cy.url().should('equal', `http://localhost:3000/organizations/${organizationId}/edit`);
 
 		cy.get('body').should('contain', 'The name field is required');
 		cy.get('body').should('contain', 'The email field is required');
@@ -186,53 +186,53 @@ describe('organisations overview', () => {
 		cy.get('input[name="email"]').type('john');
 		cy.get('button').contains('Update Organization').click();
 
-		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+		cy.url().should('equal', `http://localhost:3000/organizations/${organizationId}/edit`);
 
 		cy.get('body').should('contain', 'The email format is invalid');
 	});
 
-	it('can (soft) delete an organisation', () => {
+	it('can (soft) delete an organization', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
 
-		// create a new organisation via factory
+		// create a new organization via factory
 		cy.task('create', {
-			model: 'organisation',
+			model: 'organization',
 			properties: { name: 'John Doe', phone: '555nose', city: 'Atlantis' },
 		});
 
-		const organisationId = 1; // TODO: do not hardcode the id...
-		cy.visit(`http://localhost:3000/organisations/${organisationId}/edit`);
+		const organizationId = 1; // TODO: do not hardcode the id...
+		cy.visit(`http://localhost:3000/organizations/${organizationId}/edit`);
 
 		cy.get('body').should('not.contain', 'This organization has been deleted');
 
 		cy.get('button').contains('Delete Organization').click();
 
 		// assert redirect
-		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+		cy.url().should('equal', `http://localhost:3000/organizations/${organizationId}/edit`);
 
 		cy.get('body').should('contain', 'This organization has been deleted');
 	});
 
-	it('can restore a (soft) deleted organisation', () => {
+	it('can restore a (soft) deleted organization', () => {
 		// clear database
 		cy.exec('npm run test:migrate');
 
-		// create a new organisation via factory
+		// create a new organization via factory
 		cy.task('create', {
-			model: 'organisation',
+			model: 'organization',
 			properties: { name: 'John Doe', phone: '555nose', city: 'Atlantis', deletedAt: new Date() },
 		});
 
-		const organisationId = 1; // TODO: do not hardcode the id...
-		cy.visit(`http://localhost:3000/organisations/${organisationId}/edit`);
+		const organizationId = 1; // TODO: do not hardcode the id...
+		cy.visit(`http://localhost:3000/organizations/${organizationId}/edit`);
 
 		cy.get('body').should('contain', 'This organization has been deleted');
 
 		cy.get('button').contains('Restore').click();
 
 		// assert redirect
-		cy.url().should('equal', `http://localhost:3000/organisations/${organisationId}/edit`);
+		cy.url().should('equal', `http://localhost:3000/organizations/${organizationId}/edit`);
 
 		cy.get('body').should('not.contain', 'This organization has been deleted');
 	});

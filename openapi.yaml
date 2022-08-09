@@ -7,9 +7,9 @@ info:
   title: Ocean CRM
 tags:
   - name: web
-  - name: organisations
+  - name: organizations
 paths:
-  /organisations:
+  /organizations:
     get:
       summary: Organizations overview page
       tags:
@@ -22,29 +22,29 @@ paths:
               schema:
                 type: string
 
-  /api/organisation:
+  /api/organization:
     get:
       summary: All organizations
       tags:
-        - organisations
+        - organizations
       responses:
         '200':
           $ref: '#/components/requestBodies/OrganizationList'
     post:
-      summary: Create an organisation
+      summary: Create an organization
       tags:
-        - organisations
+        - organizations
       requestBody:
         $ref: '#/components/requestBodies/Organization_Post'
       responses:
         '200':
           $ref: '#/components/requestBodies/Organization'
 
-  /api/organisation/{id}:
+  /api/organization/{id}:
     put:
-      summary: Update an organisation
+      summary: Update an organization
       tags:
-        - organisations
+        - organizations
       parameters:
         - $ref: '#/components/parameters/id'
       requestBody:
@@ -53,9 +53,9 @@ paths:
         '200':
           $ref: '#/components/requestBodies/Organization'
     delete:
-      summary: (soft) Delete an organisation
+      summary: (soft) Delete an organization
       tags:
-        - organisations
+        - organizations
       parameters:
         - $ref: '#/components/parameters/id'
       requestBody:

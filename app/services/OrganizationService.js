@@ -12,7 +12,7 @@ export default class OrganizationService extends BasePrismaService {
 		};
 	}
 
-	static async getFilteredOrganisations(search, page, trashed = '') {
+	static async getFilteredOrganizations(search, page, trashed = '') {
 		const model = this.getModel();
 
 		// TODO: full-text search is not available for SQLite...

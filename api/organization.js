@@ -9,10 +9,10 @@ export const middleware = async () => {
 };
 
 export const get = async ({ request, response }) => {
-	const organisations = await OrganizationService.getAll();
+	const organizations = await OrganizationService.getAll();
 
 	if (request.accepts('application/json')) {
-		return response.json(organisations);
+		return response.json(organizations);
 	}
 };
 
@@ -64,5 +64,5 @@ export const post = async ({ request, response }) => {
 		return response.json(organization);
 	}
 
-	return response.redirect('/organisations'); // TODO: this should NOT be hardcoded...
+	return response.redirect('/organizations'); // TODO: this should NOT be hardcoded...
 };

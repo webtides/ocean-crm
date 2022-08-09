@@ -5,7 +5,7 @@ import UserFactory from './database/factories/UserFactory.js';
 
 const factories = {
 	contact: ContactFactory,
-	organisation: OrganizationFactory,
+	organization: OrganizationFactory,
 	user: UserFactory,
 };
 

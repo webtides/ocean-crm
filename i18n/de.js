@@ -1,3 +1,3 @@
 export default {
-	'views.components.dashboard-widgets.organization-widget.organizations': 'Organisationen',
+	'views.components.dashboard-widgets.organization-widget.organizations': 'Organizationen',
 };

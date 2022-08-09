@@ -8,7 +8,7 @@ export const middleware = async () => {
 export default class {
 	properties() {
 		return {
-			title: 'Create Organisation',
+			title: 'Create Organization',
 			errors: undefined,
 			oldValues: undefined,
 		};
@@ -25,7 +25,7 @@ export default class {
 		return html`
 			<div>
 				<div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
-					<form method="post" action="/api/organisation">
+					<form method="post" action="/api/organization">
 						<div class="flex flex-wrap -mb-8 -mr-6 p-8">
 							<text-input
 								name="name"

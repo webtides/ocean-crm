@@ -10,7 +10,7 @@ export const middleware = async () => {
 export default class {
 	properties() {
 		return {
-			title: 'Create Organisation',
+			title: 'Create Organization',
 			errors: undefined,
 			oldValues: undefined,
 			organization: undefined,
@@ -45,7 +45,7 @@ export default class {
 								? html`
 										<form
 											method="post"
-											action="/api/organisation/${this.organizationId}"
+											action="/api/organization/${this.organizationId}"
 											class="p-4 bg-yellow-300 rounded flex items-center justify-between max-w-3xl mb-6"
 										>
 											<input type="hidden" name="_method" value="delete" />
@@ -72,7 +72,7 @@ export default class {
 								: html`
 										<form
 											method="post"
-											action="/api/organisation/${this.organizationId}"
+											action="/api/organization/${this.organizationId}"
 											class="py-4 flex justify-end max-w-3xl"
 										>
 											<input type="hidden" name="_method" value="delete" />
@@ -85,7 +85,7 @@ export default class {
 					  `
 					: ''}
 				<div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
-					<form method="post" action="/api/organisation/${this.organizationId}">
+					<form method="post" action="/api/organization/${this.organizationId}">
 						<input type="hidden" name="_method" value="put" />
 						<div class="flex flex-wrap -mb-8 -mr-6 p-8">
 							<text-input
