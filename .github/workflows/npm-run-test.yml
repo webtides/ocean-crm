@@ -20,4 +20,5 @@ jobs:
       - run: npm run dev
         env:
           SESSION_SECRET: 2hs72dj278ehd72hdh27dh27
+          DATABASE_URL: file:cypress.sqlite
       - run: npm run test:ci
