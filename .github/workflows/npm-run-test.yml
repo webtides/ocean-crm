@@ -18,4 +18,6 @@ jobs:
           node-version: 16
       - run: npm install
       - run: npm run dev
+        env:
+          SESSION_SECRET: 2hs72dj278ehd72hdh27dh27
       - run: npm run test:ci
