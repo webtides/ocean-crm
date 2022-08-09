@@ -7,7 +7,7 @@
 	"scripts": {
 		"test:e2e": "cross-env DATABASE_URL=file:cypress.sqlite cypress open",
 		"test:unit": "web-test-runner tests/web-test-runner/**/*.test.js --node-resolve",
-		"test:ci": "cross-env DATABASE_URL=file:cypress.sqlite cypress run",
+		"test:ci": "cross-env DATABASE_URL=file:cypress.sqlite SESSION_SECRET=dz3hr83hs9 cypress run",
 		"test:migrate": "cross-env DATABASE_URL=file:cypress.sqlite npx prisma db push --force-reset --accept-data-loss",
 		"dev": "npx luna --dev",
 		"dev:test": "cross-env DATABASE_URL=file:cypress.sqlite npx luna --dev",
