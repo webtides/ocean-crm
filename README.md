@@ -13,21 +13,21 @@ A real world example application to demonstrate how luna-js and element-js work.
 
 ## Features
 
-- Full-stack application with real-world features
-- Server side rendering + client side rendering
-- RESTful API with backend validation
-- OpenAPI + Swagger
-- CRUD operations/views for models (+ relations)
-- Real time updates with Server Sent Events
-- Session Management
-- User impersonation
-- Local Authentication + Role based Authorization
-- i18n for backend and frontend
-- Publisher/Subscriber pattern with Events and Listeners
-- Sending Mails
-- Database Migrations and Seeding
-- Jobs and Task scheduling
-- Unit + Feature/Integration Testing
+-   Full-stack application with real-world features
+-   Server side rendering + client side rendering
+-   RESTful API with backend validation
+-   OpenAPI + Swagger
+-   CRUD operations/views for models (+ relations)
+-   Real time updates with Server Sent Events
+-   Session Management
+-   User impersonation
+-   Local Authentication + Role based Authorization
+-   i18n for backend and frontend
+-   Publisher/Subscriber pattern with Events and Listeners
+-   Sending Mails
+-   Database Migrations and Seeding
+-   Jobs and Task scheduling
+-   Unit + Feature/Integration Testing
 
 ## Installation
 
@@ -103,32 +103,34 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
 
 ## Possible Enhancements
 
-- Show Logs for User on user detail page
-- Show Log history for resource on detail page
-- Add Model classes for typehints in templates?!
-- Add global sorting to overview lists
-- Add sorting per column for datatables
-- Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
-- Flash messages and Toasts?! Should there be two?! Or just a single pattern?
-- Use custom tailwind config for mail templates (see for example: https://github.com/maizzle/starter-netlify-identity/blob/master/src/layouts/main.html)
+-   Show Logs for User on user detail page
+-   Show Log history for resource on detail page
+-   Add Model classes for typehints in templates?!
+-   Add global sorting to overview lists
+-   Add sorting per column for datatables
+-   Notifications (for Contacts Pages?) like Flash Messages but more like Toasts
+-   Flash messages and Toasts?! Should there be two?! Or just a single pattern?
+-   Use custom tailwind config for mail templates (see for example: https://github.com/maizzle/starter-netlify-identity/blob/master/src/layouts/main.html)
 
 ## luna-js Bugs
 
 -   when rendering serverside, dashToCamel is not working for attribute to property mappings
+-   when response.redirecting from "loadDynamicProperties" the following "request" will be missing the request object
 
 ## luna-js Gotchas and possible Improvements
 
-- We always need the request inside the layout. Therefor we always have to use "loadDynamicProperties" although we don't need it for the page itself...
-- Pages can't be reactive on the client, which gets limiting quite fast
-- Cannot import anything that uses native node libs... Need to dynamically import... It would be nice if luna-js could figure that out for me!
-- Cannot import anything for the client when using TARGET_BOTH...
-- I think fallback routes are not the right tool for 404 and 500 error pages... First of all I cannot know the difference and second I cannot have the correct http headers... I think luna needs another concept for these kind of routes.
-- When the app gets bigger, creating new pages/components is a lot of typing... I think it would be nice to have some generators via the cli to create pages, components, apis, services etc.
-- Cannot invoke put/delete api handlers via standard form post requests...
-- I would like to add middleware functions (for API routes) just for the eg. delete methods
-- Making RESTful API controllers is quite some boilerplate in terms of creating files and folders... It would be nice to be able to define them from a single file
-    - See https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller for example
-- Would it be possible to get views or pages or even components (rendered) programmatically?
-  - In this case I would like to get the email templates as string without having to fetch them from the server
-- Cannot use inline styles in layouts... Have to use fs.readFileSync from .build directory...
-- Cannot test components in isolation or as units... Because of the luna-js decorators...
+-   Cannot use "type": "module" in package.json - this is a huge pita because everything that you use via CLI cannot run when it uses our code that is written with ES imports and exports...
+-   We always need the request inside the layout. Therefor we always have to use "loadDynamicProperties" although we don't need it for the page itself...
+-   Pages can't be reactive on the client, which gets limiting quite fast
+-   Cannot import anything that uses native node libs... Need to dynamically import... It would be nice if luna-js could figure that out for me!
+-   Cannot import anything for the client when using TARGET_BOTH...
+-   I think fallback routes are not the right tool for 404 and 500 error pages... First of all I cannot know the difference and second I cannot have the correct http headers... I think luna needs another concept for these kind of routes.
+-   When the app gets bigger, creating new pages/components is a lot of typing... I think it would be nice to have some generators via the cli to create pages, components, apis, services etc.
+-   Cannot invoke put/delete api handlers via standard form post requests...
+-   I would like to add middleware functions (for API routes) just for the eg. delete methods
+-   Making RESTful API controllers is quite some boilerplate in terms of creating files and folders... It would be nice to be able to define them from a single file
+    -   See https://laravel.com/docs/9.x/controllers#actions-handled-by-resource-controller for example
+-   Would it be possible to get views or pages or even components (rendered) programmatically?
+    -   In this case I would like to get the email templates as string without having to fetch them from the server
+-   Cannot use inline styles in layouts... Have to use fs.readFileSync from .build directory...
+-   Cannot test components in isolation or as units... Because of the luna-js decorators...
