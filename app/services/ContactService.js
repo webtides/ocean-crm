@@ -1,6 +1,10 @@
+import { LunaService } from '@webtides/luna-js';
 import paginate from '../../views/util/paginate.js';
 import BasePrismaService from "./BasePrismaService.js";
 
+@LunaService({
+	name: 'ContactService'
+})
 export default class ContactService extends BasePrismaService {
 	static name() {
 		return 'contact';

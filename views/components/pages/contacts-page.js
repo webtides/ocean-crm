@@ -1,10 +1,12 @@
 import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
-import { Component, MethodContext } from '@webtides/luna-js';
+import { Component, MethodContext, Inject } from '@webtides/luna-js';
 
 @Component({
 	target: Component.TARGET_BOTH,
 })
 export default class ContactsPage extends TemplateElement {
+	@Inject('ContactService') contactService;
+
 	properties() {
 		return {
 			search: '',
@@ -19,15 +21,13 @@ export default class ContactsPage extends TemplateElement {
 		const search = request.query.search;
 		const trashed = request.query.trashed;
 		const page = parseInt(request.query.page || 1);
-		const ContactService = (await import('../../../app/services/ContactService.js')).default;
-		const { pagination, contacts } = await ContactService.getFilteredContacts(search, page, trashed);
+		const { pagination, contacts } = await this.contactService.getFilteredContacts(search, page, trashed);
 		return { request, response, search, trashed, page, pagination, contacts };
 	}
 
 	@MethodContext({ target: 'server', syncProperties: ['search', 'page', 'trashed'] })
 	async getFilteredContacts() {
-		const ContactService = (await import('../../../app/services/ContactService.js')).default;
-		const { pagination, contacts } = await ContactService.getFilteredContacts(this.search, this.page, this.trashed);
+		const { pagination, contacts } = await this.contactService.getFilteredContacts(this.search, this.page, this.trashed);
 		return { pagination, contacts };
 	}
 
@@ -143,8 +143,8 @@ export default class ContactsPage extends TemplateElement {
 							resource="contact"
 							pagination="${JSON.stringify(this.pagination)}"
 							items="${JSON.stringify(contacts)}"
-							overviewfields='${JSON.stringify(overviewFields)}'
-							previewfields='${JSON.stringify(previewFields)}'
+							overviewfields="${JSON.stringify(overviewFields)}"
+							previewfields="${JSON.stringify(previewFields)}"
 						></resource-overview-table>
 					</div>
 				</div>
