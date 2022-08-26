@@ -23,7 +23,13 @@ export default class ContactsEditPage extends TemplateElement {
 
 		const user = request.user;
 
-		const contactId = parseInt(request.params.id);
+		let contactId = parseInt(request.params.id);
+		if (!request.params.id) {
+			// TODO: this is a workaround because when calling server methods from the client, luna will also call loadDynamicProperties again but without the url params...
+			const urlParts = request.url.split('/');
+			contactId = parseInt(urlParts[2]);
+		}
+
 		const contact = await ContactService.findById(contactId);
 
 		const errors = request.session?.errors;
@@ -90,10 +96,14 @@ export default class ContactsEditPage extends TemplateElement {
 						const formData = new FormData(e.target);
 						const values = {
 							name: formData.get('name'),
-							organizationId: formData.get('organization'),
 							email: formData.get('email'),
 							phone: formData.get('phone'),
+							city: formData.get('city'),
 						};
+
+						if (formData.get('organization')) {
+							values['organizationId'] = formData.get('organization');
+						}
 
 						const { contact } = await this.updateContact(values);
 						this.contact = contact;
@@ -168,6 +178,13 @@ export default class ContactsEditPage extends TemplateElement {
 								error="${this.errors?.name}"
 								class="pb-8 pr-6 w-full lg:w-1/2"
 								label="Name"
+							></text-input>
+							<text-input
+								name="email"
+								value="${this.oldValues?.email || this.contact?.email}"
+								error="${this.errors?.email}"
+								class="pb-8 pr-6 w-full lg:w-1/2"
+								label="E-Mail"
 							></text-input>
 							<text-input
 								name="phone"

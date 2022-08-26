@@ -97,7 +97,6 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
     -   Pagination component for more than 6 pages
     -   Logs sorting seems out of order
     -   Impersonation seems broken
-    -   Updating Contacts is broken...
     -   Flash messages seem broken
     -   Session seems to be broken or not consistent
 
