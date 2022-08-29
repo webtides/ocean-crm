@@ -3,12 +3,13 @@
 	"version": "1.0.0",
 	"description": "A real world example application to demonstrate how luna-js and element-js work.",
 	"main": "index.js",
-	"type": "commonjs",
+	"type": "module",
 	"scripts": {
 		"test:e2e": "cross-env DATABASE_URL=file:cypress.sqlite cypress open",
 		"test:unit": "web-test-runner tests/web-test-runner/**/*.test.js --node-resolve",
 		"test:ci": "cross-env DATABASE_URL=file:cypress.sqlite cypress run",
 		"test:migrate": "cross-env DATABASE_URL=file:cypress.sqlite npx prisma db push --force-reset --accept-data-loss",
+		"lint": "eslint 'api/**/*.js' 'app/**/*.js' 'hooks/**/*.js' 'views/**/*.js'",
 		"dev": "npx luna --dev",
 		"dev:test": "cross-env DATABASE_URL=file:cypress.sqlite npx luna --dev",
 		"migrate:reset": "npx prisma db push --force-reset --accept-data-loss && npx prisma db seed",
@@ -47,14 +48,17 @@
 		"yamljs": "^0.3.0"
 	},
 	"devDependencies": {
+		"@babel/eslint-parser": "^7.18.9",
 		"@faker-js/faker": "^7.2.0",
 		"@open-wc/testing": "^3.1.6",
 		"@web/test-runner": "^0.14.0",
 		"@webtides/luna-cli": "0.11.0-dev.12",
 		"cross-env": "^7.0.3",
 		"cypress": "^10.4.0",
+		"encoding": "^0.1.13",
 		"eslint": "^8.11.0",
 		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-prettier": "^4.0.0",
 		"husky": "^7.0.4",
 		"lint-staged": "^12.3.7",
@@ -76,6 +80,82 @@
 	"lint-staged": {
 		"*.{css,js,json,yaml,yml,md}": [
 			"prettier --write"
+		]
+	},
+	"eslintConfig": {
+		"extends": [
+			"plugin:prettier/recommended",
+			"plugin:import/recommended"
+		],
+		"parser": "@babel/eslint-parser",
+		"rules": {
+			"prettier/prettier": [
+				"error",
+				{
+					"semi": true
+				}
+			],
+			"import/extensions": [
+				"error",
+				"always"
+			]
+		},
+		"parserOptions": {
+			"ecmaVersion": 2022,
+			"sourceType": "module",
+			"requireConfigFile": false,
+			"babelOptions": {
+				"babelrc": false,
+				"configFile": false,
+				"plugins": [
+					[
+						"@babel/plugin-proposal-decorators",
+						{
+							"legacy": true
+						}
+					]
+				]
+			}
+		}
+	},
+	"prettier": {
+		"endOfLine": "lf",
+		"printWidth": 120,
+		"trailingComma": "all",
+		"tabWidth": 4,
+		"semi": true,
+		"singleQuote": true,
+		"arrowParens": "always",
+		"overrides": [
+			{
+				"files": "*.md",
+				"options": {
+					"useTabs": false,
+					"trailingComma": "none",
+					"proseWrap": "never"
+				}
+			},
+			{
+				"files": [
+					"*.css",
+					"*.yaml",
+					"*.yml"
+				],
+				"options": {
+					"tabWidth": 2
+				}
+			}
+		]
+	},
+	"stylelint": {
+		"extends": [
+			"stylelint-prettier/recommended"
+		],
+		"rules": {
+			"prettier/prettier": true
+		},
+		"ignoreFiles": [
+			"**/*.md"
 		]
 	}
 }

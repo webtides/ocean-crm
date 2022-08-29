@@ -1,4 +1,4 @@
-import EventEmitter from "../singletons/event-emitter";
+import EventEmitter from '../singletons/event-emitter.js';
 
 export default class Event {
 	static eventName;

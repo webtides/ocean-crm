@@ -1,7 +1,7 @@
-import { html } from '@webtides/element-js/src/renderer/vanilla';
-import isAuthenticated from "../util/isAuthenticated";
-import icon from "../partials/icon";
-import { i18n } from "../util/i18n";
+import { html } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import isAuthenticated from '../util/isAuthenticated.js';
+import icon from '../partials/icon.js';
+import { i18n } from '../util/i18n.js';
 
 export const middleware = async () => {
 	return [isAuthenticated];

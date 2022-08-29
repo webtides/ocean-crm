@@ -1,4 +1,4 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
+import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component, MethodContext } from '@webtides/luna-js';
 
 @Component({

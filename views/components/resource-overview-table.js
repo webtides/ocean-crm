@@ -1,4 +1,4 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
+import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component } from '@webtides/luna-js';
 
 @Component({
@@ -103,7 +103,7 @@ export default class ResourceOverviewTable extends TemplateElement {
 			<resource-preview-dialog
 				resource="organization"
 				title="Preview Contact"
-				fields='${JSON.stringify(this.previewfields)}'
+				fields="${JSON.stringify(this.previewfields)}"
 			></resource-preview-dialog>
 		`;
 	}

@@ -1,4 +1,4 @@
-module.exports = ({ env }) => ({
+export default ({ env }) => ({
 	plugins: [
 		require('postcss-import'),
 		require('tailwindcss')({ config: 'tailwind.config.js' }),

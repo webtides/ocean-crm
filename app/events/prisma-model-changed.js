@@ -1,4 +1,4 @@
-import Event from "./event";
+import Event from './event.js';
 
 export default class PrismaModelChanged extends Event {
 	static eventName = 'ocean-crm-prisma-model-changed';

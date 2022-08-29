@@ -1,4 +1,4 @@
-import LogService from "../services/LogService";
+import LogService from '../services/LogService.js';
 
 export default class LogPrismaModelChange {
 	/**

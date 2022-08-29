@@ -1,4 +1,5 @@
-module.exports = {
+export default {
+	sourceType: "module",
 	content: ['./views/**/*.js'],
 	theme: {
 		extend: {

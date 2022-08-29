@@ -1,4 +1,4 @@
-import UserService from '../../app/services/UserService';
+import UserService from '../../app/services/UserService.js';
 
 export const post = async ({ request, response }) => {
 	const userId = request.body['userId'];

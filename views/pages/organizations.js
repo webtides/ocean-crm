@@ -1,6 +1,6 @@
-import { html } from '@webtides/element-js/src/renderer/vanilla';
-import OrganizationService from '../../app/services/OrganizationService';
-import isAuthenticated from '../util/isAuthenticated';
+import { html } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import OrganizationService from '../../app/services/OrganizationService.js';
+import isAuthenticated from '../util/isAuthenticated.js';
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -64,8 +64,8 @@ export default class {
 							resource="organization"
 							pagination="${JSON.stringify(this.pagination)}"
 							items="${JSON.stringify(this.organizations)}"
-							overviewfields='${JSON.stringify(overviewFields)}'
-							previewfields='${JSON.stringify(previewFields)}'
+							overviewfields="${JSON.stringify(overviewFields)}"
+							previewfields="${JSON.stringify(previewFields)}"
 						></resource-overview-table>
 					</div>
 				</div>

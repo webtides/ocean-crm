@@ -1,6 +1,6 @@
 import passport from 'passport';
 import LocalStrategy from 'passport-local';
-import UserService from '../../app/services/UserService';
+import UserService from '../../app/services/UserService.js';
 
 /* Configure password authentication strategy.
  *
@@ -15,11 +15,14 @@ import UserService from '../../app/services/UserService';
  */
 passport.use(
 	new LocalStrategy(async function verify(username, password, done) {
-		const user = await UserService.find({ email: username }, {
-			...UserService.select(),
-			password: true,
-			salt: true,
-		});
+		const user = await UserService.find(
+			{ email: username },
+			{
+				...UserService.select(),
+				password: true,
+				salt: true,
+			},
+		);
 
 		if (!user) {
 			return done(null, false, { message: 'Incorrect username or password.' });

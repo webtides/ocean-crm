@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from 'node:fs';
 
 const layout = (page, context = {}) => {
 	const style = fs.readFileSync(`.build/public/assets/css/mail.css`, 'utf-8');

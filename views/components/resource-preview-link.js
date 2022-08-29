@@ -1,4 +1,4 @@
-import { BaseElement } from '@webtides/element-js/src/renderer/vanilla';
+import { BaseElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component } from '@webtides/luna-js';
 
 @Component({
@@ -23,7 +23,7 @@ export default class ResourcePreviewLink extends BaseElement {
 					const dialog = document.querySelector('resource-preview-dialog');
 					dialog.open(json);
 				},
-			}
-		}
+			},
+		};
 	}
 }

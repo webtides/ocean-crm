@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
@@ -15,8 +15,8 @@ export default {
 
 	pages: {
 		input: [path.join(process.cwd(), 'views/pages')],
-		factory: '@webtides/luna-renderer/lib/element-js/vanilla',
-		fallback: '/fallback'
+		factory: '@webtides/luna-renderer/lib/element-js/vanilla/index.js',
+		fallback: '/fallback',
 	},
 
 	layouts: {
@@ -36,7 +36,7 @@ export default {
 				styles: {
 					output: 'assets/css/base.css',
 				},
-				factory: '@webtides/luna-renderer/lib/element-js/vanilla',
+				factory: '@webtides/luna-renderer/lib/element-js/vanilla/index.js',
 			},
 		],
 	},

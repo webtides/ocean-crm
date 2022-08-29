@@ -1,5 +1,5 @@
-import Mail from '../mails/mail';
-import UserCreated from '../mails/user-created';
+import Mail from '../mails/mail.js';
+import UserCreated from '../mails/user-created.js';
 
 export default class SendWelcomeMail {
 	/**

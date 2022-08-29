@@ -1,7 +1,7 @@
-import { html } from '@webtides/element-js/src/renderer/vanilla';
-import OrganizationService from '../../../../app/services/OrganizationService';
-import isAuthenticated from '../../../util/isAuthenticated';
-import AuthorizationService from '../../../../app/services/AuthorizationService';
+import { html } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import OrganizationService from '../../../../app/services/OrganizationService.js';
+import isAuthenticated from '../../../util/isAuthenticated.js';
+import AuthorizationService from '../../../../app/services/AuthorizationService.js';
 
 export const middleware = async () => {
 	return [isAuthenticated];

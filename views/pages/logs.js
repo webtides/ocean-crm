@@ -1,6 +1,6 @@
-import { html } from '@webtides/element-js/src/renderer/vanilla';
-import LogService from '../../app/services/LogService';
-import isAuthenticated from '../util/isAuthenticated';
+import { html } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import LogService from '../../app/services/LogService.js';
+import isAuthenticated from '../util/isAuthenticated.js';
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -25,8 +25,6 @@ export default class {
 	}
 
 	template() {
-		return html`
-			<log-feed logs='${JSON.stringify(this.logs)}' class="mt-8"></log-feed>
-		`;
+		return html` <log-feed logs="${JSON.stringify(this.logs)}" class="mt-8"></log-feed> `;
 	}
 }
