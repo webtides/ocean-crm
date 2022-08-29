@@ -1,4 +1,4 @@
-import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
+import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions.js';
 import yamljs from 'yamljs';
 import swaggerUi from 'swagger-ui-express';
 

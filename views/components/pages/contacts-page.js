@@ -1,4 +1,4 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
+import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component, MethodContext, Inject } from '@webtides/luna-js';
 
 @Component({
@@ -27,7 +27,11 @@ export default class ContactsPage extends TemplateElement {
 
 	@MethodContext({ target: 'server', syncProperties: ['search', 'page', 'trashed'] })
 	async getFilteredContacts() {
-		const { pagination, contacts } = await this.contactService.getFilteredContacts(this.search, this.page, this.trashed);
+		const { pagination, contacts } = await this.contactService.getFilteredContacts(
+			this.search,
+			this.page,
+			this.trashed,
+		);
 		return { pagination, contacts };
 	}
 

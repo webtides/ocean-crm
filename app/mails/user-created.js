@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import Mail from './mail';
+import Mail from './mail.js';
 
 export default class UserCreated extends Mail {
 	user;

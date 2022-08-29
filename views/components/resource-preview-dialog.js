@@ -1,6 +1,6 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
+import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component } from '@webtides/luna-js';
-import icon from "../partials/icon";
+import icon from '../partials/icon.js';
 
 @Component({
 	target: Component.TARGET_BOTH,
@@ -65,9 +65,7 @@ export default class ResourcePreviewDialog extends TemplateElement {
 											${icon.outline('check', 'h-6 w-6 text-green-600')}
 										</div>
 										<div>
-											<h3 class="text-lg leading-6 font-medium text-gray-900">
-												${this.title}
-											</h3>
+											<h3 class="text-lg leading-6 font-medium text-gray-900">${this.title}</h3>
 											<p class="mt-1 max-w-2xl text-sm text-gray-500">
 												Personal details and application.
 											</p>
@@ -78,7 +76,9 @@ export default class ResourcePreviewDialog extends TemplateElement {
 											${Object.keys(this.fields).map(
 												(field) => html`
 													<div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-														<dt class="text-sm font-medium text-gray-500">${this.fields[field]}</dt>
+														<dt class="text-sm font-medium text-gray-500">
+															${this.fields[field]}
+														</dt>
 														<dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
 															${this.item[field]}
 														</dd>
@@ -96,7 +96,10 @@ export default class ResourcePreviewDialog extends TemplateElement {
 															class="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
 														>
 															<div class="w-0 flex-1 flex items-center">
-																${icon.solid('paper-clip', 'flex-shrink-0 h-5 w-5 text-gray-400')}
+																${icon.solid(
+																	'paper-clip',
+																	'flex-shrink-0 h-5 w-5 text-gray-400',
+																)}
 																<span class="ml-2 flex-1 w-0 truncate">
 																	resume_back_end_developer.pdf
 																</span>
@@ -114,7 +117,10 @@ export default class ResourcePreviewDialog extends TemplateElement {
 															class="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
 														>
 															<div class="w-0 flex-1 flex items-center">
-																${icon.solid('paper-clip', 'flex-shrink-0 h-5 w-5 text-gray-400')}
+																${icon.solid(
+																	'paper-clip',
+																	'flex-shrink-0 h-5 w-5 text-gray-400',
+																)}
 																<span class="ml-2 flex-1 w-0 truncate">
 																	coverletter_back_end_developer.pdf
 																</span>
@@ -134,10 +140,7 @@ export default class ResourcePreviewDialog extends TemplateElement {
 										</dl>
 									</div>
 								</div>
-								<form
-									method="dialog"
-									class="mt-5 sm:mt-6 flex gap-4 items-center justify-end"
-								>
+								<form method="dialog" class="mt-5 sm:mt-6 flex gap-4 items-center justify-end">
 									<button
 										value="cancel"
 										class="mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 sm:mt-0 sm:col-start-1 sm:text-sm"

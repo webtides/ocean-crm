@@ -1,4 +1,4 @@
-import schedule from 'node-schedule';
+// import schedule from 'node-schedule';
 
 // TODO: this is probably not gonna be good enough...
 // I have used https://github.com/node-schedule/node-schedule for now
@@ -9,8 +9,8 @@ export default class Job {
 	handle() {}
 
 	static schedule(job, cron) {
-		schedule.scheduleJob(cron, () => {
-			job.handle();
-		});
+		// schedule.scheduleJob(cron, () => {
+		// 	job.handle();
+		// });
 	}
 }

@@ -1,7 +1,7 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
+import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component } from '@webtides/luna-js';
-import icon from '../../partials/icon';
-import { i18n } from '../../util/i18n';
+import icon from '../../partials/icon.js';
+import { i18n } from '../../util/i18n.js';
 
 @Component({
 	target: Component.TARGET_BOTH,

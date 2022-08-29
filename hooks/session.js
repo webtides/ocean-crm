@@ -1,4 +1,4 @@
-import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions';
+import { HOOKS } from '@webtides/luna-js/src/framework/hooks/definitions.js';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
@@ -23,12 +23,14 @@ export default async ({ app }) => {
 
 	app.use(cookieParser());
 
-	app.use(methodOverride((request, response) => {
-		if (request.body && typeof request.body === 'object' && '_method' in request.body) {
-			// look in urlencoded POST bodies and delete it
-			const method = request.body['_method'];
-			delete request.body['_method'];
-			return method;
-		}
-	}))
+	app.use(
+		methodOverride((request, response) => {
+			if (request.body && typeof request.body === 'object' && '_method' in request.body) {
+				// look in urlencoded POST bodies and delete it
+				const method = request.body['_method'];
+				delete request.body['_method'];
+				return method;
+			}
+		}),
+	);
 };

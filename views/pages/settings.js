@@ -1,6 +1,6 @@
-import { html } from '@webtides/element-js/src/renderer/vanilla';
-import isAuthenticated from '../util/isAuthenticated';
-import isAuthorized from "../util/isAuthorized";
+import { html } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import isAuthenticated from '../util/isAuthenticated.js';
+import isAuthorized from '../util/isAuthorized.js';
 
 export const middleware = async () => {
 	return [isAuthenticated, isAuthorized('Admin')];

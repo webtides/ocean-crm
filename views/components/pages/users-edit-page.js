@@ -1,4 +1,4 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
+import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component, MethodContext } from '@webtides/luna-js';
 
 @Component({
@@ -14,7 +14,7 @@ export default class UsersEditPage extends TemplateElement {
 	}
 
 	async loadDynamicProperties({ request, response }) {
-		const UserService = (await import('../../../app/services/UserService')).default;
+		const UserService = (await import('../../../app/services/UserService.js')).default;
 		const AuthorizationService = (await import('../../../app/services/AuthorizationService.js')).default;
 
 		const userId = parseInt(request.params.id);

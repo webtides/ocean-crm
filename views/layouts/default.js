@@ -1,8 +1,8 @@
-// import { html } from '@webtides/element-js/src/renderer/vanilla';
+// import { html } from '@webtides/element-js/src/renderer/vanilla/index.js';
 
 import UserService from '../../app/services/UserService.js';
 import icon from '../partials/icon.js';
-import { I18nService } from '../../app/services/I18nService';
+import { I18nService } from '../../app/services/I18nService.js';
 
 const layout = async (page, context = {}) => {
 	const now = Date.now();
@@ -25,7 +25,7 @@ const layout = async (page, context = {}) => {
 	const currentLocale = context.request.cookies['ocean-crm-locale'] || 'en';
 	const translations = i18nService.getTranslations(currentLocale);
 
-	return `
+	return /* HTML */ `
 		<!DOCTYPE html>
 		<html lang="" class="h-full bg-gray-100">
 			<head>
@@ -34,7 +34,7 @@ const layout = async (page, context = {}) => {
 				<meta charset="UTF-8" />
 				<link href="/assets/css/main.css?${now}" type="text/css" rel="stylesheet" />
 				<link href="/assets/css/base.css?${now}" type="text/css" rel="stylesheet" />
-				<link rel="icon" href="/assets/images/logo/vector/default-monochrome.svg" type="image/svg+xml">
+				<link rel="icon" href="/assets/images/logo/vector/default-monochrome.svg" type="image/svg+xml" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 				${context.head ?? ''}
@@ -68,40 +68,34 @@ const layout = async (page, context = {}) => {
 									<div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
 										<a
 											href="/"
-											class="${
-												currentPath === '/' ? navLinkActiveClasses : navLinkDefaultClasses
-											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+											class="${currentPath === '/'
+												? navLinkActiveClasses
+												: navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 											aria-current="page"
 											>Dashboard</a
 										>
 
 										<a
 											href="/organizations"
-											class="${
-												currentPath.includes('/organizations')
-													? navLinkActiveClasses
-													: navLinkDefaultClasses
-											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+											class="${currentPath.includes('/organizations')
+												? navLinkActiveClasses
+												: navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 											>Organizations</a
 										>
 
 										<a
 											href="/contacts"
-											class="${
-												currentPath.includes('/contacts')
-													? navLinkActiveClasses
-													: navLinkDefaultClasses
-											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+											class="${currentPath.includes('/contacts')
+												? navLinkActiveClasses
+												: navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 											>Contacts</a
 										>
 
 										<a
 											href="/logs"
-											class="${
-												currentPath.includes('/logs')
-													? navLinkActiveClasses
-													: navLinkDefaultClasses
-											} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+											class="${currentPath.includes('/logs')
+												? navLinkActiveClasses
+												: navLinkDefaultClasses} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
 											>Logs</a
 										>
 									</div>
@@ -127,8 +121,12 @@ const layout = async (page, context = {}) => {
 												aria-haspopup="true"
 											>
 												<span class="sr-only">Open user menu</span>
-												<span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
-												  <span class="text-md font-medium leading-none text-white">${userNameInitials}</span>
+												<span
+													class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500"
+												>
+													<span class="text-md font-medium leading-none text-white"
+														>${userNameInitials}</span
+													>
 												</span>
 											</button>
 											<!--
@@ -143,14 +141,22 @@ const layout = async (page, context = {}) => {
 											-->
 											<div
 												slot="content"
-												class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+												class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
 												role="menu"
 												aria-orientation="vertical"
 												aria-labelledby="user-menu-button"
 												tabindex="-1"
 											>
-												<form action="/api/locale" method="post" class="block px-4 py-2 text-sm text-gray-700">
-													<select name="locale" class="form-select w-full" onchange="this.form.submit()">
+												<form
+													action="/api/locale"
+													method="post"
+													class="block px-4 py-2 text-sm text-gray-700"
+												>
+													<select
+														name="locale"
+														class="form-select w-full"
+														onchange="this.form.submit()"
+													>
 														${locales?.map(
 															(locale) => `
 																<option value="${locale}" ${locale === currentLocale ? 'selected' : ''}>${locale}</option>
@@ -169,10 +175,8 @@ const layout = async (page, context = {}) => {
 													>Your Profile</a
 												>
 
-
-												${
-													user?.isAdmin
-														? `
+												${user?.isAdmin
+													? `
 															<a
 																href="/users"
 																class="block px-4 py-2 text-sm text-gray-700"
@@ -182,13 +186,9 @@ const layout = async (page, context = {}) => {
 																>Manage Users</a
 															>
 												`
-														: ``
-												}
-
-
-												${
-													user?.isAdmin
-														? `
+													: ``}
+												${user?.isAdmin
+													? `
 															<a
 																href="/settings"
 																class="block px-4 py-2 text-sm text-gray-700"
@@ -198,12 +198,9 @@ const layout = async (page, context = {}) => {
 																>Settings</a
 															>
 												`
-														: ``
-												}
-
-												${
-													user?.isAdmin
-														? `
+													: ``}
+												${user?.isAdmin
+													? `
 													<form action="/api/auth/impersonate" method="post" class="block px-4 py-2 text-sm text-gray-700">
 														<input type="hidden" name="adminId" value="${user.id}">
 														<select name="userId" class="form-select w-full" onchange="this.form.submit()">
@@ -216,12 +213,9 @@ const layout = async (page, context = {}) => {
 														</select>
 													</form>
 												`
-														: ``
-												}
-
-												${
-													user?.isImpersonatedBy
-														? `
+													: ``}
+												${user?.isImpersonatedBy
+													? `
 													<form action="/api/auth/impersonate" method="post" class="block px-4 py-2 text-sm text-gray-700">
 														<input type="hidden" name="adminId" value="${user.isImpersonatedBy.id}">
 														<button
@@ -234,8 +228,7 @@ const layout = async (page, context = {}) => {
 													>
 													</form>
 												`
-														: ``
-												}
+													: ``}
 
 												<form action="/api/auth/logout" method="post">
 													<button
@@ -244,8 +237,9 @@ const layout = async (page, context = {}) => {
 														role="menuitem"
 														tabindex="-1"
 														id="user-menu-item-3"
-														>Sign out</button
 													>
+														Sign out
+													</button>
 												</form>
 											</div>
 										</dropdown-button>
@@ -260,8 +254,7 @@ const layout = async (page, context = {}) => {
 										aria-expanded="false"
 									>
 										<span class="sr-only">Open main menu</span>
-            							${icon.outline('menu', 'block h-6 w-6')}
-            							${icon.outline('x', 'hidden h-6 w-6')}
+										${icon.outline('menu', 'block h-6 w-6')} ${icon.outline('x', 'hidden h-6 w-6')}
 									</button>
 								</div>
 							</div>
@@ -334,8 +327,9 @@ const layout = async (page, context = {}) => {
 										<button
 											type="submit"
 											class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100"
-											>Sign out</button
 										>
+											Sign out
+										</button>
 									</form>
 								</div>
 							</div>

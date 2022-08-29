@@ -1,9 +1,9 @@
 import Validator from 'validatorjs';
-import OrganizationService from '../../app/services/OrganizationService';
-import isAuthenticated from '../../views/util/isAuthenticated';
+import OrganizationService from '../../app/services/OrganizationService.js';
+import isAuthenticated from '../../views/util/isAuthenticated.js';
 import AuthorizationService from '../../app/services/AuthorizationService.js';
-import Event from "../../app/events/event";
-import PrismaModelChanged from "../../app/events/prisma-model-changed";
+import Event from '../../app/events/event.js';
+import PrismaModelChanged from '../../app/events/prisma-model-changed.js';
 
 export const middleware = async () => {
 	return [isAuthenticated];
@@ -64,7 +64,7 @@ export const put = async ({ request, response }) => {
 	}
 
 	return response.redirect(request.header('Referer'));
-}
+};
 
 export const remove = async ({ request, response }) => {
 	const organizationId = parseInt(request.params.id);

@@ -1,4 +1,4 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
+import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component } from '@webtides/luna-js';
 import style from './notification-stack.css';
 
@@ -47,13 +47,15 @@ export default class NotificationStack extends TemplateElement {
 						From: "opacity-100"
 						To: "opacity-0"
 					-->
-					${this.notifications.map(notification => html`
-						<notification-toast
-							title="${notification.title}"
-							text="${notification.text}"
-							class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden"
-						></notification-toast>
-					`)}
+					${this.notifications.map(
+						(notification) => html`
+							<notification-toast
+								title="${notification.title}"
+								text="${notification.text}"
+								class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden"
+							></notification-toast>
+						`,
+					)}
 				</div>
 			</div>
 		`;

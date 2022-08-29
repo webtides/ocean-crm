@@ -1,4 +1,4 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla';
+import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
 import { Component } from '@webtides/luna-js';
 
 @Component({
@@ -51,7 +51,11 @@ export default class LogFeed extends TemplateElement {
 										(log) => html`
 											<tr>
 												<td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-													${this.activityTemplate(log.resourceType, log.logType, log.user.name)}
+													${this.activityTemplate(
+														log.resourceType,
+														log.logType,
+														log.user.name,
+													)}
 												</td>
 												<td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
 													${this.resourceTemplate(
@@ -134,16 +138,16 @@ export default class LogFeed extends TemplateElement {
 		}
 
 		if (activityType === 'create') {
-			text = `has created a new ${resourceType}`
+			text = `has created a new ${resourceType}`;
 		}
 		if (activityType === 'update') {
-			text = `updated the ${resourceType}`
+			text = `updated the ${resourceType}`;
 		}
 		if (activityType === 'delete') {
-			text = `has deleted the ${resourceType}`
+			text = `has deleted the ${resourceType}`;
 		}
 		if (activityType === 'restore') {
-			text = `restored the ${resourceType}`
+			text = `restored the ${resourceType}`;
 		}
 
 		return html` <div class="flex items-center">
