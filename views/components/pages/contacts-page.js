@@ -143,8 +143,8 @@ export default class ContactsPage extends TemplateElement {
 							resource="contact"
 							pagination="${JSON.stringify(this.pagination)}"
 							items="${JSON.stringify(contacts)}"
-							overviewfields="${JSON.stringify(overviewFields)}"
-							previewfields="${JSON.stringify(previewFields)}"
+							overview-fields="${JSON.stringify(overviewFields)}"
+							preview-fields="${JSON.stringify(previewFields)}"
 						></resource-overview-table>
 					</div>
 				</div>

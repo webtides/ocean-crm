@@ -113,7 +113,6 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
 
 ## luna-js Bugs
 
--   when rendering serverside, dashToCamel is not working for attribute to property mappings
 -   when response.redirecting from "loadDynamicProperties" the following "request" will be missing the request object
 
 ## luna-js Gotchas and possible Improvements
