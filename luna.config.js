@@ -9,13 +9,13 @@ export default {
 		output: '.build',
 
 		server: {
-			resolveNodeModules: [],
+			resolveNodeModules: ['@webtides/element-js', '@prisma/client'],
 		},
 	},
 
 	pages: {
 		input: [path.join(process.cwd(), 'views/pages')],
-		factory: '@webtides/luna-renderer/lib/element-js/vanilla/index.js',
+		factory: '@webtides/luna-renderer/src/element-js/index.js',
 		fallback: '/fallback',
 	},
 
@@ -36,7 +36,7 @@ export default {
 				styles: {
 					output: 'assets/css/base.css',
 				},
-				factory: '@webtides/luna-renderer/lib/element-js/vanilla/index.js',
+				factory: '@webtides/luna-renderer/src/element-js/index.js',
 			},
 		],
 	},

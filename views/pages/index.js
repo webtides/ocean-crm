@@ -1,4 +1,4 @@
-import { html } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import { html } from '@webtides/element-js';
 import isAuthenticated from '../util/isAuthenticated.js';
 import icon from '../partials/icon.js';
 import { i18n } from '../util/i18n.js';

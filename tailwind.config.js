@@ -1,5 +1,7 @@
+import tailwindTypography from '@tailwindcss/typography';
+
 export default {
-	sourceType: "module",
+	sourceType: 'module',
 	content: ['./views/**/*.js'],
 	theme: {
 		extend: {
@@ -36,7 +38,7 @@ export default {
 		},
 	},
 	plugins: [
-		require('@tailwindcss/typography'),
+		tailwindTypography,
 		// require('@tailwindcss/forms')
 	],
 	corePlugins: {

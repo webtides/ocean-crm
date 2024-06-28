@@ -1,4 +1,4 @@
-import { html } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import { html } from '@webtides/element-js';
 import LogService from '../../app/services/LogService.js';
 import isAuthenticated from '../util/isAuthenticated.js';
 

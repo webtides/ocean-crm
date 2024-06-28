@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import { PrismaClient } from '@prisma/client';
 import PrismaModelChanged from '../events/prisma-model-changed.js';
 const prisma = new PrismaClient();

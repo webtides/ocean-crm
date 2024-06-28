@@ -1,4 +1,4 @@
-import { html, unsafeHTML, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import { html, unsafeHTML, TemplateElement } from '@webtides/element-js';
 import { Component } from '@webtides/luna-js';
 
 import style from './svg-icon.css';

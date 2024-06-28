@@ -1,4 +1,4 @@
-import { html, TemplateElement } from '@webtides/element-js/src/renderer/vanilla/index.js';
+import { html, TemplateElement } from '@webtides/element-js';
 import { Component } from '@webtides/luna-js';
 import icon from '../../partials/icon.js';
 
