@@ -63,7 +63,8 @@ export default class ResourceOverviewTable extends TemplateElement {
 										<td
 											class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
 										>
-											<resource-preview-link api-link="/api/json/${this.resource}s?id=${item.id}">
+											<!-- TODO: fix bug in element-js - can't render "=" in attribute -->
+											<resource-preview-link api-link="/api/json/${this.resource}s?id-${item.id}">
 												<a
 													href="/${this.resource}s/${item.id}/edit"
 													class="text-primary-600 hover:text-primary-900"
@@ -95,7 +96,7 @@ export default class ResourceOverviewTable extends TemplateElement {
 						  `
 						: html`
 								<pagination-component
-									pagination="${JSON.stringify(this.pagination)}"
+									pagination='${JSON.stringify(this.pagination)}'
 								></pagination-component>
 						  `}
 				</div>

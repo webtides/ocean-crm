@@ -2,6 +2,7 @@ import { html, TemplateElement } from '@webtides/element-js';
 import { Component } from '@webtides/luna-js';
 import style from './dropdown-button.css';
 
+// TODO: luna-js does not render light dom content of shadow dom rendering elements when rendered server side
 @Component({
 	target: Component.TARGET_CLIENT,
 })

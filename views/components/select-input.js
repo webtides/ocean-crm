@@ -2,7 +2,7 @@ import { html, TemplateElement } from '@webtides/element-js';
 import { Component } from '@webtides/luna-js';
 
 @Component({
-	target: Component.TARGET_CLIENT,
+	target: Component.TARGET_BOTH,
 })
 export default class SelectInput extends TemplateElement {
 	uuid = Math.random().toString(36).substr(2, 5);
