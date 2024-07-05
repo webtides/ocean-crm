@@ -56,28 +56,10 @@ Create an SQLite database. You can also use another database (MySQL, Postgres), 
 touch database/content.db
 ```
 
-Add type `module` to the `package.json` file
-
-> Sorry...
-
-```json
-{
-    "type": "module"
-}
-```
-
 Run database migrations and seeder:
 
 ```sh
 npm run migrate:reset
-```
-
-Remove type `module` from the `package.json` file
-
-> Sorry...
-
-```json
-{}
 ```
 
 Run the dev server (the output will give the address):
@@ -117,7 +99,6 @@ You're ready to go! Visit OceanCRM in your browser, and login with:
 
 ## luna-js Gotchas and possible Improvements
 
--   Cannot use "type": "module" in package.json - this is a huge pita because everything that you use via CLI cannot run when it uses our code that is written with ES imports and exports...
 -   We always need the request inside the layout. Therefor we always have to use "loadDynamicProperties" although we don't need it for the page itself...
 -   Pages can't be reactive on the client, which gets limiting quite fast
 -   Cannot import anything that uses native node libs... Need to dynamically import... It would be nice if luna-js could figure that out for me!
